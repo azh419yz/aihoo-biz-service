@@ -6,3 +6,4 @@ logs/
 *.jar
 !.gitkeep
 README.md
+DDD重构*.md
