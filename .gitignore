@@ -1,0 +1,7 @@
+target/
+logs/
+*.log
+.DS_Store
+*.class
+*.jar
+!.gitkeep
