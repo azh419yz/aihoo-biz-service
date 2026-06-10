@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.sys.model.mapper.SysUserMapper">
+
+    <select id="selectByUsername" resultType="com.aihoo.domain.sys.model.entity.SysUser">
+        select * from t_sys_user where user_name=#{username} and deleted = 0 limit 1
+    </select>
+    <select id="customerList" resultType="com.aihoo.domain.sys.model.entity.SysUser">
+        SELECT
+        u.user_name,u.nick_name,u.created_date,u.id
+        FROM
+        t_sys_user u
+        LEFT JOIN t_sys_user_role ur ON u.id = ur.user_id
+        LEFT JOIN t_sys_role r ON ur.role_id = r.id
+        LEFT JOIN t_sys_role_menu rm ON rm.role_id = r.id
+        LEFT JOIN t_sys_menu m ON rm.menu_id = m.id
+        WHERE  m.id = 52
+            <if test="map.userName != null and map.userName != ''">
+                and u.user_name LIKE CONCAT('%',#{map.userName},'%')
+            </if>
+            <if test="map.nickName!=null and map.nickName !=''">
+                and u.nick_name LIKE CONCAT('%',#{map.nickName},'%')
+            </if>
+    </select>
+
+    <update id="isDelete" parameterType="int">
+        UPDATE t_sys_user
+        SET deleted=true
+        where id=#{id}
+    </update>
+
+</mapper>

@@ -37,7 +37,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -50,6 +49,14 @@
                 <configuration>
                     <source>17</source>
                     <target>17</target>
+                    <executable>/opt/homebrew/opt/openjdk@17/bin/javac</executable>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.38</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
         </plugins>
