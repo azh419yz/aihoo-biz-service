@@ -98,6 +98,13 @@
             <version>${aliyun-oss.version}</version>
         </dependency>
 
+        <!-- Apache HttpClient (AdderssUtils 用) -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.14</version>
+        </dependency>
+
         <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
