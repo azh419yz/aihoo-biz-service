@@ -7,19 +7,19 @@ import com.aihoo.domain.consultation.model.dto.PrescriptionDrugDTO;
 import com.aihoo.domain.consultation.model.entity.MdtOrder;
 import com.aihoo.domain.consultation.model.excel.MdtOrderDrugExportEntity;
 import com.aihoo.domain.consultation.model.excel.MdtOrderExportEntity;
-import com.aihoo.domain.consultation.model.external.Drugstore;
-import com.aihoo.domain.consultation.model.external.HosPrescription;
-import com.aihoo.domain.consultation.model.external.HosPrescriptionDrug;
-import com.aihoo.domain.consultation.model.external.HosPrescriptionInstruction;
 import com.aihoo.domain.consultation.model.mapper.MdtOrderMapper;
 import com.aihoo.domain.consultation.model.request.SearchMdtOrderRequest;
 import com.aihoo.domain.consultation.model.vo.MdtOrderTradeInfoVo;
 import com.aihoo.domain.consultation.model.vo.MdtOrderVo;
 import com.aihoo.domain.consultation.service.MdtOrderService;
-import com.aihoo.domain.consultation.service.external.DrugstoreService;
-import com.aihoo.domain.consultation.service.external.HosPreDrugService;
-import com.aihoo.domain.consultation.service.external.HosPrescriptionService;
-import com.aihoo.domain.consultation.service.external.PrescriptionInstructionService;
+import com.aihoo.domain.hospital.model.entity.Drugstore;
+import com.aihoo.domain.hospital.service.DrugstoreService;
+import com.aihoo.domain.prescription.model.entity.HosPrescription;
+import com.aihoo.domain.prescription.model.entity.HosPrescriptionDrug;
+import com.aihoo.domain.prescription.model.entity.HosPrescriptionInstruction;
+import com.aihoo.domain.prescription.service.HosPreDrugService;
+import com.aihoo.domain.prescription.service.HosPrescriptionService;
+import com.aihoo.domain.prescription.service.PrescriptionInstructionService;
 import com.aihoo.exception.BizException;
 import com.aihoo.excel.ExcelUtils;
 import com.aihoo.util.DateUtil;
@@ -60,8 +60,8 @@ public class MdtOrderServiceImpl extends ServiceImpl<MdtOrderMapper, MdtOrder> i
 
     private final MdtOrderMapper mdtOrderMapper;
 
-    // TODO 跨域stub：以下 4 个 Service 来自 prescription / hospital 域，暂未迁移完成。
-    //       迁移完成后删除 stub（service.external.* 与 model.external.*），改为正式引用。
+    // 跨域引用：HosPrescriptionService / HosPreDrugService / PrescriptionInstructionService 来自 prescription 域；
+    // DrugstoreService 来自 hospital 域。
     private final HosPrescriptionService prescriptionService;
     private final HosPreDrugService predrugService;
     private final DrugstoreService drugstoreService;
