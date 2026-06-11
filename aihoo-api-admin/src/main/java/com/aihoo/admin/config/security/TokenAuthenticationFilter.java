@@ -14,14 +14,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.aihoo.admin.system.model.LoginUser;
-import com.aihoo.admin.system.model.SysUser;
-import com.aihoo.common.utils.JSONUtil;
-import com.aihoo.common.utils.StringUtil;
-import com.aihoo.core.BizResult;
-import com.aihoo.core.BizResultCode;
-import com.aihoo.core.redis.RedisConstant;
-import com.aihoo.core.redis.RedisService;
+import com.aihoo.domain.sys.model.entity.SysUser;
+import com.aihoo.util.JSONUtil;
+import com.aihoo.util.StringUtil;
+import com.aihoo.common.BizResult;
+import com.aihoo.common.BizResultCode;
+import com.aihoo.redis.RedisConstant;
+import com.aihoo.redis.RedisService;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

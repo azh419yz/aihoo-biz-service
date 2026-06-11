@@ -9,16 +9,16 @@ spring:
           model: qwen-plus
 
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:rm-0jl09152g38e79d321o.mysql.rds.aliyuncs.com}:3306/heoudb?useUnicode=true&characterEncoding=utf8&useSSL=false
-    username: ${MYSQL_USERNAME:hoouser}
+    url: jdbc:mysql://${MYSQL_HOST:}:${MYSQL_PORT:3306}/${MYSQL_DB:heoudb}?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: ${MYSQL_USERNAME:}
     password: ${MYSQL_PASSWORD:}
     driver-class-name: com.mysql.cj.jdbc.Driver
   data:
     redis:
       database: 0
-      host: ${REDIS_HOST:121.89.80.105}
+      host: ${REDIS_HOST:}
       password: ${REDIS_PASSWORD:}
-      port: 6379
+      port: ${REDIS_PORT:6379}
       timeout: 10000
       block-when-exhausted: true
       jedis:
@@ -29,7 +29,7 @@ spring:
           max-idle: 100
 
 tencent:
-  sdkappid: ${TENCENT_SDKAPPID:1600122709}
+  sdkappid: ${TENCENT_SDKAPPID:}
   privstr: ${TENCENT_PRIVSTR:}
 
 # 订单超时配置（单位：小时）
@@ -54,7 +54,7 @@ alicloud:
     sign-name: 合偶平方
     template-code: SMS_330260285
   oss:
-    endpoint: https://oss-cn-wulanchabu.aliyuncs.com
+    endpoint: oss-cn-wulanchabu.aliyuncs.com
     bucketName: aihoo-static
     imgHeadUrl: https://static.heouai.com/
 

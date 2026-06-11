@@ -1,10 +1,12 @@
 package com.aihoo.admin;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@SpringBootApplication(scanBasePackages = {"com.aihoo.admin", "com.aihoo.domain", "com.aihoo"})
+@MapperScan("com.aihoo.domain.*.model.mapper")
 public class AdminApplication {
 
     public static void main(String[] args) {

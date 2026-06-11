@@ -1,4 +1,4 @@
-package com.aihoo.core.redis;
+package com.aihoo.redis;
 
 import java.io.Serializable;
 import java.util.List;

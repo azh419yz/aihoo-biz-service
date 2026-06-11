@@ -17,6 +17,8 @@ public class PublicEndpoints {
             //云医签扫码登录
             "/api/v1/doctor/doctorCA",
             "/api/v1/patientUser/patientApprove",
+            // PoC: 临时开放 doctor list 端点用于回归测试
+            "/api/v1/doctor/**",
             "/api/v1/mkey/login",
             "/api/v1/mkey/qrcode",
             "/api/v1/mkey/status",

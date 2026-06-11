@@ -50,6 +50,13 @@
             <version>${mybatis-plus.version}</version>
         </dependency>
 
+        <!-- 固定 mybatis-spring 版本：覆盖 mybatis-plus 3.5.5 间接引入的有 bug 的 3.0.2（与 Spring 6.1 不兼容） -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>3.0.4</version>
+        </dependency>
+
         <!-- Redis -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

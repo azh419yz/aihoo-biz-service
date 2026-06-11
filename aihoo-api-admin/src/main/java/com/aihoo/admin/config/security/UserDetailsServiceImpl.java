@@ -1,8 +1,7 @@
 package com.aihoo.admin.config.security;
 
-import com.aihoo.admin.system.mapper.SysUserMapper;
-import com.aihoo.admin.system.model.LoginUser;
-import com.aihoo.admin.system.model.SysUser;
+import com.aihoo.domain.sys.model.mapper.SysUserMapper;
+import com.aihoo.domain.sys.model.entity.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

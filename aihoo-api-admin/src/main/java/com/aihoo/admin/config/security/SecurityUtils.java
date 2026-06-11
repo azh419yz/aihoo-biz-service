@@ -1,9 +1,8 @@
 package com.aihoo.admin.config.security;
 
-import com.aihoo.admin.system.model.SysUser;
+import com.aihoo.domain.sys.model.entity.SysUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import com.aihoo.admin.system.model.LoginUser;
 
 /**
  * Security Utilities replacing ShiroUtils.

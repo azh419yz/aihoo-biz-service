@@ -31,8 +31,8 @@ spring:
       max-request-size: 100MB
 
 mybatis-plus:
-  mapper-locations: classpath:xml/*Mapper.xml
-  typeAliasesPackage: com.aihoo.admin.*.model
+  mapper-locations: classpath*:xml/*Mapper.xml
+  typeAliasesPackage: com.aihoo.domain.*.model.entity
   global-config:
     id-type: auto
     field-strategy: 1
