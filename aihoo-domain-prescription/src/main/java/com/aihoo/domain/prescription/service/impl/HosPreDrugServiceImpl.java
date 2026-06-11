@@ -10,16 +10,16 @@ import com.aihoo.domain.prescription.model.mapper.HosPrescriptionDrugMapper;
 import com.aihoo.domain.prescription.model.mapper.HosPrescriptionMapper;
 import com.aihoo.domain.prescription.model.vo.HosPreDrugVo;
 import com.aihoo.domain.prescription.properties.PrescriptionProperties;
+import com.aihoo.domain.consultation.model.entity.MdtOrder;
+import com.aihoo.domain.consultation.model.mapper.MdtOrderMapper;
+import com.aihoo.domain.payment.model.entity.Order;
+import com.aihoo.domain.payment.model.mapper.OrderMapper;
 import com.aihoo.domain.prescription.service.HosPreDrugService;
-import com.aihoo.domain.prescription.stub.HosRevisit;
-import com.aihoo.domain.prescription.stub.HosVisit;
-import com.aihoo.domain.prescription.stub.MdtOrder;
-import com.aihoo.domain.prescription.stub.MdtOrderMapper;
-import com.aihoo.domain.prescription.stub.Order;
-import com.aihoo.domain.prescription.stub.OrderMapper;
-import com.aihoo.domain.prescription.stub.RevisitOrderMapper;
-import com.aihoo.domain.prescription.stub.VisitOrderService;
 import com.aihoo.domain.prescription.util.HospitalPrescriptionUtil;
+import com.aihoo.domain.visit.model.entity.HosRevisit;
+import com.aihoo.domain.visit.model.entity.HosVisit;
+import com.aihoo.domain.visit.model.mapper.RevisitOrderMapper;
+import com.aihoo.domain.visit.service.VisitOrderService;
 import com.aihoo.domain.sys.model.entity.Dict;
 import com.aihoo.domain.sys.model.mapper.DiceMapper;
 import com.aihoo.exception.BizException;
@@ -49,16 +49,12 @@ public class HosPreDrugServiceImpl extends ServiceImpl<HosPrescriptionDrugMapper
     private HosPreDrugMapper hosPreDrugMapper;
     @Resource
     private HosPrescriptionMapper hosPrescriptionMapper;
-    // TODO: 跨域依赖。Order 域尚未迁移，使用本域 stub 类型。
     @Resource
     private OrderMapper orderMapper;
-    // TODO: 跨域依赖。visit 域尚未迁移，使用本域 stub 类型。
     @Resource
     private RevisitOrderMapper revisitOrderMapper;
-    // TODO: 跨域依赖。visit 域尚未迁移，使用本域 stub 类型。
     @Resource
     private VisitOrderService visitOrderService;
-    // TODO: 跨域依赖。consultation 域尚未迁移，使用本域 stub 类型。
     @Resource
     private MdtOrderMapper mdtOrderMapper;
     // 当前 stub：真实实现需 shared-kernel 提供签名工具。

@@ -1,6 +1,10 @@
 package com.aihoo.domain.prescription.service.impl;
 
 import com.aihoo.common.BizResultCode;
+import com.aihoo.domain.consultation.model.entity.MdtOrder;
+import com.aihoo.domain.consultation.service.MdtOrderService;
+import com.aihoo.domain.doctor.model.entity.DoctorUser;
+import com.aihoo.domain.doctor.service.DoctorUserService;
 import com.aihoo.domain.hospital.model.entity.Drugstore;
 import com.aihoo.domain.hospital.service.DrugstoreService;
 import com.aihoo.domain.prescription.enums.MedicineStatusEnum;
@@ -13,10 +17,6 @@ import com.aihoo.domain.prescription.model.vo.PrescriptionDrugVo;
 import com.aihoo.domain.prescription.service.HosPreDrugService;
 import com.aihoo.domain.prescription.service.HosPrescriptionService;
 import com.aihoo.domain.prescription.service.PrescriptionInstructionService;
-import com.aihoo.domain.prescription.stub.DoctorUser;
-import com.aihoo.domain.prescription.stub.DoctorUserService;
-import com.aihoo.domain.prescription.stub.MdtOrder;
-import com.aihoo.domain.prescription.stub.MdtOrderService;
 import com.aihoo.exception.BizException;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -38,12 +38,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HosPrescriptionServiceImpl extends ServiceImpl<HosPrescriptionMapper, HosPrescription> implements HosPrescriptionService {
 
-    // TODO: 跨域依赖。doctor 域尚未迁移，使用本域 stub 类型。
     private final DoctorUserService doctorUserService;
     private final PrescriptionInstructionService prescriptionInstructionService;
     private final HosPreDrugService hosPreDrugService;
     private final DrugstoreService drugstoreService;
-    // TODO: 跨域依赖。consultation 域尚未迁移，使用本域 stub 类型。
     @Autowired
     @Lazy
     private MdtOrderService mdtOrderService;
