@@ -3,6 +3,7 @@ package com.aihoo.domain.payment.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.aihoo.common.PageParam;
 import com.aihoo.common.PageResult;
+import com.aihoo.domain.hospital.service.DrugstoreService;
 import com.aihoo.domain.payment.model.entity.MdtOrder;
 import com.aihoo.domain.payment.model.request.SearchMdtOrderRequest;
 import com.aihoo.domain.payment.model.vo.MdtOrderTradeInfoVo;
@@ -53,11 +54,12 @@ public class MdtOrderServiceImpl extends ServiceImpl<com.aihoo.domain.payment.mo
 
     private final com.aihoo.domain.payment.model.mapper.MdtOrderMapper mdtOrderMapper;
 
-    // TODO: 跨域依赖 stub - 等 prescription/hospital 域迁入后注入
+    // 跨域依赖 stub：prescription 域注入会与 prescription → payment 形成循环依赖，保持 stub
     // private final HosPrescriptionService prescriptionService;
     // private final HosPreDrugService predrugService;
-    // private final DrugstoreService drugstoreService;
     // private final PrescriptionInstructionService prescriptionInstructionService;
+    // hospital 域已在 pom 中依赖，安全注入
+    private final DrugstoreService drugstoreService;
 
     @Value("${pst.endpoint:pst.heouai.com}")
     private String pstEndpoint;
