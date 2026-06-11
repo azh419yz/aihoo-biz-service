@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aihoo.domain.hospital.model.mapper.HospitalDepartmentMapper">
+
+    <sql id="Base_Column_List">
+    id, create_time, update_time, create_user_id, hospital_id, depart_code, depart_name
+    </sql>
+
+    <delete id="deleteByDepartCodes">
+        DELETE FROM t_hospital_department
+        WHERE hospital_id = #{hospitalId}
+        AND depart_code IN
+        <foreach collection="newIds" open="(" close=")" separator="," item="newIds">
+            #{newIds}
+        </foreach>
+
+    </delete>
+
+    <select id="findDepartmentByIds" resultType="com.aihoo.domain.hospital.model.entity.HospitalDepartment">
+      SELECT <include refid="Base_Column_List"/> FROM t_hospital_department
+      WHERE hospital_id IN
+        <foreach collection="ids" open="(" close=")" separator="," item="ids">
+            #{ids}
+        </foreach>
+    </select>
+
+    <select id="findByObject" resultType="com.aihoo.domain.hospital.model.entity.HospitalDepartment">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_hospital_department
+        <include refid="whereSql"/>
+    </select>
+
+    <sql id="whereSql">
+        <where>
+            <if test="id != null and id != '' ">
+                id = #{id}
+            </if>
+            <if test="hospitalId != null and hospitalId != ''">
+                and hospital_id = #{hospitalId}
+            </if>
+        </where>
+    </sql>
+
+
+</mapper>

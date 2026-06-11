@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.hospital.model.mapper.DrugCountMapper">
+
+    <resultMap id="drugMap" type="com.aihoo.domain.hospital.model.entity.DrugCount">
+      <result property="mshId" column="msh_id"/>
+      <result property="name" column="name"/>
+      <result property="supplierCode" column="supplier_code"/>
+      <result property="num" column="num"/>
+      <result property="price" column="price"/>
+      <result property="totalPrice" column="total_price"/>
+      <result property="supplier" column="supplier"/>
+      <result property="payType" column="pay_type"/>
+      <result property="tradeStatus" column="trade_status"/>
+      <result property="month" column="month"/>
+    </resultMap>
+
+    <select id="selectDrugs" resultMap="drugMap">
+        <!--
+            SELECT
+            a.msh_id,a.name,a.supplier_code,a.num,a.price,a.total_price,
+            a.supplier,a.pay_type,a.trade_status,a.month,REPLACE(a.month,'-','') AS sortMonth
+            FROM <include refid="drugSql"/>
+            ORDER BY sortMonth DESC
+            LIMIT #{map.page},#{map.limit}
+        -->
+        SELECT
+            a.msh_id,a.name,a.supplier_code,#a.num,a.price,a.total_price,
+            SUM(a.num) num , a.price, SUM(a.num) * a.price total_price,
+        FROM <include refid="drugSql"/>
+        GROUP BY a.msh_id
+        ORDER BY sortMonth DESC
+        LIMIT #{map.page},#{map.limit}
+    </select>
+    <select id="selectDrugsCount" resultType="java.lang.Integer">
+        SELECT count(1) FROM <include refid="drugSql"/>
+    </select>
+    <select id="selectDrugsExecl" resultType="com.aihoo.domain.hospital.model.entity.DrugCount">
+        <!--
+            SELECT
+            a.msh_id,a.name,a.supplier_code,a.num,a.price,a.total_price,
+            a.supplier,a.pay_type,a.trade_status,a.month,REPLACE(a.month,'-','') AS sortMonth
+            FROM <include refid="drugSql"/>
+            ORDER BY sortMonth DESC
+         -->
+
+         SELECT
+            a.msh_id,a.name,a.supplier_code,#a.num,a.price,a.total_price,
+            SUM(a.num) num , a.price, SUM(a.num) * a.price total_price,
+        FROM <include refid="drugSql"/>
+        GROUP BY a.msh_id
+        ORDER BY sortMonth DESC
+    </select>
+
+    <sql id="drugSql">
+        ( SELECT * FROM t_clear_drug UNION ALL SELECT * FROM t_everyday_drug ) AS a
+        <where>
+            <if test="map.name != null and map.name != ''">
+                a.name LIKE CONCAT('%',#{map.name},'%')
+            </if>
+            <if test="map.payType != null and map.payType != ''">
+                AND a.pay_type = #{map.payType}
+            </if>
+            <if test="map.tradeStatus != null and map.tradeStatus != ''">
+                AND a.trade_status = #{map.tradeStatus}
+            </if>
+            <if test="map.supplier != null and map.supplier != ''">
+                AND a.supplier LIKE CONCAT('%',#{map.supplier},'%')
+            </if>
+            AND CASE
+                #按月选择
+                WHEN LENGTH(#{map.Range}) = 7 THEN #{map.Range} = LEFT(a.`month`,7)
+                #上月
+                WHEN #{map.Range} = '1' THEN TIMESTAMPADD(MONTH,-1,CURRENT_DATE) = LEFT(a.`month`,7)
+                #半年
+                WHEN #{map.Range} = '2' THEN TIMESTAMPADD(MONTH,-6,CURRENT_DATE) = LEFT(a.`month`,7)
+                #一年
+                WHEN #{map.Range} = '3' THEN TIMESTAMPADD(MONTH,-12,CURRENT_DATE) = LEFT(a.`month`,7)
+                #其它 本月
+                ELSE LEFT(CURRENT_DATE,7) = LEFT(a.`month`,7)
+            END
+            <!--
+                <if test="map.Range != null and map.Range != ''">
+                    AND LEFT(a.month,7) = LEFT(#{map.month},7)
+                </if>
+             -->
+             <!--
+            <if test="map.Range != null and map.Range != ''">
+                <choose>
+                    <when test="map.monthSection == 0">
+                       AND a.month = #{map.month}
+                    </when>
+                    <otherwise>
+                       AND <![CDATA[REPLACE(a.month,'-','') >= #{map.month}]]>
+                    </otherwise>
+                </choose>
+            </if>
+             -->
+        </where>
+    </sql>
+</mapper>

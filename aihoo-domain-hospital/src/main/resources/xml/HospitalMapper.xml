@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.hospital.model.mapper.HospitalMapper">
+
+    <select id="selectHospital" resultType="com.aihoo.domain.hospital.model.vo.HospitalIbfkVo">
+        <!-- selectHospiatl -->
+        SELECT
+            hospital_no,
+            hos_name
+        FROM
+            t_hospital
+        WHERE
+            is_delete = 0
+            AND STATUS = 1
+    </select>
+</mapper>
