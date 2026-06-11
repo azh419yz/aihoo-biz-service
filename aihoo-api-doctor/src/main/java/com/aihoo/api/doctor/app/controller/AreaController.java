@@ -1,10 +1,9 @@
 package com.aihoo.api.doctor.app.controller;
 
-
+import com.aihoo.domain.sys.model.vo.AreaVo;
 import com.aihoo.common.BizResult;
-import com.aihoo.api.doctor.app.controller.vo.AreaVo;
-import com.aihoo.api.doctor.app.model.Area;
-import com.aihoo.api.doctor.app.service.AreaService;
+import com.aihoo.domain.sys.model.entity.Area;
+import com.aihoo.domain.sys.service.AreaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -27,85 +26,30 @@ public class AreaController {
 
     @GetMapping("/l3List")
     @Operation(summary = "省市区三级联动")
-    @ApiResponse(
-            responseCode = "200",
-            description = "成功",
-            content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(
-                            oneOf = {BizResult.class, AreaVo.class},
-                            description = "省市区三级联动"
-                    )
-            )
-    )
     public BizResult<List<AreaVo>> l3List() {
         return BizResult.success(areaService.l3List());
     }
 
     @GetMapping("/l2List")
     @Operation(summary = "省市二级联动")
-    @ApiResponse(
-            responseCode = "200",
-            description = "成功",
-            content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(
-                            oneOf = {BizResult.class, AreaVo.class},
-                            description = "省市二级联动"
-                    )
-            )
-    )
     public BizResult<List<AreaVo>> l2List() {
         return BizResult.success(areaService.l2List());
     }
 
     @GetMapping("/provincesList")
     @Operation(summary = "查询省")
-    @ApiResponse(
-            responseCode = "200",
-            description = "成功",
-            content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(
-                            oneOf = {BizResult.class, Area.class},
-                            description = "查询省"
-                    )
-            )
-    )
     public BizResult<List<Area>> provincesList() {
         return BizResult.success(areaService.provincesList());
     }
 
     @GetMapping("/cityList")
     @Operation(summary = "查询市")
-    @ApiResponse(
-            responseCode = "200",
-            description = "成功",
-            content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(
-                            oneOf = {BizResult.class, Area.class},
-                            description = "查询市"
-                    )
-            )
-    )
     public BizResult<List<Area>> cityList(@RequestParam String parentAreaCode) {
         return BizResult.success(areaService.cityList(parentAreaCode));
     }
 
     @GetMapping("/districtList")
     @Operation(summary = "查询区/县")
-    @ApiResponse(
-            responseCode = "200",
-            description = "成功",
-            content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(
-                            oneOf = {BizResult.class, Area.class},
-                            description = "查询区/县"
-                    )
-            )
-    )
     public BizResult<List<Area>> districtList(@RequestParam String parentAreaCode) {
         return BizResult.success(areaService.districtList(parentAreaCode));
     }

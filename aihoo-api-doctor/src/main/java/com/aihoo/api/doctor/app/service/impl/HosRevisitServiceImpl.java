@@ -49,7 +49,7 @@ import java.util.stream.Collectors;
  * @date ：Created in 2020/9/22 19:01
  * @description：复诊订单
  */
-@Service
+@Service("doctorApiHosRevisitServiceImpl")
 public class HosRevisitServiceImpl extends ServiceImpl<HosRevisitMapper, HosRevisit> implements HosRevisitService {
     private final Log log = LogFactory.get();
     @Resource

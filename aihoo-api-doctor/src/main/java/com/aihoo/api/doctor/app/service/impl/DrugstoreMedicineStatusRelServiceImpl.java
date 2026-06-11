@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.aihoo.api.doctor.app.service.DrugstoreMedicineStatusRelService;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("doctorApiDrugstoreMedicineStatusRelServiceImpl")
 public class DrugstoreMedicineStatusRelServiceImpl extends ServiceImpl<DrugstoreMedicineStatusRelMapper, DrugstoreMedicineStatusRel>
         implements DrugstoreMedicineStatusRelService {
 }

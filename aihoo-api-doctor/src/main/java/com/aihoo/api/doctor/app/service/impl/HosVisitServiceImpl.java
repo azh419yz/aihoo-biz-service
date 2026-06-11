@@ -45,7 +45,7 @@ import java.util.*;
  * @author mcp
  * @since 2020-09-18
  */
-@Service
+@Service("doctorApiHosVisitServiceImpl")
 public class HosVisitServiceImpl extends ServiceImpl<HosVisitMapper, HosVisit> implements HosVisitService {
     @Resource
     private SmsModelSendUtil smsModelSendUtil;

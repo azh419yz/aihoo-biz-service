@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  */
-@Service
+@Service("doctorApiDoctorVisitSetServiceImpl")
 @RequiredArgsConstructor
 public class DoctorVisitSetServiceImpl extends ServiceImpl<DoctorVisitSetMapper, DoctorVisitSet> implements DoctorVisitSetService {
 

@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Service
+@Service("doctorApiDrugstoreServiceImpl")
 @RequiredArgsConstructor
 public class DrugstoreServiceImpl extends ServiceImpl<DrugstoreMapper, Drugstore> implements DrugstoreService {
     private final DrugstoreProvinceRelService provinceRelService;

@@ -10,6 +10,8 @@ import com.aihoo.api.doctor.app.controller.vo.HosVisitVo;
 import com.aihoo.api.doctor.app.mapper.HosSickMapper;
 import com.aihoo.api.doctor.app.model.*;
 import com.aihoo.api.doctor.app.service.*;
+import com.aihoo.domain.sys.model.entity.Area;
+import com.aihoo.domain.sys.service.AreaService;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +29,7 @@ import java.util.stream.Collectors;
  * @author wyz
  * @since 2026/3/6 14:21
  */
-@Service
+@Service("doctorApiHosSickServiceImpl")
 @RequiredArgsConstructor
 public class HosSickServiceImpl extends ServiceImpl<HosSickMapper, HosSick> implements HosSickService {
 

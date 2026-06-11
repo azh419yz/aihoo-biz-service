@@ -27,7 +27,7 @@ import java.util.List;
  * @author mcp
  * @since 2020-09-19
  */
-@Service
+@Service("doctorApiDrugServiceImpl")
 public class DrugServiceImpl extends ServiceImpl<DrugMapper, Drug> implements DrugService {
 
 

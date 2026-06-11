@@ -56,7 +56,7 @@ import java.util.stream.Collectors;
  * @author: Mr.Li
  * @create: 2021-01-07 17:04
  **/
-@Service
+@Service("doctorApiMdtOrderServiceImpl")
 public class MdtOrderServiceImpl implements MdtOrderService {
     Log log = LogFactory.get();
     @Resource

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * @author wyz
  * @since 2026/3/6 16:02
  */
-@Service
+@Service("doctorApiHosPrescriptionServiceImpl")
 public class HosPrescriptionServiceImpl extends ServiceImpl<HosPrescriptionMapper, HosPrescription>
         implements HosPrescriptionService {
 }

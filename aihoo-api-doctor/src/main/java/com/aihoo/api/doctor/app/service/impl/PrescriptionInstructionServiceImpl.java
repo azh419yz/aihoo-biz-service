@@ -6,7 +6,7 @@ import com.aihoo.api.doctor.app.model.HosPrescriptionInstruction;
 import com.aihoo.api.doctor.app.service.PrescriptionInstructionService;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("doctorApiPrescriptionInstructionServiceImpl")
 public class PrescriptionInstructionServiceImpl
         extends ServiceImpl<HosPrescriptionInstructionMapper, HosPrescriptionInstruction> implements PrescriptionInstructionService {
 }

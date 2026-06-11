@@ -51,7 +51,7 @@ import java.util.UUID;
  * @since 2020-09-15
  */
 @Log4j2
-@Service
+@Service("doctorApiDoctorUserServiceImpl")
 public class DoctorUserServiceImpl extends ServiceImpl<DoctorUserMapper, DoctorUser> implements DoctorUserService {
 
     @Resource

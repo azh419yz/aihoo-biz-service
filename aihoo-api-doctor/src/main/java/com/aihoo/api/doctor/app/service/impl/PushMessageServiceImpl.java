@@ -16,7 +16,7 @@ import java.util.Objects;
  * @author: Mr.Li
  * @create: 2020-10-16 15:08
  **/
-@Service
+@Service("doctorApiPushMessageServiceImpl")
 public class PushMessageServiceImpl extends ServiceImpl<PushMessageMapper, PushMessage> implements PushMessageService {
 
     /**
