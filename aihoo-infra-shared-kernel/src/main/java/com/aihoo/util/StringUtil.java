@@ -95,4 +95,15 @@ public final class StringUtil {
         String head = in.substring(0, 1);
         return head.toUpperCase() + in.substring(1);
     }
+
+    public static String getIntegerStr(Object obj) {
+        if (obj == null) {
+            return "";
+        }
+        return obj.toString();
+    }
+
+    public static boolean isNullOrEmpty(Object obj) {
+        return obj == null || "".equals(obj);
+    }
 }
