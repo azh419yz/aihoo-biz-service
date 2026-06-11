@@ -19,7 +19,7 @@ spring:
       stat-view-servlet:
         url-pattern: /druid/*
         reset-enable: true
-      aop-patterns: com.patient.api.*.service.*
+      aop-patterns: com.aihoo.api.patient.app.service.impl.*
   jackson:
     time-zone: Asia/Shanghai
     date-format: yyyy-MM-dd HH:mm:ss
@@ -41,7 +41,7 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
     cache-enabled: false
-  typeAliasesPackage: com.patient.api.*.model
+  typeAliasesPackage: com.aihoo.api.patient.app.model.*
   global-config:
     id-type: auto
     field-strategy: 1
