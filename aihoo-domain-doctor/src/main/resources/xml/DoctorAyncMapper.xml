@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.doctor.model.mapper.DoctorAyncMapper">
+    <sql id="Base_Column_List">
+    id, create_time, update_time, doctor_user_id, order_number, high_opinion, real_high_opinion
+    </sql>
+
+    <select id="findDoctorAyncByUserIds" resultType="com.aihoo.domain.doctor.model.entity.DoctorAync">
+        select <include refid="Base_Column_List"/>
+        from t_doctor_aync
+        where doctor_user_id in
+        <foreach collection="doctorUserIds" open="(" close=")" separator="," item="doctorUserIds">
+            #{doctorUserIds}
+        </foreach>
+    </select>
+</mapper>
