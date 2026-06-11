@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.im.model.mapper.MessageWarnMapper">
+
+    <update id="updateReadByMessageId" parameterType="java.util.Map">
+        UPDATE t_message_warn t1
+        LEFT JOIN t_message_reply t2 ON t1.other_id = t2.id
+        LEFT JOIN t_message t3 ON t2.message_id = t3.id
+        SET t1.is_read = true
+        WHERE (t1.type in ('NEWS','THUMP_UP')
+        AND t1.is_read = false
+        AND t1.is_delete = false
+        AND t1.wechat_user_id = #{wechatUserId}
+        AND t3.id = #{messageId})
+    </update>
+
+    <update id="updateMessageWarn" parameterType="map">
+        UPDATE t_message_warn
+        SET is_delete=#{isDelete}
+        WHERE wechat_user_id = #{wechatUserId}
+        AND id=#{id}
+    </update>
+</mapper>

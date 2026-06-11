@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.visit.model.mapper.HosVisitMapper">
+
+
+    <select id="getInfos" parameterType="Map" resultType="com.aihoo.domain.visit.model.vo.VisitOrderTradeInfoVo">
+        select
+        thv.order_num orderNum,
+        thv.total_price totalPrice,
+        thv.pay_type payType,
+        thvl.status status,
+        thvl.create_time createTime,
+        o.pay_order_num payOrderNum,
+        ths.name hosSickName,
+        th.hos_name hospitalName,
+        tdu.name doctorName
+        from t_hos_visit_log thvl
+        left join t_hos_visit thv on thvl.hos_visit_id=thv.id
+        left join t_order o on thv.order_num=o.order_num
+        left join t_hos_sick ths on thvl.sick_id=ths.id
+        left join t_doctor_user tdu on thvl.doctor_user_id=tdu.id
+        left join t_hospital th on tdu.hospital_id=th.id
+        <include refid="whereSql"></include>
+        order by thvl.create_time desc
+        <if test="page != null and limit != null">
+            LIMIT #{page} ,#{limit}
+        </if>
+    </select>
+
+    <select id="getTotal" parameterType="Map" resultType="int">
+        select
+        count(thvl.id)
+        from t_hos_visit_log thvl
+        left join t_hos_visit thv on thvl.hos_visit_id=thv.id
+        left join t_order o on thv.order_num=o.order_num
+        left join t_hos_sick ths on thvl.sick_id=ths.id
+        left join t_doctor_user tdu on thvl.doctor_user_id=tdu.id
+        left join t_hospital th on tdu.hospital_id=th.id
+        <include refid="whereSql"></include>
+    </select>
+
+    <sql id="whereSql">
+        <where>
+            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+                thvl.create_time BETWEEN #{startTime} AND #{endTime}
+            </if>
+            <if test="hosSickName != null and hosSickName != ''">
+                and ths.name like concat('%', #{hosSickName}, '%')
+            </if>
+            <if test="doctorName != null and doctorName != ''">
+                and tdu.name like concat('%', #{doctorName}, '%')
+            </if>
+            <if test="payType != null and payType != ''">
+                and thv.pay_type = #{payType}
+            </if>
+            <if test="hospitalName != null and hospitalName != ''">
+                and th.hos_name like concat('%', #{hospitalName}, '%')
+            </if>
+            <if test="status != null and status != ''">
+                and thvl.status in (${status})
+            </if>
+        </where>
+    </sql>
+
+
+</mapper>

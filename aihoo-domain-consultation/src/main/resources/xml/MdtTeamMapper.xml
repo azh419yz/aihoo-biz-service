@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.consultation.model.mapper.MdtTeamMapper">
+
+
+    <select id="selectMdtTeamList" resultMap="selectMdtTeamListMap" >
+        SELECT
+	          a.`name` AS teamName,
+			  a.home_img AS homeImg,
+			  a.details_img AS detailsImg,
+			  a.list_img AS listImg,
+			  a.introduction AS introduction,
+			  a.`index` AS mdtIndex,
+			  a.price AS price,
+	          b.doctor_user_id AS doctorUserId,
+	          b.is_main AS isMain,
+	          b.doctor_type AS doctorType,
+	          b.price AS mdtTeamDoctorPrice,
+	          a.id AS teamId,
+	          b.id AS teamDoctorId,
+	          c.`name` AS  doctorUserName,
+			  e.id AS tagId,
+			  e.`name`AS tagName,
+              a.mdt_type AS mdtType,
+              b.consultant_id AS consultantId
+             FROM
+	         t_mdt_team a
+	         LEFT JOIN t_mdt_team_doctor b ON a.id = b.mdt_team_id
+	         LEFT JOIN t_doctor_user c ON b.doctor_user_id = c.id
+	         LEFT JOIN t_mdt_team_tag d ON a.id = d.mdt_team_id
+			 LEFT JOIN d_mdt_tag e ON d.tag_id = e.id
+             WHERE
+	         a.id = #{mdtTeamId}
+    </select>
+
+    <resultMap id="selectMdtTeamListMap" type="com.aihoo.domain.consultation.model.entity.MdtTeam">
+        <id column="teamId" property="id"/>
+        <result column="teamName" property="name"/>
+        <result column="homeImg" property="homeImg"/>
+        <result column="detailsImg" property="detailsImg"/>
+        <result column="listImg" property="listImg"/>
+        <result column="introduction" property="introduction"/>
+        <result column="mdtIndex" property="index"/>
+        <result column="price" property="price"/>
+        <result column="mdtType" property="mdtType"/>
+        <collection property="mdtTeamDoctors" ofType="com.aihoo.domain.consultation.model.entity.MdtTeamDoctor">
+            <id column="teamDoctorId" property="id"/>
+            <result column="doctorUserId" property="doctorUserId"/>
+            <result column="isMain" property="isMain"/>
+            <result column="doctorType" property="doctorType"/>
+            <result column="doctorUserId" property="doctorUserId"/>
+            <result column="doctorUserName" property="doctorUserName"/>
+            <result column="mdtTeamDoctorPrice" property="price"/>
+            <result column="consultantId" property="consultantId"/>
+        </collection>
+        <collection property="dMdtTags" ofType="com.aihoo.domain.consultation.model.entity.DMdtTag">
+            <id column="tagId" property="id"/>
+            <result column="tagName" property="name"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="teamListByKeyword" resultType="com.aihoo.domain.consultation.model.entity.MdtTeam">
+        SELECT DISTINCT t_mdt_team.*,t_mdt.name as mdtName
+        FROM t_mdt_team
+                     LEFT JOIN t_mdt ON t_mdt.id = t_mdt_team.mdt_id
+                     LEFT JOIN t_mdt_tag ON t_mdt_tag.mdt_id = t_mdt.id
+                     LEFT JOIN d_mdt_tag ON d_mdt_tag.id = t_mdt_tag.tag_id
+                     LEFT JOIN t_mdt_team_tag ON t_mdt_team_tag.tag_id = d_mdt_tag.id
+                AND t_mdt_team_tag.mdt_team_id = t_mdt_team.id
+                     LEFT JOIN t_mdt_team_doctor ON t_mdt_team.id = t_mdt_team_doctor.mdt_team_id
+                     LEFT JOIN t_doctor_user ON t_doctor_user.id = t_mdt_team_doctor.doctor_user_id
+                     LEFT JOIN t_doctor_set ON t_doctor_user.id = t_doctor_set.doctor_user_id
+        WHERE t_mdt_team.is_delete = '0'
+          AND t_mdt.is_delete = '0'
+          AND t_mdt.`status` = '1'
+          AND d_mdt_tag.`is_delete` = '0'
+          AND t_mdt_team_doctor.doctor_type = 'CONSULTANT'
+          AND t_doctor_user.is_auth = 'PASS'
+          AND t_doctor_user.is_cancel = '0'
+          AND t_doctor_user.`status` = '1'
+          AND t_doctor_set.is_mdt = '1'
+          AND (t_mdt.name like #{param1,jdbcType=VARCHAR}
+                OR t_doctor_user.hospital_name like #{param1,jdbcType=VARCHAR}
+                OR t_doctor_user.name like #{param1,jdbcType=VARCHAR}
+                OR t_mdt_team.name like #{param1,jdbcType=VARCHAR})
+        ORDER BY t_mdt_team.`index`
+    </select>
+
+    <select id="teamList" resultType="com.aihoo.domain.consultation.model.entity.MdtTeam">
+        SELECT DISTINCT t_mdt_team.*
+        FROM t_mdt_team
+        LEFT JOIN t_mdt ON t_mdt.id = t_mdt_team.mdt_id
+        LEFT JOIN t_mdt_tag ON t_mdt_tag.mdt_id = t_mdt.id
+        LEFT JOIN d_mdt_tag ON d_mdt_tag.id = t_mdt_tag.tag_id
+        LEFT JOIN t_mdt_team_tag ON t_mdt_team_tag.tag_id = d_mdt_tag.id
+        AND t_mdt_team_tag.mdt_team_id = t_mdt_team.id
+        LEFT JOIN t_mdt_team_doctor ON t_mdt_team.id = t_mdt_team_doctor.mdt_team_id
+        LEFT JOIN t_doctor_user ON t_doctor_user.id = t_mdt_team_doctor.doctor_user_id
+        LEFT JOIN t_doctor_set ON t_doctor_user.id = t_doctor_set.doctor_user_id
+        WHERE t_mdt_team.is_delete = '0'
+        AND t_mdt.is_delete = '0'
+        AND t_mdt.`status` = '1'
+        AND d_mdt_tag.`is_delete` = '0'
+        AND t_mdt_team_doctor.doctor_type = 'CONSULTANT'
+        AND t_doctor_user.is_auth = 'PASS'
+        AND t_doctor_user.is_cancel = '0'
+        AND t_doctor_user.`status` = '1'
+        AND t_doctor_set.is_mdt = '1'
+        <if test="param1 != null and param1 != ''">
+            AND t_mdt_team.mdt_id = #{param1,jdbcType=VARCHAR}
+            <if test="param2 != null and param2 != ''">
+                AND d_mdt_tag.id = #{param2,jdbcType=VARCHAR}
+            </if>
+        </if>
+        ORDER BY t_mdt_team.`index`
+    </select>
+</mapper>

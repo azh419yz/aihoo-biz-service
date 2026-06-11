@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.prescription.model.mapper.HosPreDrugMapper">
+
+    <resultMap id="BaseMap" type="com.aihoo.domain.prescription.model.vo.HosPreDrugVo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="shippendStartTime" jdbcType="TIMESTAMP" property="shippendStartTime" />
+    <result column="shippendEndTime" jdbcType="TIMESTAMP" property="shippendEndTime" />
+    <result column="is_pre" jdbcType="TINYINT" property="isPre" />
+    <result column="hos_prescription_id" jdbcType="BIGINT" property="hosPrescriptionId" />
+    <result column="order_num" jdbcType="VARCHAR" property="orderNum" />
+    <result column="express_code" jdbcType="VARCHAR" property="expressCode" />
+    <result column="express_name" jdbcType="VARCHAR" property="expressName" />
+    <result column="shipping_no" jdbcType="VARCHAR" property="shippingNo" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="province_code" jdbcType="VARCHAR" property="provinceCode" />
+    <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
+    <result column="district_code" jdbcType="VARCHAR" property="districtCode" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="district" jdbcType="VARCHAR" property="district" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    </resultMap>
+    <select id="drugList" resultMap="BaseMap" resultType="map">
+        SELECT
+	    a.id ,
+        a.create_time,
+        a.shippend_start_time shippendStartTime,
+        a.shippend_end_time shippendEndTime,
+	    a.name,
+	    a.mobile,
+	    a.address,
+	    a.province,
+	    a.city,
+	    a.district,
+	    a.status,
+	    a.order_num,
+	    b.id as prescriptionId,
+	    b.type,
+	    b.total_price,
+	    b.visit_mdt_num
+        FROM
+	    t_hos_pre_drug_order a
+	    LEFT JOIN t_hos_prescription b ON a.hos_prescription_id = b.id
+        WHERE 1=1
+        <if test="orderNum!=null and orderNum !=''">
+           <!-- and a.order_num = #{orderNum} -->
+           AND CONCAT_WS(",",a.order_num,b.order_num,b.visit_mdt_num,b.prescription_num) LIKE CONCAT("%",#{orderNum},"%")
+        </if>
+        <if test="name!=null and name !=''">
+            and a.name LIKE CONCAT('%',#{name},'%')
+        </if>
+        <if test="mobile!=null and mobile !=''">
+            and a.mobile = #{mobile}
+        </if>
+        <if test="status!=null and status !=''">
+            and a.status = #{status}
+        </if>
+        ORDER BY a.create_time DESC
+        limit #{startNum},#{limit}
+    </select>
+    <select id="getDrugDetails" resultMap="HosPreDrugOrderMap">
+       SELECT
+       a.id,
+       a.name,
+       a.mobile,
+       a.address,
+       a.hos_prescription_id,
+       a.order_num,
+       a.status,
+       a.create_time as createTimeDrug,
+       a.pay_time payTimeDrug,
+       b.id as prescriptionId ,
+       b.name as hoSickName,
+       b.mobile as  hoSickMobile,
+       b.type,
+       b.visit_mdt_num,
+       b.pay_type,
+       b.total_price,
+       b.create_time,
+       b.pay_time,
+       c.id as drugId,
+       c.name as drugName,
+       c.size,
+       c.price,
+       c.number,
+       b.end_time
+       FROM t_hos_pre_drug_order a
+       LEFT JOIN t_hos_prescription b ON a.hos_prescription_id = b.id
+       LEFT JOIN t_hos_prescription_drug c ON b.id = c.hos_prescription_id
+       WHERE a.id = #{id}
+    </select>
+
+    <select id="getCount" parameterType="map" resultType="int">
+        SELECT
+        COUNT(1)
+        FROM
+        t_hos_pre_drug_order a
+        LEFT JOIN t_hos_prescription b ON a.hos_prescription_id = b.id
+        WHERE 1=1
+        <if test="orderNum!=null and orderNum !=''">
+            and a.order_num = #{orderNum}
+        </if>
+        <if test="name!=null and name !=''">
+            and a.name LIKE CONCAT('%',#{name},'%')
+        </if>
+        <if test="mobile!=null and mobile !=''">
+            and a.mobile = #{mobile}
+        </if>
+        <if test="status!=null and status !=''">
+            and a.status = #{status}
+        </if>
+    </select>
+
+    <resultMap id="HosPreDrugOrderMap" type="com.aihoo.domain.prescription.model.entity.HosPreDrugOrder" extends="BaseMap">
+        <association property="hosPrescription" javaType="com.aihoo.domain.prescription.model.entity.HosPrescription">
+            <id column="prescriptionId" jdbcType="BIGINT" property="id" />
+            <result column="total_price" jdbcType="DECIMAL" property="totalPrice" />
+            <result column="hoSickName" jdbcType="VARCHAR" property="name" />
+            <result column="hoSickMobile" jdbcType="VARCHAR" property="mobile" />
+            <result column="type" jdbcType="VARCHAR" property="type" />
+            <result column="visit_mdt_num" jdbcType="VARCHAR" property="visitMdtNum" />
+            <result column="pay_type" jdbcType="VARCHAR" property="payType" />
+            <result column="total_price" jdbcType="DECIMAL" property="totalPrice" />
+            <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+            <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+            <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+        </association>
+      <collection property="hosPrescriptionDrugs" ofType="com.aihoo.domain.prescription.model.entity.HosPrescriptionDrug">
+          <id column="drugId" jdbcType="BIGINT" property="id" />
+          <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+          <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+          <result column="hos_prescription_id" jdbcType="BIGINT" property="hosPrescriptionId" />
+          <result column="drug_id" jdbcType="BIGINT" property="drugId" />
+          <result column="drugName" jdbcType="VARCHAR" property="name" />
+          <result column="size" jdbcType="VARCHAR" property="size" />
+          <result column="drug_dos_code" jdbcType="VARCHAR" property="drugDosCode" />
+          <result column="drug_dos_name" jdbcType="VARCHAR" property="drugDosName" />
+          <result column="unit_measure" jdbcType="VARCHAR" property="unitMeasure" />
+          <result column="pack_unit_code" jdbcType="VARCHAR" property="packUnitCode" />
+          <result column="pack_unit_name" jdbcType="VARCHAR" property="packUnitName" />
+          <result column="price" jdbcType="DECIMAL" property="price" />
+          <result column="freq_med_code" jdbcType="VARCHAR" property="freqMedCode" />
+          <result column="freq_med_name" jdbcType="VARCHAR" property="freqMedName" />
+          <result column="route_admi_code" jdbcType="VARCHAR" property="routeAdmiCode" />
+          <result column="route_admi_name" jdbcType="VARCHAR" property="routeAdmiName" />
+          <result column="is_antibiotics" jdbcType="TINYINT" property="isAntibiotics" />
+          <result column="is_injection" jdbcType="TINYINT" property="isInjection" />
+          <result column="is_anesthesia" jdbcType="TINYINT" property="isAnesthesia" />
+          <result column="is_monitor" jdbcType="TINYINT" property="isMonitor" />
+          <result column="content" jdbcType="VARCHAR" property="content" />
+          <result column="number" jdbcType="BIGINT" property="number" />
+          <result column="use_day" jdbcType="BIGINT" property="useDay" />
+          <result column="dosage" jdbcType="VARCHAR" property="dosage" />
+      </collection>
+    </resultMap>
+
+    <resultMap id="BaseResultMap" extends="BaseMap" type="com.aihoo.domain.prescription.model.entity.HosPreDrugOrder">
+        <id column="drugId" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+        <result column="order_num" jdbcType="VARCHAR" property="orderNum" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+        <association property="hosPrescription" javaType="com.aihoo.domain.prescription.model.entity.HosPrescription">
+            <id column="prescriptionId" jdbcType="BIGINT" property="id" />
+            <result column="type" jdbcType="VARCHAR" property="type" />
+            <result column="visit_mdt_num" jdbcType="VARCHAR" property="visitMdtNum" />
+            <result column="total_price" jdbcType="DECIMAL" property="totalPrice" />
+        </association>
+    </resultMap>
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.payment.model.mapper.OfflinePatientMapper">
+  <resultMap id="BaseResultMap" type="com.aihoo.domain.payment.model.entity.OfflinePatient">
+    <!--@mbg.generated-->
+    <!--@Table t_offline_patient-->
+    <id column="id" property="id" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+    <result column="name" property="name" />
+    <result column="mobile" property="mobile" />
+    <result column="papers_code" property="papersCode" />
+    <result column="papers_name" property="papersName" />
+    <result column="papers_numbers" property="papersNumbers" />
+    <result column="status" property="status" />
+    <result column="is_delete" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, create_time, update_time, `name`, mobile, papers_code, papers_name, papers_numbers, 
+    `status`, is_delete
+  </sql>
+</mapper>

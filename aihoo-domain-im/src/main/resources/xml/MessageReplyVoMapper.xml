@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.im.model.mapper.MessageReplyVoMapper">
+
+    <resultMap id="messageReplyVoMap" type="com.aihoo.domain.im.model.vo.MessageReplyVo">
+        <id property="id" column="id"/>
+        <result property="wechatUserId" column="wechat_user_id"/>
+        <result property="messageId" column="message_id"/>
+        <result property="messageWechatUserId" column="message_wechat_user_id"/>
+        <result property="messageReplyId" column="message_reply_id"/>
+        <result property="recommendId" column="recommend_id"/>
+        <result property="name" column="name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="messageUpdateTime" column="update_time"/>
+        <result property="content" column="content"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="headImg" column="head_img"/>
+        <result property="recommendName" column="recommend_name"/>
+    </resultMap>
+
+    <select id="selectAllComment" resultMap="messageReplyVoMap">
+        SELECT mt.id,mt.message_id, mt.wechat_user_id, mt.content, mt.message_reply_id,wu.nick_name
+        FROM t_message_reply mt
+            LEFT JOIN t_wechat_user wu ON mt.wechat_user_id = wu.id
+            where mt.message_id=#{messageId}
+    </select>
+
+    <select id="getHomepageMessageReply" parameterType="Map" resultMap="messageReplyVoMap">
+        SELECT t1.id, t1.message_id, t1.wechat_user_id, t1.content, t1.message_reply_id
+        , t2.nick_name
+        FROM t_message_reply t1
+        LEFT JOIN t_wechat_user t2 ON t1.wechat_user_id = t2.id
+        WHERE t1.message_id = #{messageId}
+        AND t1.message_reply_id IS NULL
+        ORDER BY t1.create_time DESC
+        LIMIT 0,2
+    </select>
+
+    <select id="getMessageReplyCount" parameterType="Map" resultType="Integer">
+        SELECT count(id)
+        FROM t_message_reply
+        WHERE message_id = #{messageId}
+        AND message_reply_id IS NULL
+    </select>
+
+    <select id="getMessageReply" parameterType="Map" resultMap="messageReplyVoMap">
+        SELECT t1.id, t1.message_id, t1.wechat_user_id, t1.content, t1.message_reply_id
+            , t1.create_time, t2.nick_name, t2.head_img
+        FROM t_message_reply t1
+            LEFT JOIN t_wechat_user t2 ON t1.wechat_user_id = t2.id
+        WHERE t1.message_id = #{messageId}
+            AND t1.message_reply_id IS NULL
+        ORDER BY t1.create_time DESC
+    </select>
+
+    <select id="getMessageReview" parameterType="Map" resultMap="messageReplyVoMap">
+        SELECT t1.id, t1.message_id, t1.wechat_user_id, t1.content, t1.message_reply_id
+        , t1.create_time, t2.nick_name, t2.head_img, t3.nick_name AS recommend_name
+        FROM t_message_reply t1
+        LEFT JOIN t_wechat_user t2 ON t1.wechat_user_id = t2.id
+        LEFT JOIN t_wechat_user t3 ON t1.recommend_id = t3.id
+        WHERE t1.message_id = #{messageId}
+        AND t1.message_reply_id = #{messageReplyId}
+        ORDER BY t1.create_time DESC
+    </select>
+
+    <select id="getMessageReplyDetail" parameterType="Map" resultMap="messageReplyVoMap">
+        SELECT t1.id, t1.message_id, t1.wechat_user_id, t1.content, t1.message_reply_id
+        , t1.create_time, t2.nick_name, t2.head_img
+        FROM t_message_reply t1
+        LEFT JOIN t_wechat_user t2 ON t1.wechat_user_id = t2.id
+        WHERE t1.message_id = #{messageId}
+        AND t1.id = #{messageReplyId}
+        ORDER BY t1.create_time DESC
+    </select>
+
+    <select id="getUserMessageList" parameterType="map" resultMap="messageReplyVoMap">
+        SELECT t1.id, t1.wechat_user_id, t1.message_id, t1.message_reply_id, t1.recommend_id
+            , t1.recommend_reply_id, t1.content,t2.`name`,t2.wechat_user_id message_wechat_user_id
+            , t3.head_img, t3.nick_name,DATE_FORMAT(t1.create_time, '%Y-%m-%d %H:%i:%s') AS create_time
+        , DATE_FORMAT(t2.update_time, '%Y-%m-%d %H:%i:%s') AS update_time
+        FROM t_message_reply t1
+            LEFT JOIN t_message t2 ON t1.message_id = t2.id
+            LEFT JOIN t_wechat_user t3 ON t1.wechat_user_id = t3.id
+        WHERE (t1.recommend_id = #{wechatUserId}
+            OR t1.wechat_user_id = #{wechatUserId}
+            OR (t1.recommend_id IS NULL
+                AND t2.wechat_user_id = #{wechatUserId}))
+        ORDER BY t1.create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.im.model.mapper.MessageWarnVoMapper">
+
+<!--
+    <select id="getMessagePrompt" parameterType="map" resultType="com.aihoo.api.app.controller.vo.MessageWarnVo">
+        SELECT t2.id, DATE_FORMAT(t2.create_time, '%Y-%m-%d %H:%i:%s') AS createTime
+            , DATE_FORMAT(t2.update_time, '%Y-%m-%d %H:%i:%s') AS updateTime, t2.wechat_user_id
+            , t2.type, t2.title, t2.content, t2.is_read, t1.state, t3.nick_name AS nickName, t3.head_img AS headImg
+            , t1.id otherId, t1.id messageId
+        FROM t_message_warn t2
+            INNER JOIN t_message t1 ON t1.id = t2.other_id
+            LEFT JOIN t_wechat_user t3 ON t2.thump_up_wechat_user_id = t3.id
+        WHERE (t1.is_delete = false
+            AND t2.is_delete = false
+            AND t2.type = #{type}
+            AND t2.is_read = false
+            AND t2.wechat_user_id=#{wechatUserId})
+            ORDER BY t2.create_time DESC
+            Limit #{offset},#{limit}
+    </select>
+
+    <select id="getNewMessage" parameterType="map" resultType="com.aihoo.api.app.controller.vo.MessageWarnVo">
+        SELECT t1.id, t1.update_time, t1.title,t1.create_time create_time,t2.id recommendReplyId,t2.message_reply_id messageReplyId, t2.message_id AS messageId, t2.content
+            , t3.nick_name AS nickName, t3.head_img AS headImg,t1.other_id AS otherId
+        FROM t_message_warn t1
+            LEFT JOIN t_message_reply t2 ON t1.other_id = t2.id
+            LEFT JOIN t_wechat_user t3 ON t1.wechat_user_id = t3.id
+            LEFT JOIN t_message t4 ON t2.message_id = t4.id
+        WHERE t1.wechat_user_id = #{wechatUserId}
+            AND t4.wechat_user_id!=#{wechatUserId}
+            AND t1.is_delete = false
+            AND t4.is_delete = false
+            AND t1.is_read = false
+            AND t1.type = 'NEWS'
+            ORDER BY t1.create_time DESC
+            Limit #{offset},#{limit}
+    </select>
+-->
+
+
+
+
+
+</mapper>

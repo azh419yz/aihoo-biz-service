@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.im.model.mapper.PushMessageMapper">
+    <select id="mdtMessageList" resultType="com.aihoo.domain.im.model.vo.MdtPushMessageVo">
+        SELECT t_push_message.id,
+        t_mdt_order.order_num,
+        t_push_message.intro,
+        t_push_message.other_id,
+        t_push_message.content,
+        t_push_message.set_time,
+        t_push_message.is_read
+        FROM t_push_message
+        LEFT JOIN
+        t_mdt_order
+        on t_push_message.other_id = t_mdt_order.id
+        WHERE t_push_message.pesronal_id = #{param2}
+        AND t_push_message.type = #{param3}
+        AND t_push_message.message_type = #{param4}
+        AND t_push_message.is_delete = '0'
+        <if test="null != param8 and '' != param8">
+            AND t_push_message.content like #{param8}
+        </if>
+        <if test="null != param5 and '' != param5">
+            AND t_mdt_order.order_num = #{param5}
+        </if>
+        <if test="null != param6 and '' != param6 and null != param7 and '' != param7">
+            AND t_push_message.set_time BETWEEN #{param6} AND #{param7}
+        </if>
+        ORDER BY t_push_message.is_read ASC,
+        t_push_message.create_time DESC
+    </select>
+</mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.visit.model.mapper.HosSickMapper">
+    <select id="hosSickList" resultType="com.aihoo.domain.visit.model.entity.HosSick">
+        SELECT
+        id,
+        create_time,
+        name,
+        id_card,
+        mobile,
+        patient_user_id
+        FROM
+        t_hos_sick
+        WHERE 1=1
+        <if test="mobile!=null and mobile !=''">
+            AND mobile = #{mobile}
+        </if>
+        <if test="name!=null and name !=''">
+            AND name = #{name}
+        </if>
+        limit #{startNum},#{limit}
+    </select>
+
+    <select id="getCount" parameterType="map" resultType="int">
+        SELECT
+        COUNT(1)
+        FROM
+        t_hos_sick
+        WHERE 1=1
+        <if test="mobile!=null and mobile !=''">
+            AND mobile = #{mobile}
+        </if>
+        <if test="name!=null and name !=''">
+            AND name = #{name}
+        </if>
+    </select>
+
+    <select id="hosSickDetails" resultType="com.aihoo.domain.visit.model.entity.HosSick">
+        SELECT
+        id,
+        create_time,
+        name,
+        age,
+        sex,
+        id_card,
+        mobile,
+        patient_user_id,
+        is_delete
+        FROM
+        t_hos_sick
+        <where>
+            <if test="id!=null and id !=''">
+                and id = #{id}
+            </if>
+        </where>
+    </select>
+</mapper>

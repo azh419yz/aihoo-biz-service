@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.payment.model.mapper.OfflineBlacklistMapper">
+  <resultMap id="BaseResultMap" type="com.aihoo.domain.payment.model.entity.OfflineBlacklist">
+    <!--@mbg.generated-->
+    <!--@Table t_offline_blacklist-->
+    <id column="id" property="id" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+    <result column="name" property="name" />
+    <result column="phone" property="phone" />
+    <result column="certificates" property="certificates" />
+    <result column="hospital_id" property="hospitalId" />
+    <result column="hospital_name" property="hospitalName" />
+    <result column="real_date" property="realDate" />
+    <result column="is_delete" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, create_time, update_time, `name`, phone, certificates
+    hospital_id, hospital_name, real_date, is_delete
+  </sql>
+</mapper>

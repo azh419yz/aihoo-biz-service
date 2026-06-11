@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.im.model.mapper.MessageFileMapper">
+    <select id="getMessageFile" parameterType="map" resultType="com.aihoo.domain.im.model.entity.MessageFile">
+        SELECT id,message_id,file_url,`type`
+            FROM t_message_file WHERE `type`=#{type} AND message_id=#{messageId}
+            Limit 1
+    </select>
+</mapper>

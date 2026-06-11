@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.payment.model.mapper.OfflineOderMapper">
+
+    <resultMap id="BaseMap" type="com.aihoo.domain.payment.model.entity.OfflineOder">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+        <result column="preparation_time" jdbcType="TIMESTAMP" property="preparationTime" />
+        <result column="preparation_name" jdbcType="VARCHAR" property="preparationName" />
+        <result column="company_id" jdbcType="BIGINT" property="companyId" />
+        <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+        <result column="customer_id" jdbcType="BIGINT" property="customerId" />
+        <result column="manager" jdbcType="VARCHAR" property="manager" />
+        <result column="manager_phone" jdbcType="VARCHAR" property="managerPhone" />
+        <result column="manager_name" jdbcType="VARCHAR" property="managerName" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="certificates_type" jdbcType="VARCHAR" property="certificatesType" />
+        <result column="certificates" jdbcType="VARCHAR" property="certificates" />
+        <result column="birth" jdbcType="TIMESTAMP" property="birth" />
+        <result column="sex" jdbcType="VARCHAR" property="sex" />
+        <result column="type" jdbcType="VARCHAR" property="type" />
+        <result column="visit_time" jdbcType="TIMESTAMP" property="visitTime" />
+        <result column="treatment_id" jdbcType="BIGINT" property="treatmentId" />
+        <result column="treatment_name" jdbcType="VARCHAR" property="treatmentName" />
+        <result column="symptom" jdbcType="VARCHAR" property="symptom" />
+        <result column="hospital_name" jdbcType="VARCHAR" property="hospitalName" />
+        <result column="doctor_specialty" jdbcType="VARCHAR" property="doctorSpecialty" />
+        <result column="doctor_name" jdbcType="VARCHAR" property="doctorName" />
+        <result column="price" jdbcType="DOUBLE" property="price" />
+        <result column="operation" jdbcType="VARCHAR" property="operation" />
+        <result column="department" jdbcType="VARCHAR" property="department" />
+        <result column="examination" jdbcType="VARCHAR" property="examination" />
+        <result column="statement" jdbcType="VARCHAR" property="statement" />
+        <result column="mode" jdbcType="VARCHAR" property="mode" />
+        <result column="operation_time" jdbcType="TIMESTAMP" property="operationTime" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+        <result column="preparation_mode" jdbcType="VARCHAR" property="preparationMode" />
+    </resultMap>
+
+    <select id="reportForm" resultType="com.aihoo.domain.payment.model.entity.OfflineOder">
+        SELECT
+            create_time,
+            preparation_time,
+            company_id,
+            company_name,
+            customer_id,
+            manager,
+            manager_phone,
+            manager_name,
+            `name`,
+            `status`,
+            phone,
+            visit_time,
+            treatment_name,
+            hospital_name,
+            doctor_specialty,
+            doctor_name,
+            price,
+            `mode`,
+            preparation_time,
+            preparation_name
+        FROM
+            t_offline_order
+        WHERE
+            is_delete = 0
+        <if test="status != null and status != '' ">
+            and status = #{status}
+        </if>
+          <if test="companyName!=null and companyName !=''">
+            and company_name like concat('%',#{companyName},'%')
+        </if>
+        <if test="manager!=null and manager !=''">
+            and manager like concat('%',#{manager},'%')
+        </if>
+        <if test="name!=null and name !=''">
+            and name like concat('%',#{name},'%')
+        </if>
+        <if test="phone!=null and phone !=''">
+            and phone like concat('%',#{phone},'%')
+        </if>
+        <if test="preparationName!=null and preparationName !=''">
+            and preparation_name = #{preparationName}
+        </if>
+        <if test="hospitalName!=null and hospitalName !=''">
+            and hospital_name like concat('%',#{hospitalName},'%')
+        </if>
+        <if test="doctorSpecialty!=null and doctorSpecialty != ''">
+            and doctor_specialty like concat('%',#{doctorSpecialty},'%')
+        </if>
+        <if test="treatmentName!=null and treatmentName !=''">
+            and treatment_name = #{treatmentName}
+        </if>
+        <if test="startTime!=null and startTime !=''">
+            and visit_time >= #{startTime}
+        </if>
+        <if test="endTime!=null and endTime !=''">
+            and #{endTime} >= visit_time
+        </if>
+        ORDER BY
+        CONVERT ( hospital_name USING gbk )
+    </select>
+
+    <select id="findCount" resultMap="BaseMap">
+        SELECT
+            count( hospital_name ) AS countHospital,
+            sum( price ) AS sumPrice
+        FROM
+            t_offline_order
+        WHERE
+            is_delete = 0
+        <if test="status != null and status != '' ">
+            and status = #{status}
+        </if>
+        <if test="companyName!=null and companyName !=''">
+            and company_name like concat('%',#{companyName},'%')
+        </if>
+        <if test="manager!=null and manager !=''">
+            and manager like concat('%',#{manager},'%')
+        </if>
+        <if test="managerName!=null and managerName !=''">
+            and manager_name like concat('%',#{managerName},'%')
+        </if>
+        <if test="name!=null and name !=''">
+            and name like concat('%',#{name},'%')
+        </if>
+        <if test="phone!=null and phone !=''">
+            and phone like concat('%',#{phone},'%')
+        </if>
+        <if test="preparationName!=null and preparationName !=''">
+            and preparation_name = #{preparationName}
+        </if>
+        <if test="doctorSpecialty!=null and doctorSpecialty !=''">
+            and doctor_specialty like concat('%',#{doctorSpecialty},'%')
+        </if>
+        <if test="treatmentName!=null and treatmentName !=''">
+            and treatment_name = #{treatmentName}
+        </if>
+        <if test="startTime!=null and startTime !=''">
+            and visit_time >= #{startTime}
+        </if>
+        <if test="endTime!=null and endTime !=''">
+            and #{endTime} >= visit_time
+        </if>
+        <if test="hospitalName!=null and hospitalName !=''">
+            and hospital_name like concat('%',#{hospitalName},'%')
+        </if>
+    </select>
+
+    <select id="findAll" resultMap="BaseMap">
+        SELECT
+            hospital_name,
+            count( hospital_name ) AS isCountHospital,
+            sum( price ) AS isSumPrice
+        FROM
+            t_offline_order
+        WHERE
+            is_delete = 0
+        <if test="status != null and status != '' ">
+            and status = #{status}
+        </if>
+        <if test="companyName!=null and companyName !=''">
+            and company_name like concat('%',#{companyName},'%')
+        </if>
+        <if test="manager!=null and manager !=''">
+            and manager like concat('%',#{manager},'%')
+        </if>
+        <if test="managerName!=null and managerName !=''">
+            and manager_name like concat('%',#{managerName},'%')
+        </if>
+        <if test="name!=null and name !=''">
+            and name like concat('%',#{name},'%')
+        </if>
+        <if test="phone!=null and phone !=''">
+            and phone like concat('%',#{phone},'%')
+        </if>
+        <if test="preparationName!=null and preparationName !=''">
+            and preparation_name = #{preparationName}
+        </if>
+        <if test="doctorSpecialty!=null and doctorSpecialty !=''">
+            and doctor_specialty like concat('%',#{doctorSpecialty},'%')
+        </if>
+        <if test="treatmentName!=null and treatmentName !=''">
+            and treatment_name = #{treatmentName}
+        </if>
+        <if test="startTime!=null and startTime !=''">
+            and visit_time >= #{startTime}
+        </if>
+        <if test="endTime!=null and endTime !=''">
+            and #{endTime} >= visit_time
+        </if>
+        <if test="hospitalName!=null and hospitalName !=''">
+            and hospital_name like concat('%',#{hospitalName},'%')
+        </if>
+        GROUP BY
+            hospital_name
+        ORDER BY
+            CONVERT ( hospital_name USING gbk )
+    </select>
+
+    <select id="findDepartment" resultType="com.aihoo.domain.payment.model.vo.OfflineDepartment">
+        select code_id,code_name,booking_id from t_offline_department where district_id = #{districtId}
+    </select>
+
+    <select id="findHospitalList" resultType="com.aihoo.domain.payment.model.vo.OfflineDistrict">
+        select district_id,district_name from t_offline_district
+    </select>
+
+    <select id="findCost" resultType="com.aihoo.domain.payment.model.vo.OfflineCost">
+        select id,name,fyje from t_offline_cost
+    </select>
+
+    <select id="selectHospitalCard" resultType="com.aihoo.domain.payment.model.entity.OfflineHospital">
+        select hospital_id,hospital_name from t_offline_card
+    </select>
+
+    <select id="findPreparationNameList" resultType="java.lang.String">
+        SELECT preparation_name preparationName FROM t_offline_order Group BY preparation_name
+    </select>
+
+    <select id="findNode" resultType="com.aihoo.domain.payment.model.vo.OfflineNode">
+        select node_id,node_name,pool_id from t_offline_node
+    </select>
+
+    <select id="findStaff" resultType="com.aihoo.domain.payment.model.vo.OfflineStaff">
+        select staff_code,staff_name,code_id from t_offline_staff where code_id = #{codeId}
+    </select>
+
+    <select id="findNodeDoctor" resultType="com.aihoo.domain.payment.model.vo.OfflineNodeDoctor">
+        select map_id,entity_name,node_id,pool_id from t_offline_nodeDoctor where node_id = #{groupId}
+    </select>
+
+    <select id="findBooking" resultType="com.aihoo.domain.payment.model.vo.OfflineBooking">
+        select district_id,booking_id,booking_name from t_offline_booking where district_id = #{districtId}
+    </select>
+
+    <select id="queryDepart" resultType="com.aihoo.domain.payment.model.vo.OfflineDepartment">
+        select code_id,code_name,district_id,booking_id from t_offline_department where district_id = #{districtId} and booking_id = #{bookingId}
+    </select>
+
+    <select id="queryNode" resultType="com.aihoo.domain.payment.model.vo.OfflineNode">
+        select node_id,node_name,pool_id from t_offline_node where pool_id = #{bookingId}
+    </select>
+
+    <select id="selectOder" resultType="com.aihoo.domain.payment.model.entity.OfflineOder">
+        SELECT
+            id
+        FROM
+            t_offline_order
+        ORDER BY
+            create_time DESC
+            LIMIT 0,1
+    </select>
+
+    <select id="findOneHospital" resultType="com.aihoo.domain.payment.model.entity.OfflineHospital">
+        select * from t_offline_card where hospital_name = #{name}
+    </select>
+
+</mapper>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.patient.model.mapper.PatientUserMapper">
+
+    <resultMap id="patientUserMap" type="com.aihoo.domain.patient.model.entity.PatientUser" >
+        <id column="id" property="id" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+        <result column="wechat_open_id" jdbcType="VARCHAR" property="wechatOpenId" />
+        <result column="alipay_open_id" jdbcType="VARCHAR" property="alipayOpenId" />
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+        <result column="head_img" jdbcType="VARCHAR" property="headImg" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+        <result column="sex" jdbcType="TINYINT" property="sex" />
+        <result column="birth_day" jdbcType="TIMESTAMP" property="birthDay" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+        <result column="is_auth" jdbcType="VARCHAR" property="isAuth" />
+        <result column="token" jdbcType="VARCHAR" property="token" />
+        <result column="apple_id" jdbcType="VARCHAR" property="appleId" />
+        <result column="is_cancel" jdbcType="VARCHAR" property="isCancel" />
+        <collection property="addresses" ofType="com.aihoo.domain.patient.model.entity.Address">
+            <id column="addressId" property="id" />
+            <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+            <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+            <result column="patient_user_id" jdbcType="BIGINT" property="patientUserId" />
+            <result column="addressName" jdbcType="VARCHAR" property="name" />
+            <result column="addressMobile" jdbcType="VARCHAR" property="mobile" />
+            <result column="province_code" jdbcType="VARCHAR" property="provinceCode" />
+            <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
+            <result column="district_code" jdbcType="VARCHAR" property="districtCode" />
+            <result column="province" jdbcType="VARCHAR" property="province" />
+            <result column="city" jdbcType="VARCHAR" property="city" />
+            <result column="district" jdbcType="VARCHAR" property="district" />
+            <result column="address" jdbcType="VARCHAR" property="address" />
+            <result column="addressIsDefault" jdbcType="TINYINT" property="isDefault" />
+            <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+        </collection>
+        <collection property="hosSicks" ofType="com.aihoo.domain.patient.model.entity.HosSickRef">
+            <id column="hosSickId" property="id" />
+            <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+            <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+            <result column="hosSickPatientUserId" jdbcType="BIGINT" property="patientUserId" />
+            <result column="hosSickName" jdbcType="VARCHAR" property="name" />
+            <result column="hosSickIdCard" jdbcType="VARCHAR" property="idCard" />
+            <result column="hosSickSex" jdbcType="TINYINT" property="sex" />
+            <result column="age" jdbcType="TINYINT" property="age" />
+            <result column="hosSickMobile" jdbcType="VARCHAR" property="mobile" />
+            <result column="hosSickAddress" jdbcType="VARCHAR" property="address" />
+            <result column="hosSickIsDefault" jdbcType="TINYINT" property="isDefault" />
+            <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+        </collection>
+    </resultMap>
+    <delete id="cancel">
+         UPDATE t_patient_user SET
+         wechat_open_id = null ,alipay_open_id = null ,
+         is_auth = null ,token = null ,
+         union_id = null ,apple_id =null ,
+         `name` = CONCAT_WS("",`name`,"(旧)") ,
+         im_user_sig = null ,is_cancel = 1
+
+         where mobile = #{mobile}
+    </delete>
+
+    <select id="patientUserDetails" resultMap="patientUserMap">
+        SELECT
+            pu.id,
+            pu.mobile,
+            pu.wechat_open_id,
+            pu.alipay_open_id,
+            pu.nick_name,
+            pu.head_img,
+            pu.name,
+            pu.id_card,
+            pu.sex,
+            pu.birth_day,
+            pu.status,
+            pu.create_time,
+            pu.is_auth,
+            pu.token,
+            pu.is_cancel,
+            pu.apple_id,
+            pu.union_id,
+            a.id as addressId,
+            a.patient_user_id as addressPatientUserId,
+            a.name as addressName,
+            a.mobile as addressMobile,
+            a.province_code,
+            a.city_code,
+            a.district_code,
+            a.province,
+            a.city,
+            a.district,
+            a.address,
+            hs.id as hosSickId,
+            hs.patient_user_id as hosSickPatientUserId,
+            hs.name as hosSickName,
+            hs.id_card as hosSickIdCard,
+            hs.sex as hosSickSex,
+            hs.age,
+            hs.mobile as hosSickMobile,
+            hs.address as hosSickAddress
+        FROM
+            t_patient_user pu
+        LEFT JOIN t_address a ON pu.id = a.patient_user_id
+        LEFT JOIN t_hos_sick hs ON pu.id = hs.patient_user_id
+        <where>
+            <if test="id!=null and id !=''">
+                and pu.id = #{id}
+            </if>
+        </where>
+    </select>
+
+    <select id="patientUserList" resultMap="patientUserMap">
+        SELECT
+            id,
+            create_time,
+            mobile,
+            status
+        FROM
+            t_patient_user
+        WHERE
+        1=1
+        <if test="mobile!=null and mobile !=''">
+            AND mobile = #{mobile}
+        </if>
+        limit #{startNum},#{limit}
+    </select>
+
+    <select id="getCount" parameterType="map" resultType="int">
+        SELECT
+        COUNT(1)
+        FROM
+        t_patient_user
+        WHERE
+        1=1
+        <if test="mobile!=null and mobile !=''">
+             AND mobile = #{mobile}
+        </if>
+    </select>
+</mapper>

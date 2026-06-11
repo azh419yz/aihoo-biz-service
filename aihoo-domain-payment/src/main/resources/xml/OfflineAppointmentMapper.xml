@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.payment.model.mapper.OfflineAppointmentMapper">
+
+    <select id="findAppointment" resultType="com.aihoo.domain.payment.model.vo.OfflineTreatmentTime">
+        SELECT
+        fyje,
+        scheduling_date,
+        scheduling_type,
+        scheduling_id
+        FROM
+        t_offline_schedulingTime s
+        LEFT JOIN t_offline_staff a ON s.staff_code = a.staff_code
+        LEFT JOIN t_offline_cost c ON c.`name` = s.code_name
+        WHERE
+        1 = 1
+        <if test="map.staffName != null and map.staffName != ''">
+            and staff_name = #{map.staffName}
+        </if>
+        <if test="map.codeName !=null and map.codeName!=''">
+            and code_name = #{map.codeName}
+        </if>
+        GROUP BY
+        scheduling_id
+        order by scheduling_date
+    </select>
+
+
+    <select id="thisDepartmentList" resultType="com.aihoo.domain.payment.model.vo.OfflineDepartment">
+        select code_id, district_id, booking_id from t_offline_department
+    </select>
+
+    <select id="findStaff" resultType="com.aihoo.domain.payment.model.vo.OfflineTreatmentTime">
+        SELECT s.staff_code,
+               s.staff_name,
+               s.staff_title,
+               d.district_id as districtId,
+               d.district_name as district,
+               dep.code_id,
+               dep.code_name,
+               b.booking_name  as groupName,
+               s.staff_note
+        FROM t_offline_district d
+                 RIGHT JOIN t_offline_booking b ON d.district_id = b.district_id
+                 RIGHT JOIN t_offline_department dep ON b.booking_id = dep.booking_id
+                 RIGHT JOIN t_offline_staff s ON dep.code_id = s.code_Id
+    </select>
+
+    <select id="findNodeDoctor" resultType="com.aihoo.domain.payment.model.vo.OfflineNodeDoctor">
+        SELECT d.map_id,
+               d.entity_name,
+               d.title,
+               n.node_id,
+               n.node_name,
+               d.pool_id
+        FROM t_offline_nodeDoctor d
+                 LEFT JOIN t_offline_node n ON d.node_id = n.node_id
+    </select>
+
+    <select id="selectStaff" resultType="com.aihoo.domain.payment.model.vo.OfflineTreatmentTime">
+        SELECT s.staff_code,
+               s.staff_name,
+               d.code_id,
+               d.code_name
+        FROM t_offline_staff s
+                 LEFT JOIN t_offline_department d ON s.code_id = d.code_id
+        where s.staff_code = #{map.staffCode}
+          and d.code_id = #{map.codeId}
+    </select>
+
+    <select id="findCost" resultType="com.aihoo.domain.payment.model.vo.OfflineCost">
+        SELECT
+            `name`,
+            fyje
+        FROM
+            t_offline_cost
+        WHERE
+            id = #{groupId}
+    </select>
+</mapper>

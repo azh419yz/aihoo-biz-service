@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.payment.model.mapper.OfflineOderYueMapper">
+
+    <insert id="insertOderYue" parameterType="com.aihoo.domain.payment.model.entity.OfflineOderYue">
+        INSERT INTO t_offline_order_yue (
+			order_id,
+            NAME,
+			certificates,
+            certificates_type,
+			phone,
+			district_name,
+            group_id,
+			group_name,
+            code_id,
+			code_name,
+            staff_Id,
+			staff_name,
+			is_status,
+        	is_status_code,
+			scheduling_date,
+			scheduling_type,
+			money,
+			treatment_type,
+            treatment_name,
+			decision_time,
+			about_id,
+			yue_time,
+			yue_id,
+			time,
+			floor,
+			booking_id,
+			district_id
+		)
+		VALUES
+			(#{oderYue.orderId},#{oderYue.name},#{oderYue.certificates},#{oderYue.certificatesType},#{oderYue.phone},#{oderYue.districtName},#{oderYue.groupId},#{oderYue.groupName},#{oderYue.codeId},#{oderYue.codeName},#{oderYue.staffId},#{oderYue.staffName},
+			#{oderYue.isStatus},#{oderYue.isStatus},#{oderYue.schedulingDate},#{oderYue.schedulingType},#{oderYue.money},#{oderYue.treatmentType},#{oderYue.treatmentName},#{oderYue.decisionTime},#{oderYue.aboutId},
+			#{oderYue.yueTime},#{oderYue.yueId},#{oderYue.time},#{oderYue.floor},#{oderYue.bookingId},#{oderYue.districtId})
+    </insert>
+
+	<select id="findNode" resultType="com.aihoo.domain.payment.model.vo.OfflineNode">
+		select node_id,node_name from t_offline_node where node_code = #{nodeCode}
+	</select>
+
+	<select id="selectNodeList" resultType="com.aihoo.domain.payment.model.vo.OfflineNode">
+		select node_id,pool_id from t_offline_node where node_type = 2
+	</select>
+
+	<select id="findOderYueId" resultType="com.aihoo.domain.payment.model.entity.OfflineOderYue">
+		select id from t_offline_order_yue order by create_time  desc limit 0,1
+	</select>
+
+	<select id="findDistrictName" resultType="com.aihoo.domain.payment.model.vo.OfflineDistrict">
+		SELECT
+			district_id,
+			district_name,
+			district_address
+		FROM
+			t_offline_district
+		WHERE
+			district_name = #{districtName}
+	</select>
+</mapper>

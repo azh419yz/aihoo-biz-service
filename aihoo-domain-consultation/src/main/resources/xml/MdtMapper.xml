@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.consultation.model.mapper.MdtMapper">
+
+    <resultMap type="com.aihoo.domain.consultation.model.entity.Mdt" id="mdt">
+        <id column="mdtId" jdbcType="BIGINT" property="id"/>
+        <result column="mdtName" jdbcType="VARCHAR" property="name"/>
+        <result column="mdtContent" jdbcType="VARCHAR" property="content"/>
+        <result column="mdtStatus" jdbcType="TINYINT" property="status"/>
+        <result column="mdtIndex" jdbcType="INTEGER" property="index"/>
+        <collection property="dMdtTags" ofType="com.aihoo.domain.consultation.model.entity.DMdtTag">
+            <id column="tagId" property="id"/>
+            <result column="tagName" property="name"/>
+        </collection>
+    </resultMap>
+    <sql id="base_column">
+     id, create_time, update_time, create_user_id, icon_img, code, `name`, price, mdt_synopsis,content,
+    `status`, is_delete, `index`, register_price, hospital, moderator, contact_way
+   </sql>
+    <update id="updateMdtIdByIndex">
+        UPDATE t_mdt
+        SET `index` = `index` + 1
+        WHERE id IN
+        <foreach collection="ids" open="(" close=")" separator="," item="ids">
+            #{ids}
+        </foreach>
+    </update>
+
+    <select id="mdtDetails" resultMap="mdt">
+      SELECT
+       a.`name` AS mdtName ,a.`index` AS mdtIndex ,a.`status` AS mdtStatus ,a.content AS mdtContent,
+	   c.`name` AS tagName , a.id AS mdtId, c.id AS tagId
+      FROM t_mdt a
+         LEFT JOIN t_mdt_tag b ON a.id = b.mdt_id
+	     LEFT JOIN d_mdt_tag c ON b.tag_id = c.id
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="selectMdtIdByIndex" resultType="java.lang.String">
+       SELECT id FROM  t_mdt WHERE `index` <![CDATA[ >= ]]> #{index}
+    </select>
+
+    <select id="mdtAssistantAndConsultant" resultType="hashmap" >
+       SELECT
+	   a.id ,a.`name`,a.doctor_type,b.is_combination,a.papers_numbers idCard
+       FROM
+	   t_doctor_user a
+	   LEFT JOIN t_doctor_set b ON a.id = b.doctor_user_id
+       WHERE
+	       a.is_cancel = 0
+	   AND a.`status` = 1
+	   AND a.is_auth = 'PASS'
+	   AND b.is_mdt = 1
+    </select>
+
+
+    <select id="selectMdtList" resultMap="selectMdtListMap">
+     SELECT
+	   a.`name` AS mdtName ,a.`index` AS mdtIndex ,a.`status` AS mdtStatus ,
+	   c.`name` AS tagName , a.id AS mdtId, c.id AS tagId
+       FROM
+	t_mdt a
+	LEFT JOIN t_mdt_tag b ON a.id = b.mdt_id
+	LEFT JOIN d_mdt_tag c ON b.tag_id = c.id
+	<where>
+        c.is_delete = 0
+        <if test="map.name!=null and map.name !=''">
+           AND  a.`name` LIKE CONCAT('%',#{map.name},'%')
+        </if>
+    </where>
+	ORDER BY mdtIndex ASC
+    </select>
+
+    <resultMap id="selectMdtListMap" type="com.aihoo.domain.consultation.model.entity.Mdt">
+        <id column="mdtId" property="id"/>
+        <result column="mdtName" property="name"/>
+        <result column="mdtIndex" property="index"/>
+        <result column="mdtStatus" property="status"/>
+        <collection property="dMdtTags" ofType="com.aihoo.domain.consultation.model.entity.DMdtTag">
+            <id column="tagId" property="id"/>
+            <result column="tagName" property="name"/>
+        </collection>
+    </resultMap>
+
+</mapper>

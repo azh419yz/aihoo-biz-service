@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.im.model.mapper.MessageVoMapper">
+    <resultMap id="messageVo" type="com.aihoo.domain.im.model.vo.MessageVo">
+        <id property="id" column="id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="wechatUserId" column="wechat_user_id"/>
+        <result property="messageTimesId" column="message_times_id"/>
+        <result property="name" column="name"/>
+        <result property="payType" column="pay_type"/>
+        <result property="content" column="content"/>
+        <result property="countryCode" column="country_code"/>
+        <result property="countryName" column="country_name"/>
+        <result property="cityCode" column="city_code"/>
+        <result property="cityName" column="city_name"/>
+        <result property="address" column="address"/>
+        <result property="longitude" column="longitude"/>
+        <result property="latitude" column="latitude"/>
+        <result property="browseCount" column="browse_count"/>
+        <result property="state" column="state"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="headImg" column="head_img"/>
+        <result property="isCare" column="is_care"/>
+        <result property="isThumpUp" column="is_thump_up"/>
+        <result property="distanceUm" column="distance_um"/>
+    </resultMap>
+    <select id="getMessageVo" parameterType="java.util.Map" resultMap="messageVo">
+        SELECT  t1.id, DATE_FORMAT(t1.create_time, '%Y-%m-%d %H:%i:%s') AS create_time
+        , DATE_FORMAT(t1.update_time, '%m-%d %H:%i') AS update_time, t1.wechat_user_id
+        , t1.`name`, t1.pay_type, t1.`content`, t1.country_name, t1.city_name
+        , t1.address, t1.longitude, t1.latitude, t1.browse_count, t1.state
+        , t2.nick_name, t2.head_img
+        FROM t_message t1
+        LEFT JOIN t_wechat_user t2 ON t1.wechat_user_id = t2.id
+        WHERE  t1.is_delete = 0
+        AND t1.id = #{messageId}
+    </select>
+
+</mapper>
