@@ -7,12 +7,22 @@ import com.aihoo.domain.im.model.entity.ImCustomerMsg;
 import com.aihoo.domain.im.model.entity.ImMsgCustomerContent;
 import com.aihoo.domain.im.model.mapper.ImCustomerMsgMapper;
 import com.aihoo.domain.im.model.vo.CustomerVo;
-import com.aihoo.domain.im.model.vo.SearchTeamDoctorVo;
 import com.aihoo.domain.im.service.CustomerService;
+import com.aihoo.domain.consultation.model.entity.DMdtTag;
+import com.aihoo.domain.consultation.model.entity.Mdt;
+import com.aihoo.domain.consultation.model.entity.MdtTeam;
+import com.aihoo.domain.consultation.model.mapper.DMdtTagMapper;
+import com.aihoo.domain.consultation.model.mapper.MdtMapper;
+import com.aihoo.domain.consultation.model.mapper.MdtTeamMapper;
+import com.aihoo.domain.doctor.model.mapper.DoctorUserMapper;
+import com.aihoo.domain.doctor.model.vo.SearchTeamDoctorVo;
+import com.aihoo.domain.patient.model.entity.PatientUser;
+import com.aihoo.domain.patient.model.mapper.PatientUserMapper;
 import com.aihoo.domain.sys.model.entity.SysUser;
 import com.aihoo.domain.sys.model.mapper.SysUserMapper;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -47,25 +57,20 @@ public class CustomerServiceImpl implements CustomerService {
     @Resource
     private ImCustomerMsgMapper imCustomerMsgMapper;
 
-    // TODO: 跨域依赖（aihoo-domain-patient 待引入），旧代码引用 com.aihoo.admin.system.mapper.PatientUserMapper
-    // @Resource
-    // private PatientUserMapper patientUserMapper;
+    @Resource
+    private PatientUserMapper patientUserMapper;
 
-    // TODO: 跨域依赖（aihoo-domain-consultation 待创建），旧代码引用 com.aihoo.admin.system.mapper.MdtTeamMapper
-    // @Resource
-    // private MdtTeamMapper mdtTeamMapper;
+    @Resource
+    private MdtTeamMapper mdtTeamMapper;
 
-    // TODO: 跨域依赖（aihoo-domain-doctor 待引入），旧代码引用 com.aihoo.admin.system.mapper.DoctorUserMapper
-    // @Resource
-    // private DoctorUserMapper doctorUserMapper;
+    @Resource
+    private DoctorUserMapper doctorUserMapper;
 
-    // TODO: 跨域依赖（aihoo-domain-consultation 待创建），旧代码引用 com.aihoo.admin.system.mapper.MdtMapper
-    // @Resource
-    // private MdtMapper mdtMapper;
+    @Resource
+    private MdtMapper mdtMapper;
 
-    // TODO: 跨域依赖（aihoo-domain-consultation 待创建），旧代码引用 com.aihoo.admin.system.mapper.DMdtTagMapper
-    // @Resource
-    // private DMdtTagMapper dMdtTagMapper;
+    @Resource
+    private DMdtTagMapper dMdtTagMapper;
 
     private static final String CUSTOMER_IMAGE = "https://internet-hospital-prod.oss-accelerate.aliyuncs.com/admin/2020111111134544dfa87fb49c4c1bbb7f7d0d410e5e0d.png";
 
@@ -102,19 +107,13 @@ public class CustomerServiceImpl implements CustomerService {
         if (CollectionUtils.isEmpty(patientIds)) {
             return new PageResult<>(Lists.newArrayList(), customerDetails.getTotal());
         }
-        // TODO: 跨域依赖（aihoo-domain-patient 待引入），此处使用 stub 返回空 list
-        // 查询所有患者手机号
-        // List<PatientUser> patientUsers = this.patientUserMapper.selectList(new QueryWrapper<PatientUser>().in("id", patientIds));
-        List<Object> patientUsers = new ArrayList<>();
-        // Map<String, PatientUser> patientUserMap = patientUsers.stream().collect(Collectors.toMap(PatientUser::getId, s -> s));
-        // 临时用空 map 占位，待 patientUserMapper 迁移后恢复
-        Map<String, Object> patientUserMap = new java.util.HashMap<>();
+        //查询所有患者手机号
+        List<PatientUser> patientUsers = this.patientUserMapper.selectList(new QueryWrapper<PatientUser>().in("id", patientIds));
+        Map<String, PatientUser> patientUserMap = patientUsers.stream().collect(Collectors.toMap(PatientUser::getId, s -> s));
         List<CustomerVo> list = new ArrayList<>();
         patientIds.forEach(patientId -> {
             CustomerVo customerVo = new CustomerVo();
-            // TODO: 跨域依赖，待 patientUser 域迁移后恢复 patientUserMap.get(patientId).getMobile()
-            // customerVo.setPatientPhone(patientUserMap.get(patientId).getMobile());
-            customerVo.setPatientPhone("");
+            customerVo.setPatientPhone(patientUserMap.get(patientId).getMobile());
             // 循环拼接分页的数据
             // 获取聊天客服与当前患者所有的聊天消息
             List<ImCustomerMsg> imCustomerMsgs = this.imCustomerMsgMapper.findStartTime(map.get("adminId").toString(), patientId);
@@ -136,10 +135,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<ImCustomerMsg> chattingRecords(Map<String, Object> map) {
-        // TODO: 跨域依赖（aihoo-domain-patient 待引入），旧代码用 patientUserMapper.selectById(patientId) 取头像
-        // PatientUser patientUser = this.patientUserMapper.selectById(map.get("patientId").toString());
-        // String headImg = patientUser == null ? "" : patientUser.getHeadImg();
-        String headImg = "";
+        PatientUser patientUser = this.patientUserMapper.selectById(map.get("patientId").toString());
         // 获取聊天客服与当前患者所有的聊天消息
         List<ImCustomerMsg> imCustomerMsgs = this.imCustomerMsgMapper.findStartTime
                 (map.get("adminId").toString(), map.get("patientId").toString());
@@ -155,7 +151,7 @@ public class CustomerServiceImpl implements CustomerService {
             if (r.getFromAccount().startsWith("ADMIN_")) {
                 r.setAvatar(CUSTOMER_IMAGE);
             } else {
-                r.setAvatar(headImg);
+                r.setAvatar(patientUser.getHeadImg());
             }
             List<ImMsgCustomerContent> payload = r.getPayloads();
             payload.forEach(s -> {
@@ -183,21 +179,16 @@ public class CustomerServiceImpl implements CustomerService {
         } catch (Exception e) {
             log.error("分页条件错误--->page:" + param.get("page") + " limit:" + param.get("limit"));
         }
-        // TODO: 跨域依赖（aihoo-domain-consultation 待创建），旧代码使用 mdtTeamMapper.teamList
-        // IPage<Map> teamPage = new Page<>(page, limit, false);
-        // List<MdtTeam> teamList;
-        // if (null == param.get("keyword") || StrUtil.isBlank(param.get("keyword").toString())) {
-        //     String mdtId = ObjectUtil.isEmpty(param.get("mdtId")) ? null : param.get("mdtId").toString();
-        //     String tagId = ObjectUtil.isEmpty(param.get("tagId")) ? null : param.get("tagId").toString();
-        //     teamList = mdtTeamMapper.teamList(mdtId, tagId, teamPage);
-        // } else {
-        //     String keyword = "%" + param.get("keyword").toString() + "%";
-        //     teamList = mdtTeamMapper.teamListByKeyword(keyword, teamPage);
-        // }
-        // 临时返回空 list，待 mdtTeamMapper 迁移后恢复
-        return Lists.newArrayList();
-
-        /* 旧代码保留作迁移参考：
+        IPage<Map> teamPage = new Page<>(page, limit, false);
+        List<MdtTeam> teamList;
+        if (null == param.get("keyword") || StrUtil.isBlank(param.get("keyword").toString())) {
+            String mdtId = ObjectUtil.isEmpty(param.get("mdtId")) ? null : param.get("mdtId").toString();
+            String tagId = ObjectUtil.isEmpty(param.get("tagId")) ? null : param.get("tagId").toString();
+            teamList = mdtTeamMapper.teamList(mdtId, tagId, teamPage);
+        } else {
+            String keyword = "%" + param.get("keyword").toString() + "%";
+            teamList = mdtTeamMapper.teamListByKeyword(keyword, teamPage);
+        }
         List<SearchTeamDoctorVo> mdtTeamDoctors = new ArrayList<>();
         for (MdtTeam mdtTeam : teamList) {
             boolean isNormal = true;
@@ -232,24 +223,22 @@ public class CustomerServiceImpl implements CustomerService {
             }
         }
         return mdtTeamDoctors;
-        */
     }
 
     @Override
     public JSONArray mdtList() {
         JSONArray mdtList = new JSONArray();
-        // TODO: 跨域依赖（aihoo-domain-consultation 待创建），旧代码使用 mdtMapper + dMdtTagMapper
-        // LambdaQueryWrapper<Mdt> mdtLambdaQueryWrapper = new QueryWrapper<Mdt>().lambda();
-        // mdtLambdaQueryWrapper.eq(Mdt::getIsDelete, "0").eq(Mdt::getStatus, "1").orderByAsc(Mdt::getIndex);
-        // List<Mdt> mdts = mdtMapper.selectList(mdtLambdaQueryWrapper);
-        // for (Mdt mdt : mdts) {
-        //     JSONObject jsonObject = new JSONObject();
-        //     List<DMdtTag> mdtTagList = dMdtTagMapper.selectListByMdt(mdt.getId());
-        //     jsonObject.put("tagList", mdtTagList);
-        //     jsonObject.put("mdtId", mdt.getId() == null ? "" : mdt.getId());
-        //     jsonObject.put("mdtName", mdt.getName() == null ? "" : mdt.getName());
-        //     mdtList.add(jsonObject);
-        // }
+        LambdaQueryWrapper<Mdt> mdtLambdaQueryWrapper = new QueryWrapper<Mdt>().lambda();
+        mdtLambdaQueryWrapper.eq(Mdt::getIsDelete, "0").eq(Mdt::getStatus, "1").orderByAsc(Mdt::getIndex);
+        List<Mdt> mdts = mdtMapper.selectList(mdtLambdaQueryWrapper);
+        for (Mdt mdt : mdts) {
+            JSONObject jsonObject = new JSONObject();
+            List<DMdtTag> mdtTagList = dMdtTagMapper.selectListByMdt(mdt.getId());
+            jsonObject.put("tagList", mdtTagList);
+            jsonObject.put("mdtId", mdt.getId() == null ? "" : mdt.getId());
+            jsonObject.put("mdtName", mdt.getName() == null ? "" : mdt.getName());
+            mdtList.add(jsonObject);
+        }
         return mdtList;
     }
 }

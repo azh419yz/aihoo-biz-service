@@ -4,18 +4,25 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.aihoo.common.PageResult;
+import com.aihoo.constant.UserRoleEnum;
 import com.aihoo.domain.im.model.vo.MdtPushMessageVo;
 import com.aihoo.domain.im.model.entity.HomepageMessage;
 import com.aihoo.domain.im.model.entity.PushMessage;
 import com.aihoo.domain.im.model.mapper.MessageMapper;
 import com.aihoo.domain.im.model.mapper.PushMessageMapper;
 import com.aihoo.domain.im.service.MessageService;
+import com.aihoo.domain.doctor.model.entity.DoctorUser;
+import com.aihoo.domain.doctor.model.mapper.DoctorUserMapper;
+import com.aihoo.domain.sys.model.entity.SysUser;
+import com.aihoo.domain.sys.model.mapper.SysUserMapper;
 import com.aihoo.exception.BizException;
 import com.aihoo.util.SecurityUtils;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,17 +49,25 @@ public class MessageServiceImpl implements MessageService {
     @Resource
     private PushMessageMapper pushMessageMapper;
 
-    // TODO: 跨域依赖，待 aihoo-domain-doctor 迁移后改用其 DoctorUserMapper
-    // @Resource
-    // private DoctorUserMapper doctorUserMapper;
+    @Resource
+    private DoctorUserMapper doctorUserMapper;
 
-    // TODO: 跨域依赖 SysUserRoleService（未在 aihoo-domain-sys 提供），旧代码用其 userRole() 判定当前用户角色
-    // @Resource
-    // private SysUserRoleService sysUserRoleService;
+    @Resource
+    private SysUserMapper sysUserMapper;
 
-    // 角色枚举常量（与旧 com.aihoo.admin.common.constant.UserRoleEnum 保持一致）
-    private static final String ROLE_HZZLYS = "18"; // 会诊/助理医生
-    private static final String ROLE_YLGJ = "17";   // 医疗管家
+    // SysUserRoleService 暂未在 aihoo-domain-sys 提供，沿用 MdtServiceImpl 的 ApplicationContext 兜底
+    private Object sysUserRoleService;
+
+    @Autowired
+    private ApplicationContext applicationContext;
+
+    private Object getBeanIfPresent(String name) {
+        try {
+            return applicationContext.containsBean(name) ? applicationContext.getBean(name) : null;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     @Override
     public void homePageMessageAdd(Map<String, Object> map) {
@@ -179,33 +194,38 @@ public class MessageServiceImpl implements MessageService {
         String content = "";
         String type = "";
         String otherId = "";
-        // TODO: 跨域依赖 SysUser，旧代码通过 SecurityUtils.getLoginUser() 获取当前登录用户
-        // 当前域内 shared-kernel SecurityUtils.getLoginUser() 未提供（仅有 getLoginUserId()），
-        // 暂时根据 ID 自行判断角色
-        // SysUser user = SecurityUtils.getLoginUser();
-        // List<String> roles = sysUserRoleService.userRole();
-        // boolean hzzlys = roles.contains(ROLE_HZZLYS);
-        // boolean ylgj = roles.contains(ROLE_YLGJ);
-        // 旧逻辑：
-        //   if (hzzlys) { type = "DOCKER_PERSONAL"; ... doctorUserMapper ... }
-        //   else if (ylgj) { type = "ADMIN_PERSONAL"; otherId = user.getId(); }
-        // TODO: 待 aihoo-domain-sys 提供 SysUserRoleService.userRole() 和 DoctorUser 域后恢复
-        boolean hzzlys = false;
-        boolean ylgj = false;
+        // 旧代码使用 SecurityUtils.getLoginUser()，但 shared-kernel 仅提供 getLoginUserId()。
+        // 此处按 loginUserId 从 sysUserMapper 查 SysUser 以获取 idCard。
+        SysUser user = sysUserMapper.selectById(SecurityUtils.getLoginUserId());
+        List<String> roles;
+        if (sysUserRoleService == null) {
+            sysUserRoleService = getBeanIfPresent("sysUserRoleService");
+        }
+        if (sysUserRoleService != null) {
+            // 反射调用 userRole()（SysUserRoleService 暂未迁移到 domain-sys）
+            try {
+                roles = (List<String>) sysUserRoleService.getClass().getMethod("userRole").invoke(sysUserRoleService);
+            } catch (Exception e) {
+                roles = java.util.Collections.emptyList();
+            }
+        } else {
+            roles = java.util.Collections.emptyList();
+        }
+        //会诊助理医生角色
+        boolean hzzlys = roles.contains(UserRoleEnum.HZZLYS.getCode());
+        //医疗管家角色
+        boolean ylgj = roles.contains(UserRoleEnum.YLGJ.getCode());
         if (hzzlys) {
             type = "DOCKER_PERSONAL";
-            // TODO: 跨域依赖 DoctorUser（aihoo-domain-doctor 待迁移）
-            // String idCard = user.getIdCard();
-            // LambdaQueryWrapper<DoctorUser> wrapper = new QueryWrapper<DoctorUser>().lambda();
-            // wrapper.eq(DoctorUser::getPapersNumbers, idCard);
-            // wrapper.eq(DoctorUser::getIsCancel, "0");
-            // DoctorUser doctorUser = doctorUserMapper.selectOne(wrapper);
-            // otherId = doctorUser.getId();
-            otherId = "";
+            String idCard = user == null ? null : user.getIdCard();
+            LambdaQueryWrapper<DoctorUser> doctorUserLambdaQueryWrapper = new QueryWrapper<DoctorUser>().lambda();
+            doctorUserLambdaQueryWrapper.eq(DoctorUser::getPapersNumbers, idCard);
+            doctorUserLambdaQueryWrapper.eq(DoctorUser::getIsCancel, "0");
+            DoctorUser doctorUser = doctorUserMapper.selectOne(doctorUserLambdaQueryWrapper);
+            otherId = doctorUser == null ? null : doctorUser.getId();
         } else if (ylgj) {
             type = "ADMIN_PERSONAL";
-            // TODO: 跨域依赖 SysUser.getId()（aihoo-domain-sys 已迁移）
-            otherId = SecurityUtils.getLoginUserId();
+            otherId = user == null ? null : user.getId();
         }
         if (null != map.get("page") && !"".equals(map.get("page"))) {
             page = Long.parseLong(map.get("page").toString());
