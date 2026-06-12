@@ -15,7 +15,7 @@ import com.aihoo.common.JsonResult;
 import com.alibaba.fastjson2.JSON;
 import com.aliyuncs.utils.StringUtils;
 import com.aihoo.api.doctor.app.controller.vo.HosOrder;
-import com.aihoo.api.doctor.app.mapper.HosVisitMapper;
+import com.aihoo.domain.visit.model.mapper.HosVisitMapper;
 import com.aihoo.api.doctor.app.model.HosVisit;
 import com.aihoo.api.doctor.app.service.HosVisitService;
 import com.aihoo.api.doctor.app.service.IMService;

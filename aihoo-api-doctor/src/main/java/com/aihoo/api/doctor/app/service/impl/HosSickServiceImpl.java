@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.aihoo.api.doctor.app.controller.vo.HosSickVo;
 import com.aihoo.api.doctor.app.controller.vo.HosVisitVo;
-import com.aihoo.api.doctor.app.mapper.HosSickMapper;
+import com.aihoo.domain.visit.model.mapper.HosSickMapper;
 import com.aihoo.api.doctor.app.model.*;
 import com.aihoo.api.doctor.app.service.*;
 import com.aihoo.domain.sys.model.entity.Area;

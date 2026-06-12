@@ -20,7 +20,7 @@ import com.aihoo.api.doctor.app.model.*;
 import com.aihoo.api.doctor.app.service.IMService;
 import com.aihoo.api.doctor.app.service.JudgeService;
 import com.aihoo.properties.CheckingProperties;
-import com.aihoo.api.doctor.common.constant.StatusEnumUtil;
+import com.aihoo.util.StatusEnumUtil;
 import com.aihoo.api.doctor.common.utils.HisResultFormat;
 import com.aihoo.api.doctor.common.utils.IMMsgType;
 import org.springframework.mock.web.MockMultipartFile;

@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.aihoo.api.doctor.app.controller.vo.DoctorDirectoryVo;
 import com.aihoo.api.doctor.app.mapper.DoctorDirectoryMapper;
-import com.aihoo.api.doctor.app.mapper.HosSickMapper;
+import com.aihoo.domain.visit.model.mapper.HosSickMapper;
 import com.aihoo.api.doctor.app.model.DoctorDirectory;
 import com.aihoo.api.doctor.app.model.HosSick;
 import com.aihoo.api.doctor.app.service.DoctorDirectoryService;

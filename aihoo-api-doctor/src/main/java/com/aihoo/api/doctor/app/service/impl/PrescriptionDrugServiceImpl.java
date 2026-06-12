@@ -1,7 +1,7 @@
 package com.aihoo.api.doctor.app.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.aihoo.api.doctor.app.mapper.HosPrescriptionDrugMapper;
+import com.aihoo.domain.prescription.model.mapper.HosPrescriptionDrugMapper;
 import com.aihoo.api.doctor.app.model.HosPrescriptionDrug;
 import com.aihoo.api.doctor.app.service.PrescriptionDrugService;
 import org.springframework.stereotype.Service;

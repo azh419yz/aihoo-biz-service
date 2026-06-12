@@ -2,7 +2,7 @@ package com.aihoo.api.doctor.app.service.impl;
 
 import com.aihoo.api.doctor.app.mapper.HosPrescriptionLogMapper;
 import com.aihoo.api.doctor.app.mapper.HosRevisitLogMapper;
-import com.aihoo.api.doctor.app.mapper.HosSickMapper;
+import com.aihoo.domain.visit.model.mapper.HosSickMapper;
 import com.aihoo.api.doctor.app.mapper.HosVisitLogMapper;
 import com.aihoo.api.doctor.app.model.*;
 import com.aihoo.api.doctor.app.service.LogService;

@@ -18,7 +18,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
  * @date: 2019/7/23 9:58
  */
 @SpringBootApplication
-@MapperScan(basePackages = {"com.aihoo.domain.*.model.mapper"})
+@MapperScan(basePackages = {"com.aihoo.domain.*.model.mapper", "com.aihoo.api.doctor.app.mapper"})
 @ComponentScan(basePackages = {
         "com.aihoo.api.doctor",
         "com.aihoo.domain",

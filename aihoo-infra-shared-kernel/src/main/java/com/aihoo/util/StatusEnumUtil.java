@@ -6,7 +6,14 @@ package com.aihoo.util;
  * @description：状态翻译
  */
 public class StatusEnumUtil {
-    public final static String DONE = "DONE";
+                                public final static String UNSUBMITTED = "UNSUBMITTED"; // 资料未提交
+public final static String SUBMITTED = "SUBMITTED"; // 资料已提交
+public final static String STARTED = "STARTED"; // 对话已开始
+public final static String REFUND_PROCESSING = "REFUND_PROCESSING"; // 退款中
+public final static String REFUNDED = "REFUNDED"; // 已退款
+public final static String MANUALAUDIT = "MANUALAUDIT";
+public final static String ENDED = "ENDED"; // 问诊已结束
+public final static String DONE = "DONE";
     public final static String CANCEL = "CANCEL";
     public final static String DECLINE = "DECLINE";
     public final static String WAIT = "WAIT";
@@ -195,4 +202,37 @@ public class StatusEnumUtil {
     }
 
 
+
+public static String getStatus(String status) {
+        if (status == null) {
+            return "未知状态";
+        }
+        switch (status) {
+            case "START":
+                return "进行中";
+            case "PAY":
+                return "待接单";
+            case "HAVE":
+                return "进行中";
+            case "END":
+                return "已完成";
+            case "WAIT":
+                return "待付款";
+            case "DONE":
+                return "订单已关闭";
+            case "CANCEL":
+                return "订单已取消";
+            case "DECLINE":
+                return "已拒单";
+            default:
+                return "未知状态";
+        }
+    }
+
+public static String getVisitTypeName(String type) {
+        if (type == null) {
+            return "";
+        }
+        return "在线复诊";
+    }
 }
