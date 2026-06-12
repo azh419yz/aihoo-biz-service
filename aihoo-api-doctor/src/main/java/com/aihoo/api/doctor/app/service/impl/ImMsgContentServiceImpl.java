@@ -2,7 +2,7 @@ package com.aihoo.api.doctor.app.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.aihoo.domain.im.model.mapper.ImMsgContentMapper;
-import com.aihoo.api.doctor.app.model.ImMsgContent;
+import com.aihoo.domain.im.model.entity.ImMsgContent;
 import com.aihoo.api.doctor.app.service.ImMsgContentService;
 import org.springframework.stereotype.Service;
 

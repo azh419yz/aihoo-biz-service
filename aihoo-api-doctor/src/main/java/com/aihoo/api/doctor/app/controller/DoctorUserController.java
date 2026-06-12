@@ -5,7 +5,7 @@ import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 import com.aihoo.common.JsonResult;
 import com.alibaba.fastjson2.JSONObject;
-import com.aihoo.api.doctor.app.model.DoctorUser;
+import com.aihoo.domain.doctor.model.entity.DoctorUser;
 import com.aihoo.api.doctor.app.service.DoctorUserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;

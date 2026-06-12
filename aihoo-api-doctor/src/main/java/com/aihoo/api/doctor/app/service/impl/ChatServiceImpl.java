@@ -16,9 +16,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.aihoo.api.doctor.app.controller.vo.VisitChatVo;
-import com.aihoo.api.doctor.app.mapper.*;
-import com.aihoo.api.doctor.app.model.*;
-import com.aihoo.api.doctor.app.service.*;
+import com.aihoo.domain.doctor.model.mapper.DoctorUserMapper;
+import com.aihoo.domain.visit.model.mapper.HosVisitMapper;
+import com.aihoo.domain.visit.model.mapper.HosRevisitMapper;
+import com.aihoo.domain.visit.model.mapper.HosRevisitImgMapper;
+
+
 import com.aihoo.util.StatusEnumUtil;
 import com.aihoo.api.doctor.common.utils.AuthUtil;
 import com.aihoo.api.doctor.common.utils.IMMsgType;
@@ -27,6 +30,20 @@ import jakarta.annotation.Resource;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.aihoo.domain.doctor.model.mapper.CommonLanguageMapper;
+import com.aihoo.domain.im.model.mapper.PushMessageMapper;
+import com.aihoo.domain.sys.model.mapper.TBaseMapper;
+import com.aihoo.domain.doctor.model.entity.DoctorUser;
+import com.aihoo.domain.visit.model.entity.HosVisit;
+import com.aihoo.domain.visit.model.entity.HosRevisit;
+import com.aihoo.domain.visit.model.entity.HosRevisitImg;
+import com.aihoo.domain.im.model.entity.PushMessage;
+import com.aihoo.domain.sys.model.entity.TBase;
+import com.aihoo.api.doctor.app.service.ChatService;
+import com.aihoo.api.doctor.app.service.IMService;
+import com.aihoo.api.doctor.app.service.LogService;
+import com.aihoo.api.doctor.app.service.HosVisitService;
+import com.aihoo.api.doctor.app.service.HosRevisitService;
 
 import java.util.*;
 

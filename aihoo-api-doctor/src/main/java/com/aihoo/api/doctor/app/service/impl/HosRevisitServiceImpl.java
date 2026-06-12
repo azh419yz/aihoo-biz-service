@@ -24,9 +24,17 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.aihoo.api.doctor.app.controller.vo.HosOrder;
 import com.aihoo.api.doctor.app.controller.vo.OrderResult;
-import com.aihoo.api.doctor.app.mapper.*;
-import com.aihoo.api.doctor.app.model.*;
-import com.aihoo.api.doctor.app.service.*;
+import com.aihoo.domain.consultation.model.mapper.MdtOrderMapper;
+import com.aihoo.domain.doctor.model.mapper.DoctorUserMapper;
+import com.aihoo.domain.prescription.model.mapper.HosPrescriptionDrugMapper;
+import com.aihoo.domain.visit.model.mapper.HosRevisitMapper;
+import com.aihoo.domain.sys.model.mapper.DictMapper;
+import com.aihoo.domain.prescription.model.mapper.HosPrescriptionMapper;
+import com.aihoo.domain.visit.model.mapper.HealthRecordsMapper;
+import com.aihoo.domain.sys.model.mapper.DiseaseMapper;
+import com.aihoo.domain.visit.model.mapper.HosRevisitImgMapper;
+
+
 import com.aihoo.properties.CaProperties;
 import com.aihoo.constant.DictTypeEnum;
 import com.aihoo.util.StatusEnumUtil;
@@ -43,6 +51,36 @@ import jakarta.annotation.Resource;
 import java.net.URLDecoder;
 import java.util.*;
 import java.util.stream.Collectors;
+import com.aihoo.domain.hospital.model.mapper.DrugMapper;
+import com.aihoo.domain.patient.model.mapper.PatientUserMapper;
+import com.aihoo.domain.sys.model.mapper.TBaseMapper;
+import com.aihoo.domain.prescription.model.entity.HosPrescription;
+import com.aihoo.domain.prescription.model.entity.HosPrescriptionDisease;
+import com.aihoo.domain.prescription.model.entity.HosPrescriptionDrug;
+import com.aihoo.domain.doctor.model.entity.DoctorUser;
+import com.aihoo.domain.visit.model.entity.HosRevisit;
+import com.aihoo.domain.visit.model.entity.HosRevisitImg;
+import com.aihoo.domain.hospital.model.entity.Drug;
+import com.aihoo.domain.prescription.model.entity.HosPrescriptionError;
+import com.aihoo.domain.prescription.model.entity.HosPrescriptionDiseaseError;
+import com.aihoo.domain.prescription.model.entity.HosPrescriptionDrugError;
+import com.aihoo.domain.doctor.model.entity.DoctorSet;
+import com.aihoo.domain.doctor.model.entity.DoctorSetTimes;
+import com.aihoo.domain.visit.model.entity.HealthRecords;
+import com.aihoo.domain.patient.model.entity.PatientUser;
+import com.aihoo.domain.consultation.model.entity.MdtOrder;
+import com.aihoo.domain.sys.model.entity.Disease;
+import com.aihoo.domain.sys.model.entity.Dict;
+import com.aihoo.domain.sys.model.entity.TBase;
+import com.aihoo.api.doctor.app.service.PrescriptionDrugErrorService;
+import com.aihoo.api.doctor.app.service.PushMessageService;
+import com.aihoo.api.doctor.app.service.PrescriptionDrugService;
+import com.aihoo.api.doctor.app.service.PrescriptionDiseaseErrorService;
+import com.aihoo.api.doctor.app.service.PrescriptionDiseaseService;
+import com.aihoo.api.doctor.app.service.IMService;
+import com.aihoo.api.doctor.app.service.LogService;
+import com.aihoo.api.doctor.app.service.JudgeService;
+import com.aihoo.api.doctor.app.service.HosRevisitService;
 
 /**
  * @author ：lsl

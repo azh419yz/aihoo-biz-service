@@ -21,8 +21,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.aihoo.api.doctor.app.controller.vo.MdtOrderReportVo;
-import com.aihoo.api.doctor.app.mapper.*;
-import com.aihoo.api.doctor.app.model.*;
+import com.aihoo.domain.consultation.model.mapper.MdtOrderMapper;
+import com.aihoo.domain.doctor.model.mapper.DoctorUserMapper;
+import com.aihoo.domain.prescription.model.mapper.HosPrescriptionDrugMapper;
+import com.aihoo.domain.sys.model.mapper.DictMapper;
+import com.aihoo.domain.doctor.model.mapper.DoctorBalanceLogMapper;
+import com.aihoo.domain.prescription.model.mapper.HosPrescriptionMapper;
+
 import com.aihoo.api.doctor.app.service.JudgeService;
 import com.aihoo.api.doctor.app.service.MdtOrderService;
 import com.aihoo.api.doctor.app.service.PrescriptionDrugService;
@@ -49,6 +54,30 @@ import java.net.URLDecoder;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import com.aihoo.domain.consultation.model.mapper.MdtMapper;
+import com.aihoo.domain.hospital.model.mapper.DrugMapper;
+import com.aihoo.domain.consultation.model.mapper.MdtOrderDoctorMapper;
+import com.aihoo.domain.consultation.model.mapper.MdtOrderDicomStudyMapper;
+import com.aihoo.domain.consultation.model.mapper.MdtOrderReportMapper;
+import com.aihoo.domain.consultation.model.mapper.MdtOrderFileMapper;
+import com.aihoo.domain.sys.model.mapper.SysUserMapper;
+import com.aihoo.domain.consultation.model.mapper.MdtOrderReportAuditMapper;
+import com.aihoo.domain.consultation.model.mapper.MdtTeamMapper;
+import com.aihoo.domain.prescription.model.entity.HosPrescription;
+import com.aihoo.domain.prescription.model.entity.HosPrescriptionDrug;
+import com.aihoo.domain.doctor.model.entity.DoctorUser;
+import com.aihoo.domain.doctor.model.entity.DoctorBalanceLog;
+import com.aihoo.domain.hospital.model.entity.Drug;
+import com.aihoo.domain.consultation.model.entity.MdtOrder;
+import com.aihoo.domain.consultation.model.entity.Mdt;
+import com.aihoo.domain.consultation.model.entity.MdtOrderDoctor;
+import com.aihoo.domain.consultation.model.entity.MdtOrderDicomStudy;
+import com.aihoo.domain.consultation.model.entity.MdtTeam;
+import com.aihoo.domain.consultation.model.entity.MdtOrderFile;
+import com.aihoo.domain.consultation.model.entity.MdtOrderReport;
+import com.aihoo.domain.consultation.model.entity.MdtOrderReportAudit;
+import com.aihoo.domain.sys.model.entity.Dict;
+import com.aihoo.domain.sys.model.entity.SysUser;
 
 /**
  * @program: aihoo-root

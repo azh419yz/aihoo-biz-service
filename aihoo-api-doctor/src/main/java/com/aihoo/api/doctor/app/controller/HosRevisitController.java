@@ -7,7 +7,7 @@ import com.aihoo.util.SecurityUtil;
 import com.aihoo.common.JsonResult;
 import com.alibaba.fastjson2.JSON;
 import com.aliyun.oss.common.utils.StringUtils;
-import com.aihoo.api.doctor.app.model.Drug;
+import com.aihoo.domain.hospital.model.entity.Drug;
 import com.aihoo.api.doctor.app.service.HosRevisitService;
 import com.aihoo.properties.CaProperties;
 import lombok.SneakyThrows;

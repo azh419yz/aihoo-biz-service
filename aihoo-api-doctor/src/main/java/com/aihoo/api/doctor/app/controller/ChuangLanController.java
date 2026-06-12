@@ -6,7 +6,7 @@ import com.alibaba.fastjson2.JSONObject;
 import com.aihoo.api.doctor.app.controller.request.ChuangLanLoginRequest;
 import com.aihoo.api.doctor.app.controller.vo.ChuangLanLoginVo;
 import com.aihoo.api.doctor.app.controller.vo.DoctorUserVo;
-import com.aihoo.api.doctor.app.model.DoctorUser;
+import com.aihoo.domain.doctor.model.entity.DoctorUser;
 import com.aihoo.api.doctor.app.service.DoctorUserService;
 import com.aihoo.api.doctor.app.service.HosVisitService;
 import com.aihoo.api.doctor.app.service.PrescriptionService;

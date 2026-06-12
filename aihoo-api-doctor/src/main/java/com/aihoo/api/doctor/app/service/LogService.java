@@ -1,8 +1,8 @@
 package com.aihoo.api.doctor.app.service;
 
-import com.aihoo.api.doctor.app.model.HosPrescription;
-import com.aihoo.api.doctor.app.model.HosRevisit;
-import com.aihoo.api.doctor.app.model.HosVisit;
+import com.aihoo.domain.prescription.model.entity.HosPrescription;
+import com.aihoo.domain.visit.model.entity.HosRevisit;
+import com.aihoo.domain.visit.model.entity.HosVisit;
 
 /**
  * @author ：lsl

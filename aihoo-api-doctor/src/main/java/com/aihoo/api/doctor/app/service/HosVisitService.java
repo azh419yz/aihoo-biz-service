@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.aihoo.api.doctor.app.controller.vo.HosOrder;
 import com.aihoo.api.doctor.app.controller.vo.HosVisitBaseInfoVo;
 import com.aihoo.api.doctor.app.controller.vo.HosVisitHealthInfoVo;
-import com.aihoo.api.doctor.app.model.HosVisit;
+import com.aihoo.domain.visit.model.entity.HosVisit;
 
 import java.util.List;
 import java.util.Map;

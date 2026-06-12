@@ -1,8 +1,8 @@
 package com.aihoo.api.doctor.app.controller.request;
 
-import com.aihoo.api.doctor.app.model.dto.PrescriptionConsultationFeeDTO;
-import com.aihoo.api.doctor.app.model.dto.PrescriptionDrugDTO;
-import com.aihoo.api.doctor.app.model.dto.PrescriptionInstructionDTO;
+import com.aihoo.domain.prescription.model.dto.PrescriptionConsultationFeeDTO;
+import com.aihoo.domain.prescription.model.dto.PrescriptionDrugDTO;
+import com.aihoo.domain.prescription.model.dto.PrescriptionInstructionDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

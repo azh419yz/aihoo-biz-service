@@ -1,6 +1,6 @@
 package com.aihoo.api.doctor.app.controller.vo;
 
-import com.aihoo.api.doctor.app.model.HosPrescription;
+import com.aihoo.domain.prescription.model.entity.HosPrescription;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

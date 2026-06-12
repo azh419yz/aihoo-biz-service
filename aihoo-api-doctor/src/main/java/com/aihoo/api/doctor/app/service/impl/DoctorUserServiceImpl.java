@@ -18,12 +18,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.aihoo.api.doctor.app.controller.request.DoctorVisitSetRequest;
 import com.aihoo.api.doctor.app.controller.request.DoctorWelcomeMessageRequest;
 import com.aihoo.api.doctor.app.controller.vo.DoctorUserVo;
-import com.aihoo.api.doctor.app.mapper.DVersionMapper;
+import com.aihoo.domain.sys.model.mapper.DVersionMapper;
 import com.aihoo.domain.doctor.model.mapper.DoctorSetMapper;
 import com.aihoo.domain.doctor.model.mapper.DoctorUserLogMapper;
 import com.aihoo.domain.doctor.model.mapper.DoctorUserMapper;
-import com.aihoo.api.doctor.app.model.*;
-import com.aihoo.api.doctor.app.service.*;
+
+
 import com.aihoo.api.doctor.common.utils.AuthUtil;
 import com.aihoo.api.doctor.common.utils.ReturnValues;
 import com.aihoo.util.UserAgentGetter;
@@ -40,6 +40,19 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import com.aihoo.domain.doctor.model.entity.DoctorUser;
+import com.aihoo.domain.doctor.model.entity.DoctorSet;
+import com.aihoo.domain.doctor.model.entity.DoctorVisitSet;
+import com.aihoo.domain.doctor.model.entity.DoctorWelcomeMessageSet;
+import com.aihoo.domain.doctor.model.entity.DoctorUserLog;
+import com.aihoo.domain.sys.model.entity.DVersion;
+import com.aihoo.redis.RedisService;
+import com.aihoo.api.doctor.app.service.DoctorVisitSetService;
+import com.aihoo.api.doctor.app.service.DoctorUserService;
+import com.aihoo.api.doctor.app.service.HosVisitService;
+import com.aihoo.api.doctor.app.service.PrescriptionService;
+import com.aihoo.api.doctor.app.service.DoctorWelcomeMessageSetService;
+import com.aihoo.api.doctor.app.service.ProposalService;
 
 
 /**

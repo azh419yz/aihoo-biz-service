@@ -1,7 +1,7 @@
 package com.aihoo.api.doctor.app.service.impl;
 
-import com.aihoo.api.doctor.app.model.TbYlYppsxx;
-import com.aihoo.api.doctor.app.mapper.TbYlYppsxxMapper;
+import com.aihoo.domain.payment.model.entity.TbYlYppsxx;
+import com.aihoo.domain.payment.model.mapper.TbYlYppsxxMapper;
 import com.aihoo.api.doctor.app.service.TbYlYppsxxService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

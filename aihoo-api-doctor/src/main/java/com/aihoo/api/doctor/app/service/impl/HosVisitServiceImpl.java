@@ -14,10 +14,15 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.aihoo.api.doctor.app.controller.vo.*;
-import com.aihoo.api.doctor.app.mapper.*;
-import com.aihoo.api.doctor.app.model.*;
-import com.aihoo.api.doctor.app.model.dto.HosVisitBaseInfoDTO;
+
+import com.aihoo.domain.doctor.model.mapper.DoctorUserMapper;
+import com.aihoo.domain.visit.model.mapper.HosVisitVoMapper;
+import com.aihoo.domain.visit.model.mapper.HosVisitMapper;
+import com.aihoo.domain.visit.model.mapper.HosVisitImgMapper;
+import com.aihoo.domain.payment.model.mapper.OrderBackPayMapper;
+import com.aihoo.domain.payment.model.mapper.OrderMapper;
+
+import com.aihoo.domain.visit.model.dto.HosVisitBaseInfoDTO;
 import com.aihoo.api.doctor.app.service.HosSickHealthRecordsService;
 import com.aihoo.api.doctor.app.service.HosVisitService;
 import com.aihoo.api.doctor.app.service.IMService;
@@ -34,6 +39,23 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.aihoo.domain.visit.model.mapper.HosSickMapper;
+import com.aihoo.domain.im.model.mapper.ImMsgMapper;
+import com.aihoo.domain.patient.model.mapper.PatientUserMapper;
+import com.aihoo.domain.sys.model.mapper.TBaseMapper;
+import com.aihoo.domain.visit.model.entity.HosVisit;
+import com.aihoo.domain.visit.model.entity.HosVisitImg;
+import com.aihoo.domain.visit.model.entity.HosSickHealthRecords;
+import com.aihoo.domain.doctor.model.entity.DoctorUser;
+import com.aihoo.domain.visit.model.vo.HosVisitSelectVo;
+import com.aihoo.domain.patient.model.entity.PatientUser;
+import com.aihoo.domain.im.model.entity.ImMsg;
+import com.aihoo.domain.sys.model.entity.TBase;
+import com.aihoo.domain.payment.model.entity.Order;
+import com.aihoo.domain.payment.model.entity.OrderBackPay;
+import com.aihoo.api.doctor.app.controller.vo.HosOrder;
+import com.aihoo.api.doctor.app.controller.vo.HosVisitHealthInfoVo;
+import com.aihoo.api.doctor.app.controller.vo.HosVisitBaseInfoVo;
 
 import java.util.*;
 

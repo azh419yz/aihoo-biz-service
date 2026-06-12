@@ -2,7 +2,7 @@ package com.aihoo.api.doctor.common.utils;
 
 
 import com.aihoo.util.StringUtil;
-import com.aihoo.api.doctor.app.model.DoctorUser;
+import com.aihoo.domain.doctor.model.entity.DoctorUser;
 
 import java.util.HashMap;
 

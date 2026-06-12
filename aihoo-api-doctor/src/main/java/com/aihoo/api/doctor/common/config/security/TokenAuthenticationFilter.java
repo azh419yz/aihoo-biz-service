@@ -6,7 +6,7 @@ import com.aihoo.common.BizResult;
 import com.aihoo.common.BizResultCode;
 import com.aihoo.redis.RedisConstant;
 import com.aihoo.redis.RedisService;
-import com.aihoo.api.doctor.app.model.DoctorUser;
+import com.aihoo.domain.doctor.model.entity.DoctorUser;
 import com.aihoo.api.doctor.common.utils.AuthUtil;
 import com.aihoo.api.doctor.common.utils.chuanglan.ChuangLanFlashAuthUtil;
 import jakarta.servlet.FilterChain;
@@ -26,6 +26,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Objects;
+import com.aihoo.redis.RedisService;
 
 import static com.aihoo.api.doctor.common.config.security.PublicEndpoints.PUBLIC_URLS;
 

@@ -15,8 +15,16 @@ import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.fastjson2.JSONWriter;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.aihoo.api.doctor.app.mapper.*;
-import com.aihoo.api.doctor.app.model.*;
+import com.aihoo.domain.consultation.model.mapper.MdtOrderMapper;
+import com.aihoo.domain.doctor.model.mapper.DoctorUserMapper;
+import com.aihoo.domain.prescription.model.mapper.HosPrescriptionDrugMapper;
+import com.aihoo.domain.prescription.model.mapper.HosPreDrugOrderMapper;
+import com.aihoo.domain.prescription.model.mapper.HosPrescriptionDiseaseMapper;
+import com.aihoo.domain.visit.model.mapper.HosVisitMapper;
+import com.aihoo.domain.visit.model.mapper.HosRevisitMapper;
+import com.aihoo.domain.prescription.model.mapper.HosPrescriptionMapper;
+import com.aihoo.domain.payment.model.mapper.OrderMapper;
+
 import com.aihoo.api.doctor.app.service.IMService;
 import com.aihoo.api.doctor.app.service.JudgeService;
 import com.aihoo.properties.CheckingProperties;
@@ -35,6 +43,17 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.net.URL;
 import java.util.List;
+import com.aihoo.domain.hospital.model.mapper.DrugMapper;
+import com.aihoo.domain.consultation.model.mapper.MdtTeamMapper;
+import com.aihoo.domain.prescription.model.entity.HosPrescriptionDisease;
+import com.aihoo.domain.prescription.model.entity.HosPrescriptionDrug;
+import com.aihoo.domain.visit.model.entity.HosVisit;
+import com.aihoo.domain.visit.model.entity.HosRevisit;
+import com.aihoo.domain.prescription.model.entity.HosPrescription;
+import com.aihoo.domain.doctor.model.entity.DoctorUser;
+import com.aihoo.domain.hospital.model.entity.Drug;
+import com.aihoo.domain.consultation.model.entity.MdtOrder;
+import com.aihoo.domain.payment.model.entity.Order;
 import java.util.*;
 
 /**

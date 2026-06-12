@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.aihoo.api.doctor.app.controller.request.SearchDrugRequest;
 import com.aihoo.api.doctor.app.controller.vo.DrugVo;
 import com.aihoo.domain.hospital.model.mapper.DrugMapper;
-import com.aihoo.api.doctor.app.model.Drug;
+import com.aihoo.domain.hospital.model.entity.Drug;
 import com.aihoo.api.doctor.app.service.DrugService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;

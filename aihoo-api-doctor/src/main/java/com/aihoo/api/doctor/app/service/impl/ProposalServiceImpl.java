@@ -3,7 +3,7 @@ package com.aihoo.api.doctor.app.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.aihoo.domain.payment.model.mapper.ProposalMapper;
-import com.aihoo.api.doctor.app.model.Proposal;
+import com.aihoo.domain.payment.model.entity.Proposal;
 import com.aihoo.api.doctor.app.service.ProposalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

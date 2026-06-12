@@ -1,6 +1,6 @@
 package com.aihoo.api.doctor.app.service;
 
-import com.aihoo.api.doctor.app.model.TbYlYppsxx;
+import com.aihoo.domain.payment.model.entity.TbYlYppsxx;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

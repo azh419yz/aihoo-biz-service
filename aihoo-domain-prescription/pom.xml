@@ -69,6 +69,11 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
+            <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>fluent-hc</artifactId>
+            <version>4.5.14</version>
+        </dependency>
     </dependencies>
 
     <build>

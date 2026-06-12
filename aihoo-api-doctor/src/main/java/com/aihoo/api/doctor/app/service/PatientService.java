@@ -2,7 +2,7 @@ package com.aihoo.api.doctor.app.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.aihoo.api.doctor.app.controller.vo.HosSickVo;
-import com.aihoo.api.doctor.app.model.PatientUser;
+import com.aihoo.domain.patient.model.entity.PatientUser;
 
 import java.util.List;
 import java.util.Map;

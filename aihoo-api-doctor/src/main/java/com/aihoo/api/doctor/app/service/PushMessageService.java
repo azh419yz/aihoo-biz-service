@@ -1,7 +1,7 @@
 package com.aihoo.api.doctor.app.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.aihoo.api.doctor.app.model.PushMessage;
+import com.aihoo.domain.im.model.entity.PushMessage;
 
 public interface PushMessageService extends IService<PushMessage> {
     int insertOne(String title, String intro, String messageType, String otherId, String content, String isPush);

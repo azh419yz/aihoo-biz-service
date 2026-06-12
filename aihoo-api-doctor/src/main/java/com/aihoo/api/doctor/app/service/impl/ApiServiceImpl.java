@@ -9,8 +9,19 @@ import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.aihoo.api.doctor.app.mapper.*;
-import com.aihoo.api.doctor.app.model.*;
+import com.aihoo.domain.consultation.model.mapper.MdtOrderMapper;
+import com.aihoo.domain.doctor.model.mapper.DoctorUserMapper;
+import com.aihoo.domain.prescription.model.mapper.HosPrescriptionDrugMapper;
+import com.aihoo.domain.prescription.model.mapper.HosPreDrugOrderMapper;
+import com.aihoo.domain.prescription.model.entity.HosPreDrugOrder;
+import com.aihoo.domain.prescription.model.mapper.HosPrescriptionDiseaseMapper;
+import com.aihoo.domain.visit.model.mapper.HosRevisitMapper;
+import com.aihoo.domain.visit.model.mapper.HosVisitMapper;
+import com.aihoo.domain.prescription.model.mapper.HosPrescriptionMapper;
+import com.aihoo.domain.prescription.model.mapper.HosPrescriptionLogMapper;
+import com.aihoo.domain.payment.model.mapper.OrderMapper;
+import com.aihoo.domain.payment.model.mapper.TbYlYppsxxMapper;
+
 import com.aihoo.api.doctor.app.service.ApiService;
 import com.aihoo.api.doctor.app.service.IMService;
 import com.aihoo.api.doctor.common.utils.IMMsgType;
@@ -28,6 +39,15 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.aihoo.domain.prescription.model.entity.HosPrescription;
+import com.aihoo.domain.prescription.model.entity.HosPrescriptionDisease;
+import com.aihoo.domain.prescription.model.entity.HosPrescriptionDrug;
+import com.aihoo.domain.doctor.model.entity.DoctorUser;
+import com.aihoo.domain.visit.model.entity.HosVisit;
+import com.aihoo.domain.visit.model.entity.HosRevisit;
+import com.aihoo.domain.prescription.model.entity.HosPrescriptionLog;
+import com.aihoo.domain.payment.model.entity.Order;
+import com.aihoo.domain.payment.model.entity.TbYlYppsxx;
 
 /**
  * @program: aihoo-root

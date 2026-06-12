@@ -7,7 +7,7 @@ import com.aihoo.common.PageParam;
 import com.aihoo.common.PageResult;
 import com.aihoo.api.doctor.app.controller.request.SearchDrugRequest;
 import com.aihoo.api.doctor.app.controller.vo.DrugVo;
-import com.aihoo.api.doctor.app.model.Drug;
+import com.aihoo.domain.hospital.model.entity.Drug;
 import com.aihoo.api.doctor.app.service.DrugService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

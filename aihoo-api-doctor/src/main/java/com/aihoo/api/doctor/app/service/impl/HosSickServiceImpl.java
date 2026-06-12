@@ -6,10 +6,13 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.aihoo.api.doctor.app.controller.vo.HosSickVo;
+import com.aihoo.api.doctor.app.service.HosVisitService;
+import com.aihoo.api.doctor.app.service.HosPrescriptionService;
+import com.aihoo.api.doctor.app.service.HosSickHealthRecordsService;
 import com.aihoo.api.doctor.app.controller.vo.HosVisitVo;
 import com.aihoo.domain.visit.model.mapper.HosSickMapper;
-import com.aihoo.api.doctor.app.model.*;
-import com.aihoo.api.doctor.app.service.*;
+
+
 import com.aihoo.domain.sys.model.entity.Area;
 import com.aihoo.domain.sys.service.AreaService;
 import com.google.common.collect.Lists;
@@ -20,6 +23,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import com.aihoo.domain.prescription.model.entity.HosPrescription;
+import com.aihoo.domain.visit.model.entity.HosVisit;
+import com.aihoo.domain.visit.model.entity.HosSick;
+import com.aihoo.domain.visit.model.entity.HosSickHealthRecords;
+import com.aihoo.api.doctor.app.service.HosSickService;
 
 /**
  * <p>

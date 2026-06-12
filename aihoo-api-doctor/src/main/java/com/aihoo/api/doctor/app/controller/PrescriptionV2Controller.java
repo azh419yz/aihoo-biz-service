@@ -7,7 +7,7 @@ import com.aihoo.api.doctor.app.controller.request.SavePrescriptionRequest;
 import com.aihoo.api.doctor.app.controller.request.SearchRecentPreRequest;
 import com.aihoo.api.doctor.app.controller.request.WithdrawPrescriptionRequest;
 import com.aihoo.api.doctor.app.controller.vo.RecentPreVo;
-import com.aihoo.api.doctor.app.model.HosPrescription;
+import com.aihoo.domain.prescription.model.entity.HosPrescription;
 import com.aihoo.api.doctor.app.service.PrescriptionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

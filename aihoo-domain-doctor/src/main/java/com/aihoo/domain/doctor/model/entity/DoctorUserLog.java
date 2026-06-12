@@ -59,5 +59,6 @@ public class DoctorUserLog {
      * 操作说明
      */
     private String remark;
+    private String city;
 
 }

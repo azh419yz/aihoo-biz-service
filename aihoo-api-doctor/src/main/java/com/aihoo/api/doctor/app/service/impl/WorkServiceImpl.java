@@ -18,8 +18,20 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.aihoo.api.doctor.app.controller.vo.ChangeBalance;
 import com.aihoo.api.doctor.app.controller.vo.DoctorWorkVo;
 import com.aihoo.api.doctor.app.controller.vo.HosOrderList;
-import com.aihoo.api.doctor.app.mapper.*;
-import com.aihoo.api.doctor.app.model.*;
+import com.aihoo.domain.im.model.entity.HomepageMessage;
+import com.aihoo.domain.im.model.mapper.MessageMapper;
+import com.aihoo.domain.doctor.model.mapper.DoctorUserLogMapper;
+import com.aihoo.domain.doctor.model.mapper.DoctorSetMapper;
+import com.aihoo.domain.doctor.model.mapper.DoctorAyncMapper;
+import com.aihoo.domain.doctor.model.mapper.DoctorBalanceMapper;
+import com.aihoo.domain.payment.model.mapper.CancelMapper;
+import com.aihoo.domain.consultation.model.mapper.MdtOrderMapper;
+import com.aihoo.domain.doctor.model.mapper.DoctorUserMapper;
+import com.aihoo.domain.visit.model.mapper.HosRevisitMapper;
+import com.aihoo.domain.visit.model.mapper.HosVisitMapper;
+import com.aihoo.domain.doctor.model.mapper.DoctorSetTimesMapper;
+import com.aihoo.domain.doctor.model.mapper.DoctorBalanceLogMapper;
+
 import com.aihoo.api.doctor.app.service.WorkService;
 import com.aihoo.api.doctor.common.utils.AuthUtil;
 import com.aihoo.util.StatusEnumUtil;
@@ -33,6 +45,19 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import com.aihoo.domain.doctor.model.entity.DoctorSet;
+import com.aihoo.domain.visit.model.entity.HosVisit;
+import com.aihoo.domain.visit.model.entity.HosRevisit;
+import com.aihoo.domain.doctor.model.entity.DoctorUser;
+import com.aihoo.domain.doctor.model.entity.DoctorUserLog;
+import com.aihoo.domain.doctor.model.entity.DoctorAync;
+import com.aihoo.domain.doctor.model.entity.DoctorBalance;
+import com.aihoo.domain.doctor.model.entity.DoctorBalanceLog;
+import com.aihoo.domain.doctor.model.entity.DoctorSetTimes;
+import com.aihoo.domain.consultation.model.entity.MdtOrder;
+import com.aihoo.domain.im.model.entity.PushMessage;
+import com.aihoo.domain.payment.model.entity.Cancel;
+import com.aihoo.redis.RedisService;
 import java.util.*;
 
 /**
@@ -45,7 +70,7 @@ public class WorkServiceImpl implements WorkService {
 
     //首页提示信息表
     @Autowired
-    private HomePageMessageMapper homePageMessageMapper;
+    private MessageMapper messageMapper;
     //接诊设置表
     @Autowired
     private DoctorAyncMapper doctorAyncMapper;
@@ -361,15 +386,15 @@ public class WorkServiceImpl implements WorkService {
      * @return
      */
     public Object getHomeMessageData() {
-        QueryWrapper<HomePageMessage> wrapper = new QueryWrapper<>();
+        QueryWrapper<HomepageMessage> wrapper = new QueryWrapper<>();
         wrapper.eq("type", "DOCKER")
                 .eq("is_delete", "0")
                 .select("title")
                 .orderByAsc(true, "create_time");
-        List<HomePageMessage> homePageMessageList = homePageMessageMapper.selectList(wrapper);
+        List<HomepageMessage> homePageMessageList = messageMapper.selectList(wrapper);
         List<String> titleList = new ArrayList<>();
-        for (HomePageMessage homePageMessage : homePageMessageList) {
-            titleList.add(homePageMessage.getTitle());
+        for (HomepageMessage homepageMessage : homePageMessageList) {
+            titleList.add(homepageMessage.getTitle());
         }
         return titleList;
     }
@@ -792,15 +817,15 @@ public class WorkServiceImpl implements WorkService {
      * @return
      */
     public Object getRevisitDataTest() {
-        QueryWrapper<HomePageMessage> wrapper = new QueryWrapper<>();
+        QueryWrapper<HomepageMessage> wrapper = new QueryWrapper<>();
         wrapper.eq("type", "DOCKER")
                 .eq("is_delete", "0")
                 .select("title")
                 .orderByAsc(true, "create_time");
-        List<HomePageMessage> homePageMessageList = homePageMessageMapper.selectList(wrapper);
+        List<HomepageMessage> homePageMessageList = messageMapper.selectList(wrapper);
         List<String> titleList = new ArrayList<>();
-        for (HomePageMessage homePageMessage : homePageMessageList) {
-            titleList.add(homePageMessage.getTitle());
+        for (HomepageMessage homepageMessage : homePageMessageList) {
+            titleList.add(homepageMessage.getTitle());
         }
         return titleList;
     }

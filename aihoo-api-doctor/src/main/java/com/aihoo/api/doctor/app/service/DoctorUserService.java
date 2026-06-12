@@ -5,9 +5,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.aihoo.api.doctor.app.controller.request.DoctorVisitSetRequest;
 import com.aihoo.api.doctor.app.controller.request.DoctorWelcomeMessageRequest;
 import com.aihoo.api.doctor.app.controller.vo.DoctorUserVo;
-import com.aihoo.api.doctor.app.model.DoctorUser;
-import com.aihoo.api.doctor.app.model.DoctorVisitSet;
-import com.aihoo.api.doctor.app.model.DoctorWelcomeMessageSet;
+import com.aihoo.domain.doctor.model.entity.DoctorUser;
+import com.aihoo.domain.doctor.model.entity.DoctorVisitSet;
+import com.aihoo.domain.doctor.model.entity.DoctorWelcomeMessageSet;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Map;

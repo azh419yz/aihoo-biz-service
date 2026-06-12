@@ -5,7 +5,7 @@ import com.aihoo.common.PageResult;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.aihoo.api.doctor.app.controller.request.SearchDrugRequest;
 import com.aihoo.api.doctor.app.controller.vo.DrugVo;
-import com.aihoo.api.doctor.app.model.Drug;
+import com.aihoo.domain.hospital.model.entity.Drug;
 
 /**
  * <p>

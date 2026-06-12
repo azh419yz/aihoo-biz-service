@@ -1,8 +1,8 @@
 package com.aihoo.api.doctor.app.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.aihoo.api.doctor.app.model.Drug;
-import com.aihoo.api.doctor.app.model.HosRevisit;
+import com.aihoo.domain.hospital.model.entity.Drug;
+import com.aihoo.domain.visit.model.entity.HosRevisit;
 
 import java.util.List;
 import java.util.Map;

@@ -1,8 +1,8 @@
 package com.aihoo.api.doctor.app.controller.vo;
 
-import com.aihoo.api.doctor.app.model.HosPrescription;
-import com.aihoo.api.doctor.app.model.HosVisit;
-import com.aihoo.api.doctor.app.model.HosVisitImg;
+import com.aihoo.domain.prescription.model.entity.HosPrescription;
+import com.aihoo.domain.visit.model.entity.HosVisit;
+import com.aihoo.domain.visit.model.entity.HosVisitImg;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -4,6 +4,11 @@ package com.aihoo.domain.prescription.util;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 import com.alibaba.fastjson2.JSONObject;
+import com.aihoo.util.AppSiganatureUtils;
+import org.apache.http.client.fluent.Request;
+import org.apache.http.entity.ContentType;
+
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 /**
@@ -36,13 +41,7 @@ public class HospitalPrescriptionUtil {
                                             String prescripNo, String prescribeDate, String hospitalName) throws Exception {
         log.info("查询处方物流开始-- 订单号" + prescripNo);
         TIMESTAMP = System.currentTimeMillis();
-        log.info("
-{}
-{}
-{}
-{}
-{}
-{}", REQS_URL, ACCESS_APPID, APP_SECRET, prescripNo, hospitalName, TIMESTAMP);
+        log.info("REQS_URL={} ACCESS_APPID={} APP_SECRET={} prescripNo={} hospitalName={} TIMESTAMP={}", REQS_URL, ACCESS_APPID, APP_SECRET, prescripNo, hospitalName, TIMESTAMP);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("prescripNo", prescripNo);
         jsonObject.put("prescribeDate", prescribeDate);
@@ -108,4 +107,5 @@ public class HospitalPrescriptionUtil {
         log.info(s);
         log.info("新增处方结束-- 订单号" + prescripNo);
         return json;
+}
 }

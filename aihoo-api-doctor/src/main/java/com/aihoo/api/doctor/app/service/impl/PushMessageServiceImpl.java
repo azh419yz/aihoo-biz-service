@@ -3,7 +3,7 @@ package com.aihoo.api.doctor.app.service.impl;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.aihoo.domain.im.model.mapper.PushMessageMapper;
-import com.aihoo.api.doctor.app.model.PushMessage;
+import com.aihoo.domain.im.model.entity.PushMessage;
 import com.aihoo.api.doctor.app.service.PushMessageService;
 import com.aihoo.api.doctor.common.utils.AuthUtil;
 import org.springframework.stereotype.Service;

@@ -8,9 +8,9 @@ import com.aihoo.api.doctor.app.controller.request.SavePrescriptionRequest;
 import com.aihoo.api.doctor.app.controller.request.SearchRecentPreRequest;
 import com.aihoo.api.doctor.app.controller.request.WithdrawPrescriptionRequest;
 import com.aihoo.api.doctor.app.controller.vo.RecentPreVo;
-import com.aihoo.api.doctor.app.model.Disease;
-import com.aihoo.api.doctor.app.model.Drug;
-import com.aihoo.api.doctor.app.model.HosPrescription;
+import com.aihoo.domain.sys.model.entity.Disease;
+import com.aihoo.domain.hospital.model.entity.Drug;
+import com.aihoo.domain.prescription.model.entity.HosPrescription;
 import jakarta.validation.Valid;
 
 import java.util.List;

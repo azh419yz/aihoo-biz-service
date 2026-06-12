@@ -10,7 +10,7 @@ import com.aihoo.common.BizResultCode;
 import com.alibaba.fastjson2.JSONObject;
 import com.aihoo.api.doctor.app.controller.request.WxaCodeRequest;
 import com.aihoo.api.doctor.app.controller.vo.WxaCodeVo;
-import com.aihoo.api.doctor.app.model.DoctorUser;
+import com.aihoo.domain.doctor.model.entity.DoctorUser;
 import com.aihoo.api.doctor.app.service.WeChatApiService;
 import com.aihoo.api.doctor.common.utils.AuthUtil;
 

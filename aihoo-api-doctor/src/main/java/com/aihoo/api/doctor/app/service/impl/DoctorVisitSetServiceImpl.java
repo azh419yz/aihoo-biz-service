@@ -2,7 +2,7 @@ package com.aihoo.api.doctor.app.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.aihoo.domain.doctor.model.mapper.DoctorVisitSetMapper;
-import com.aihoo.api.doctor.app.model.DoctorVisitSet;
+import com.aihoo.domain.doctor.model.entity.DoctorVisitSet;
 import com.aihoo.api.doctor.app.service.DoctorVisitSetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

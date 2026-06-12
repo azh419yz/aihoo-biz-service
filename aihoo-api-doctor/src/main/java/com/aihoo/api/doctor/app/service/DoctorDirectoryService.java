@@ -2,7 +2,7 @@ package com.aihoo.api.doctor.app.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.aihoo.api.doctor.app.controller.vo.DoctorDirectoryVo;
-import com.aihoo.api.doctor.app.model.DoctorDirectory;
+import com.aihoo.domain.doctor.model.entity.DoctorDirectory;
 
 import java.util.List;
 

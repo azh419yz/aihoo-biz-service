@@ -1,15 +1,22 @@
 package com.aihoo.api.doctor.app.service.impl;
 
-import com.aihoo.api.doctor.app.mapper.HosPrescriptionLogMapper;
-import com.aihoo.api.doctor.app.mapper.HosRevisitLogMapper;
+import com.aihoo.domain.prescription.model.mapper.HosPrescriptionLogMapper;
+import com.aihoo.domain.visit.model.mapper.HosRevisitLogMapper;
 import com.aihoo.domain.visit.model.mapper.HosSickMapper;
-import com.aihoo.api.doctor.app.mapper.HosVisitLogMapper;
-import com.aihoo.api.doctor.app.model.*;
+import com.aihoo.domain.visit.model.mapper.HosVisitLogMapper;
+
 import com.aihoo.api.doctor.app.service.LogService;
 import com.aihoo.api.doctor.common.utils.AuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.aihoo.domain.prescription.model.entity.HosPrescription;
+import com.aihoo.domain.prescription.model.entity.HosPrescriptionLog;
+import com.aihoo.domain.visit.model.entity.HosVisit;
+import com.aihoo.domain.visit.model.entity.HosVisitLog;
+import com.aihoo.domain.visit.model.entity.HosRevisit;
+import com.aihoo.domain.visit.model.entity.HosRevisitLog;
+import com.aihoo.domain.visit.model.entity.HosSick;
 
 /**
  * @author ：lsl
