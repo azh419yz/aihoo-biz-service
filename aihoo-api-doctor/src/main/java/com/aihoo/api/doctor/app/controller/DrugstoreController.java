@@ -43,7 +43,7 @@ public class DrugstoreController {
                     )
             )
     )
-    public BizResult<PageResult<DrugstoreVo>> list(@Parameter PageParam<Drugstore> pageParam,
+    public BizResult<Object> list(@Parameter PageParam<Drugstore> pageParam,
                                                    @Parameter SearchDrugstoreRequest request) {
         return BizResult.success(drugstoreService.getPage(pageParam, request));
     }

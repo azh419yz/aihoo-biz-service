@@ -1,16 +1,5 @@
 package com.aihoo.api.doctor.app.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.aihoo.domain.im.model.entity.ImMsgContent;
-
-/**
- * <p>
- * IM消息内容表 服务类
- * </p>
- *
- * @author zys
- * @since 2020-10-15
- */
-public interface ImMsgContentService extends IService<ImMsgContent> {
-
+/** 兼容垫片：委托到 com.aihoo.domain.im.service */
+public interface ImMsgContentService extends com.aihoo.domain.im.service.ImMsgContentService {
 }

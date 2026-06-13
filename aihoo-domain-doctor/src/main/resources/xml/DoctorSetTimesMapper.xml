@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.doctor.model.mapper.DoctorSetTimesMapper">
+    <select id="selectListByTypeAndDoctorId" resultType="java.util.Map">
+        SELECT id, create_time, update_time, doctor_set_id, week_code, week_name, start_time, end_time, type
+        FROM t_doctor_set_times
+        WHERE doctor_user_id = #{doctorId,jdbcType=VARCHAR}
+          AND `type` = #{type,jdbcType=VARCHAR}
+    </select>
+</mapper>

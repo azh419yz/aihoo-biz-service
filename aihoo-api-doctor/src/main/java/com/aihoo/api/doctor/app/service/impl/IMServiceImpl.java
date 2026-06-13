@@ -177,7 +177,7 @@ public class IMServiceImpl implements IMService {
             try {
                 ImMsg imMsg = new ImMsg();
                 imMsg.setOrderNum(req.getVisitNo());
-                imMsg.setPeerReadStatus(0);
+                imMsg.setPeerReadStatus("0");
                 imMsg.setMsgRandom(req.getRandom().toString());
                 imMsg.setFromAccount(req.getFromAccount());
                 imMsg.setToAccount(req.getToAccount());

@@ -13,4 +13,9 @@
             #{doctorUserIds}
         </foreach>
     </select>
+
+    <select id="selectByDoctorId" resultType="com.aihoo.domain.doctor.model.entity.DoctorAync">
+        SELECT id, create_time, update_time, doctor_user_id, order_number, high_opinion, real_high_opinion
+        FROM t_doctor_aync WHERE doctor_user_id=#{doctorId,jdbcType=VARCHAR}
+    </select>
 </mapper>

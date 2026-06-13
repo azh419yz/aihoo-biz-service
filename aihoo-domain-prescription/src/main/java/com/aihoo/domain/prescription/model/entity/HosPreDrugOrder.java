@@ -49,6 +49,11 @@ public class HosPreDrugOrder implements Serializable {
     private String isPre;
 
     /**
+     * 类型
+     */
+    private String type;
+
+    /**
      * 处方id
      */
     private String hosPrescriptionId;

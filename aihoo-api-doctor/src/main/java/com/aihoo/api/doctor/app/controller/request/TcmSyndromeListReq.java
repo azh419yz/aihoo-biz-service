@@ -1,13 +1,8 @@
 package com.aihoo.api.doctor.app.controller.request;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-
-@Data
-@Schema(description = "获取中医证候列表请求对象")
-public class TcmSyndromeListReq {
-
-    @Schema(description = "证候名称模糊搜索")
-    private String keyword;
-
+/**
+ * API 层垫片类：保留原 import 路径，指向 domain-sys 的 TcmSyndromeListReq
+ * 任务 #56 (K/N/O 规则) 时拆掉这个垫片
+ */
+public class TcmSyndromeListReq extends com.aihoo.domain.sys.dto.TcmSyndromeListReq {
 }

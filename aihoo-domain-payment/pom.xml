@@ -28,9 +28,48 @@
             <artifactId>aihoo-infra-shared-kernel</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
-            <dependency>
+        <dependency>
+            <groupId>com.aihoo</groupId>
+            <artifactId>aihoo-domain-prescription</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aihoo</groupId>
+            <artifactId>aihoo-domain-im</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aihoo</groupId>
+            <artifactId>aihoo-domain-visit</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aihoo</groupId>
+            <artifactId>aihoo-domain-doctor</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aihoo</groupId>
+            <artifactId>aihoo-domain-consultation</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aihoo</groupId>
+            <artifactId>aihoo-domain-hospital</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aihoo</groupId>
+            <artifactId>aihoo-domain-sys</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
         </dependency>
     </dependencies>
 

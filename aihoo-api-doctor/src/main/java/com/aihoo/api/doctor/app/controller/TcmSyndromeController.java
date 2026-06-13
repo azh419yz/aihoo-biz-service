@@ -42,7 +42,7 @@ public class TcmSyndromeController extends BaseController {
             )
     )
     @GetMapping("/list")
-    public BizResult<List<TcmSyndromeVo>> list(@Parameter TcmSyndromeListReq req) {
+    public BizResult<Object> list(@Parameter TcmSyndromeListReq req) {
         return BizResult.success(tcmSyndromeService.getSyndromeList(req));
     }
 }

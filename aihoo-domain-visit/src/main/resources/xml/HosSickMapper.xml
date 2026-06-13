@@ -54,4 +54,30 @@
             </if>
         </where>
     </select>
+
+    <select id="selectByDoctorId" resultType="java.util.Map">
+        SELECT DISTINCT t1.id,
+                        t1.`name`,
+                        t1.age,
+                        t1.sex
+        FROM t_hos_sick t1
+                     LEFT JOIN t_hos_revisit t2 ON t2.hos_sick_id = t1.id
+                     LEFT JOIN t_hos_visit t3 ON t3.hos_sick_id = t1.id
+        WHERE (t2.doctor_user_id = #{doctorId,jdbcType=VARCHAR} OR t3.doctor_user_id = #{doctorId,jdbcType=VARCHAR})
+          AND is_delete = '0'
+          AND t1.NAME LIKE #{sickName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectVoByDoctorId" resultType="java.util.Map">
+        SELECT DISTINCT t1.id,
+                        t1.`name`,
+                        t1.age,
+                        t1.sex
+        FROM t_hos_sick t1
+                     LEFT JOIN t_hos_revisit t2 ON t2.hos_sick_id = t1.id
+                     LEFT JOIN t_hos_visit t3 ON t3.hos_sick_id = t1.id
+        WHERE (t2.doctor_user_id = #{doctorId,jdbcType=VARCHAR} OR t3.doctor_user_id = #{doctorId,jdbcType=VARCHAR})
+          AND is_delete = '0'
+          AND t1.NAME LIKE #{sickName,jdbcType=VARCHAR}
+    </select>
 </mapper>

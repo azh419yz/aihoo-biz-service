@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.doctor.model.mapper.DoctorBalanceLogMapper">
+    <select id="selectByDoctorId" resultType="com.aihoo.domain.doctor.model.entity.DoctorBalanceLog">
+        SELECT id, create_time, update_time, doctor_user_id, action_type, os_name, ip_address, remark, city
+        FROM t_doctor_user_log
+        WHERE doctor_user_id = #{doctorId,jdbcType=VARCHAR}
+        <if test="type != null and type != ''">
+            AND action_type = #{type}
+        </if>
+        <if test="beginOfMonth != null and beginOfMonth != ''">
+            AND create_time >= #{beginOfMonth}
+        </if>
+        <if test="endOfMonth != null and endOfMonth != ''">
+            AND create_time &lt;= #{endOfMonth}
+        </if>
+        ORDER BY create_time DESC
+    </select>
+</mapper>

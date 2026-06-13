@@ -1,16 +1,5 @@
 package com.aihoo.api.doctor.app.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.aihoo.domain.doctor.model.entity.DoctorWelcomeMessageSet;
-
-
-/**
- * <p>
- * 欢迎语设置表 服务类
- * </p>
- *
- */
-public interface DoctorWelcomeMessageSetService extends IService<DoctorWelcomeMessageSet> {
-
-
+/** 兼容垫片：委托到 com.aihoo.domain.doctor.service */
+public interface DoctorWelcomeMessageSetService extends com.aihoo.domain.doctor.service.DoctorWelcomeMessageSetService {
 }

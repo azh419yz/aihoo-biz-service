@@ -1,7 +1,4 @@
 package com.aihoo.api.doctor.app.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.aihoo.domain.prescription.model.entity.HosPrescriptionInstruction;
-
-public interface PrescriptionInstructionService extends IService<HosPrescriptionInstruction> {
+public interface PrescriptionInstructionService extends com.aihoo.domain.prescription.service.PrescriptionInstructionService {
 }

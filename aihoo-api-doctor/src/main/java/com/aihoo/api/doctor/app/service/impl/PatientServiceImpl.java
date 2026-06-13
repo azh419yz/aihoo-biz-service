@@ -77,9 +77,9 @@ public class PatientServiceImpl extends ServiceImpl<PatientUserMapper, PatientUs
         } else {
             sickName = "%" + sickName + "%";
         }
-        List<HosSick> list = hosSickMapper.selectVoByDoctorId(loginUserId, sickName);
+        List<Object> list = hosSickMapper.selectVoByDoctorId(loginUserId, sickName);
         List<HosSickVo> result = new java.util.ArrayList<>();
-        for (HosSick h : list) {
+        for (Object h : list) {
             HosSickVo v = new HosSickVo();
             org.springframework.beans.BeanUtils.copyProperties(h, v);
             result.add(v);

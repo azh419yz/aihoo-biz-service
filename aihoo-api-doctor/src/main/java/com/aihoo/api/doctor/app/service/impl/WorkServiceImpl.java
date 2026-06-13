@@ -18,13 +18,14 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.aihoo.api.doctor.app.controller.vo.ChangeBalance;
 import com.aihoo.api.doctor.app.controller.vo.DoctorWorkVo;
 import com.aihoo.api.doctor.app.controller.vo.HosOrderList;
-import com.aihoo.domain.im.model.entity.HomepageMessage;
+import com.aihoo.domain.hospital.model.entity.HomepageMessage;
 import com.aihoo.domain.im.model.mapper.MessageMapper;
+import com.aihoo.domain.im.model.entity.Message;
 import com.aihoo.domain.doctor.model.mapper.DoctorUserLogMapper;
 import com.aihoo.domain.doctor.model.mapper.DoctorSetMapper;
 import com.aihoo.domain.doctor.model.mapper.DoctorAyncMapper;
 import com.aihoo.domain.doctor.model.mapper.DoctorBalanceMapper;
-import com.aihoo.domain.payment.model.mapper.CancelMapper;
+import com.aihoo.domain.im.model.mapper.CancelMapper;
 import com.aihoo.domain.consultation.model.mapper.MdtOrderMapper;
 import com.aihoo.domain.doctor.model.mapper.DoctorUserMapper;
 import com.aihoo.domain.visit.model.mapper.HosRevisitMapper;
@@ -56,7 +57,7 @@ import com.aihoo.domain.doctor.model.entity.DoctorBalanceLog;
 import com.aihoo.domain.doctor.model.entity.DoctorSetTimes;
 import com.aihoo.domain.consultation.model.entity.MdtOrder;
 import com.aihoo.domain.im.model.entity.PushMessage;
-import com.aihoo.domain.payment.model.entity.Cancel;
+import com.aihoo.domain.im.model.entity.Cancel;
 import com.aihoo.redis.RedisService;
 import java.util.*;
 
@@ -192,7 +193,8 @@ public class WorkServiceImpl implements WorkService {
             e.printStackTrace();
         }
         IPage<DoctorBalanceLog> iPage = new Page<>(page, limit);
-        List<DoctorBalanceLog> doctorBalanceLogList = doctorBalanceLogMapper.selectByDoctorId(AuthUtil.getLoginUser().getId(), type, beginOfMonth, endOfMonth, iPage);
+        IPage<DoctorBalanceLog> resultPage = doctorBalanceLogMapper.selectByDoctorId(AuthUtil.getLoginUser().getId(), type, beginOfMonth, endOfMonth, iPage);
+        List<DoctorBalanceLog> doctorBalanceLogList = resultPage.getRecords();
         List<ChangeBalance> changeBalanceList = new ArrayList<>();
         for (DoctorBalanceLog doctorBalanceLog : doctorBalanceLogList) {
             String doctorBalanceType = doctorBalanceLog.getType();
@@ -386,14 +388,14 @@ public class WorkServiceImpl implements WorkService {
      * @return
      */
     public Object getHomeMessageData() {
-        QueryWrapper<HomepageMessage> wrapper = new QueryWrapper<>();
+        QueryWrapper<Message> wrapper = new QueryWrapper<>();
         wrapper.eq("type", "DOCKER")
                 .eq("is_delete", "0")
                 .select("title")
                 .orderByAsc(true, "create_time");
-        List<HomepageMessage> homePageMessageList = messageMapper.selectList(wrapper);
+        List<Message> homePageMessageList = messageMapper.selectList(wrapper);
         List<String> titleList = new ArrayList<>();
-        for (HomepageMessage homepageMessage : homePageMessageList) {
+        for (Message homepageMessage : homePageMessageList) {
             titleList.add(homepageMessage.getTitle());
         }
         return titleList;
@@ -817,14 +819,14 @@ public class WorkServiceImpl implements WorkService {
      * @return
      */
     public Object getRevisitDataTest() {
-        QueryWrapper<HomepageMessage> wrapper = new QueryWrapper<>();
+        QueryWrapper<Message> wrapper = new QueryWrapper<>();
         wrapper.eq("type", "DOCKER")
                 .eq("is_delete", "0")
                 .select("title")
                 .orderByAsc(true, "create_time");
-        List<HomepageMessage> homePageMessageList = messageMapper.selectList(wrapper);
+        List<Message> homePageMessageList = messageMapper.selectList(wrapper);
         List<String> titleList = new ArrayList<>();
-        for (HomepageMessage homepageMessage : homePageMessageList) {
+        for (Message homepageMessage : homePageMessageList) {
             titleList.add(homepageMessage.getTitle());
         }
         return titleList;

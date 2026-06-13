@@ -10,7 +10,7 @@ import com.aihoo.domain.doctor.model.entity.DoctorUser;
 import com.aihoo.api.doctor.app.service.DoctorUserService;
 import com.aihoo.api.doctor.app.service.HosVisitService;
 import com.aihoo.api.doctor.app.service.PrescriptionService;
-import com.aihoo.api.doctor.app.service.ProposalService;
+import com.aihoo.domain.im.service.ProposalService;
 import com.aihoo.api.doctor.common.config.properties.ChuanglanProperties;
 import com.aihoo.api.doctor.common.utils.chuanglan.ChuangLanFlashAuthUtil;
 import io.swagger.v3.oas.annotations.Operation;

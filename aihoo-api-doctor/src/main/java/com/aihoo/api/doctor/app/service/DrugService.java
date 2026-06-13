@@ -1,20 +1,5 @@
 package com.aihoo.api.doctor.app.service;
 
-import com.aihoo.common.PageParam;
-import com.aihoo.common.PageResult;
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.aihoo.api.doctor.app.controller.request.SearchDrugRequest;
-import com.aihoo.api.doctor.app.controller.vo.DrugVo;
-import com.aihoo.domain.hospital.model.entity.Drug;
-
-/**
- * <p>
- * 药品信息表 服务类
- * </p>
- *
- * @author mcp
- * @since 2020-09-19
- */
-public interface DrugService extends IService<Drug> {
-    PageResult<DrugVo> getPage(PageParam<Drug> pageParam, SearchDrugRequest request);
+/** 兼容垫片：委托到 com.aihoo.domain.hospital.service */
+public interface DrugService extends com.aihoo.domain.hospital.service.DrugService {
 }

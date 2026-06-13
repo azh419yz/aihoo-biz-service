@@ -16,5 +16,6 @@ public class MdtTeam implements Serializable {
     private String id;
 
     private String mdtName;
+    private String name;
     private Integer mdtId;
 }

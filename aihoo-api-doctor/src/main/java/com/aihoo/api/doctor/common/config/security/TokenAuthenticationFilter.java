@@ -6,9 +6,9 @@ import com.aihoo.common.BizResult;
 import com.aihoo.common.BizResultCode;
 import com.aihoo.redis.RedisConstant;
 import com.aihoo.redis.RedisService;
+import com.aihoo.security.AuthUtil;
+import com.aihoo.security.LoginUser;
 import com.aihoo.domain.doctor.model.entity.DoctorUser;
-import com.aihoo.api.doctor.common.utils.AuthUtil;
-import com.aihoo.api.doctor.common.utils.chuanglan.ChuangLanFlashAuthUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -85,13 +85,21 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             // 👇 兼容原有 AuthUtil（可选，建议逐步移除）
-            AuthUtil.setLoginUser(user);
+            AuthUtil.setLoginUser(toLoginUser(user));
             log.info("\n\n{}\n{}\n{}\n{}\n\n", request.getRequestURI(), user.getId(), accessToken, user);
             filterChain.doFilter(request, response);
         } finally {
             // 请求结束清除 ThreadLocal（兼容原逻辑）
             AuthUtil.clear();
         }
+    }
+
+    private LoginUser toLoginUser(DoctorUser user) {
+        LoginUser loginUser = new LoginUser();
+        loginUser.setId(user.getId());
+        loginUser.setName(user.getName());
+        loginUser.setType("DOCTOR");
+        return loginUser;
     }
 
     private void sendUnauthorizedResponse(HttpServletResponse response) throws IOException {

@@ -1,20 +1,8 @@
 package com.aihoo.api.doctor.app.controller.request;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-
-import java.util.List;
-
-@Data
-@Schema(description = "药房查询请求参数")
-public class SearchDrugstoreRequest {
-
-    @Schema(description = "药房名称", example = "北京朝阳大药房")
-    private String name;
-
-    @Schema(description = "所在省", example = "110000")
-    private String provincesCode;
-
-    @Schema(description = "药态CODE", example = "[1, 2, 3]")
-    private List<Integer> medicineStatusList;
+/**
+ * API 层垫片类：保留原 import 路径，指向 domain-hospital 的 SearchDrugstoreRequest
+ * 任务 #56 (K/N/O 规则) 时拆掉这个垫片
+ */
+public class SearchDrugstoreRequest extends com.aihoo.domain.hospital.dto.SearchDrugstoreRequest {
 }

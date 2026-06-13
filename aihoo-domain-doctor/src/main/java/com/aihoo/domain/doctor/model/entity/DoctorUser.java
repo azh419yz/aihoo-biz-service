@@ -73,6 +73,14 @@ public class DoctorUser implements Serializable {
     private String isIndex;
     private String indexImage;
     private String isOnline;
+    private String caNumber;
+    private String caNumberUrl;
+    private String caSignImage;
+    private String imNumber;
+    private String token;
+    private String beGoodAtText;
+    private String introductionText;
+    private String officeHolderName;
 
     @TableField(exist = false)
     private List<Object> doctorSetTimes;

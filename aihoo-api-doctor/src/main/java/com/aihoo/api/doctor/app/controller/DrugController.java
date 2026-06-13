@@ -52,7 +52,7 @@ public class DrugController extends BaseController {
             )
     )
     @GetMapping("/list")
-    public BizResult<PageResult<DrugVo>> list(@ParameterObject PageParam<Drug> pageParam,
+    public BizResult<Object> list(@ParameterObject PageParam<Drug> pageParam,
                                               @ParameterObject SearchDrugRequest request) {
         return BizResult.success(drugService.getPage(pageParam, request));
     }

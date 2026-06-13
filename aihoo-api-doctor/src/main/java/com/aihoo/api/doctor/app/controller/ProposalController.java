@@ -3,7 +3,7 @@ package com.aihoo.api.doctor.app.controller;
 
 import com.aihoo.common.JsonResult;
 import com.aihoo.domain.doctor.model.entity.DoctorUser;
-import com.aihoo.api.doctor.app.service.ProposalService;
+import com.aihoo.domain.im.service.ProposalService;
 import com.aihoo.api.doctor.common.utils.AuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

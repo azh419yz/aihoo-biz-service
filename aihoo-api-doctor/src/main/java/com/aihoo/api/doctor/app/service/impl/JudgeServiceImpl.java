@@ -234,7 +234,7 @@ public class JudgeServiceImpl implements JudgeService {
                 Date date = DateUtil.date();
                 Date lastDate = DateUtil.offsetSecond(date, Integer.parseInt(time));
                 String format = DateUtil.format(lastDate, "yyyy-MM-dd HH:mm:ss");
-                updateHosPrescription.setCheck_timeout(format);
+                updateHosPrescription.setCheckTimeout(format);
                 updateHosPrescription.setCheckStatus(StatusEnumUtil.MANUALAUDIT);
                 updateHosPrescription.setId(hosPrescription.getId());
                 hosPrescriptionMapper.updateById(updateHosPrescription);

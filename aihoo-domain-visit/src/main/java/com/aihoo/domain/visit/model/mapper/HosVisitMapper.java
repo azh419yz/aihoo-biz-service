@@ -1,9 +1,9 @@
 package com.aihoo.domain.visit.model.mapper;
 
-import com.aihoo.domain.visit.model.entity.Visit;
+import com.aihoo.domain.visit.model.entity.HosVisit;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface HosVisitMapper extends BaseMapper<Visit> {
+public interface HosVisitMapper extends BaseMapper<HosVisit> {
 }

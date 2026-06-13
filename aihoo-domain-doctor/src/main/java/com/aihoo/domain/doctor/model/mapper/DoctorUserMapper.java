@@ -11,4 +11,5 @@ import java.util.List;
 @Mapper
 public interface DoctorUserMapper extends BaseMapper<DoctorUser> {
     List<SearchTeamDoctorVo> getByTeamId(@Param("teamId") String teamId);
+    List<DoctorUser> findTeamDoctorByMdtOrderNum(@Param("isMain") String isMain, @Param("mdtOrderNum") String mdtOrderNum);
 }

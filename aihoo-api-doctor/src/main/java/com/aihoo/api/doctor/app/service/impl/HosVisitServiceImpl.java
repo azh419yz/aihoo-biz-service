@@ -485,7 +485,7 @@ public class HosVisitServiceImpl extends ServiceImpl<HosVisitMapper, HosVisit> i
             queryWrapper.eq("order_num", hosVisitVo.getOrderNum());
             queryWrapper.orderByDesc("create_time");
             List<ImMsg> msgList = imMsgMapper.selectList(queryWrapper);
-            Integer count = msgList.stream().filter(msg -> msg.getDoctorPeerReadStatus() == 0).toList().size();
+            Integer count = msgList.stream().filter(msg -> "0".equals(msg.getDoctorPeerReadStatus())).toList().size();
             jsonObject.put("msgPeerReadCount", count);
             jSONArray.add(jsonObject);
         }

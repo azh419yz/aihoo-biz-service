@@ -21,4 +21,5 @@ public class DoctorUserLog implements Serializable {
     private String osName;
     private String ipAddress;
     private String remark;
+    private String city;
 }

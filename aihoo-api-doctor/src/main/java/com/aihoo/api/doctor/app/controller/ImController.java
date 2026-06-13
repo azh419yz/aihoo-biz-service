@@ -142,8 +142,8 @@ public class ImController {
                                        @RequestParam String visitNo) {
         List<ImMsg> list = imMsgService.list(new LambdaQueryWrapper<ImMsg>()
                 .eq(ImMsg::getOrderNum, visitNo)
-                .eq(ImMsg::getDoctorPeerReadStatus, 0));
-        list.forEach(msg -> msg.setDoctorPeerReadStatus(1));
+                .eq(ImMsg::getDoctorPeerReadStatus, "0"));
+        list.forEach(msg -> msg.setDoctorPeerReadStatus("1"));
         imMsgService.updateBatchById(list);
         return BizResult.success(Boolean.TRUE);
     }

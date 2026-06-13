@@ -1,21 +1,8 @@
 package com.aihoo.api.doctor.app.controller.request;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
-
-@Data
-@Schema(description = "药品查询请求参数")
-public class SearchDrugRequest {
-
-    @Schema(description = "药房ID", example = "1")
-    @NotBlank(message = "药房ID不能为空")
-    private String drugstoreId;
-
-    @Schema(description = "药品名称", example = "砒霜")
-    private String name;
-
-    @Schema(description = "拼音首字母", example = "RS（人参）")
-    private String initial;
-
+/**
+ * API 层垫片类：保留原 import 路径，指向 domain-hospital 的 SearchDrugRequest
+ * 任务 #56 (K/N/O 规则) 时拆掉这个垫片
+ */
+public class SearchDrugRequest extends com.aihoo.domain.hospital.dto.SearchDrugRequest {
 }

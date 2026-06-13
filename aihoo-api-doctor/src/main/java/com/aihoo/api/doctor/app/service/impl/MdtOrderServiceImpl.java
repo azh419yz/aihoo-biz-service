@@ -160,7 +160,8 @@ public class MdtOrderServiceImpl implements MdtOrderService {
             log.debug("会诊我的账单接口：分页条件有误，默认展示前十条");
         }
         IPage<DoctorBalanceLog> iPage = new Page<>(page, limit);
-        List<DoctorBalanceLog> doctorBalanceLogList = doctorBalanceLogMapper.selectByDoctorId(Objects.requireNonNull(AuthUtil.getLoginUser()).getId(), "MDT%", beginOfMonth, endOfMonth, iPage);
+        IPage<DoctorBalanceLog> resultPage = doctorBalanceLogMapper.selectByDoctorId(Objects.requireNonNull(AuthUtil.getLoginUser()).getId(), "MDT%", beginOfMonth, endOfMonth, iPage);
+        List<DoctorBalanceLog> doctorBalanceLogList = resultPage.getRecords();
         List<Map<String, String>> resultList = Lists.newArrayList();
         for (DoctorBalanceLog doctorBalanceLog : doctorBalanceLogList) {
             Map<String, String> resultMap = Maps.newHashMap();
@@ -193,7 +194,7 @@ public class MdtOrderServiceImpl implements MdtOrderService {
                 StatusEnumUtil.CANCEL,
                 StatusEnumUtil.DONE
         );
-        List<MdtOrder> mdtOrders = mdtOrderMapper.selectListByDoctorIdCard(doctorUserId, statusList, null);
+        List<MdtOrder> mdtOrders = mdtOrderMapper.selectListByDoctorIdCard(doctorUserId, statusList, null).getRecords();
 
         if (null != mdtOrders && mdtOrders.size() > 0) {
             //PAY HAVE ILLNESS_EXAMINE_PASS CONSULTATION_CONFIRM CONSULTATION CONSULTATION_END CANCEL DONE
@@ -430,7 +431,8 @@ public class MdtOrderServiceImpl implements MdtOrderService {
             limit = NumberUtil.parseInt(limitStr);
         }
         Page<MdtOrder> mdtOrderPage = new Page<>(page, limit);
-        List<MdtOrder> mdtOrders = mdtOrderMapper.selectListByDoctorIdCard(doctorUserId, statusList, mdtOrderPage);
+        IPage<MdtOrder> resultPage = mdtOrderMapper.selectListByDoctorIdCard(doctorUserId, statusList, mdtOrderPage);
+        List<MdtOrder> mdtOrders = resultPage.getRecords();
         if (statusList.contains(StatusEnumUtil.ILLNESS_EXAMINE)) {
             if ("HAVE".equals(type)) {
                 mdtOrders = mdtOrders.stream()

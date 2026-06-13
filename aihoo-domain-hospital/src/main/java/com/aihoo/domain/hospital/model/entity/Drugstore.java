@@ -32,4 +32,5 @@ public class Drugstore implements Serializable {
     private String province;
     private String city;
     private String district;
+    private String image;
 }

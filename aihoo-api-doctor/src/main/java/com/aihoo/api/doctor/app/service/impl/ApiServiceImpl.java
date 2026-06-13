@@ -48,6 +48,7 @@ import com.aihoo.domain.visit.model.entity.HosRevisit;
 import com.aihoo.domain.prescription.model.entity.HosPrescriptionLog;
 import com.aihoo.domain.payment.model.entity.Order;
 import com.aihoo.domain.payment.model.entity.TbYlYppsxx;
+import com.aihoo.domain.payment.model.entity.YlYppsxx;
 
 /**
  * @program: aihoo-root
@@ -135,7 +136,7 @@ public class ApiServiceImpl implements ApiService {
                 serviceTheGoodsRemind(hosPrescription);
                 hosPrescriptionMapper.update(null, new UpdateWrapper<HosPrescription>().eq("order_num", prescripNo).set("status",status));
                 hosPreDrugOrderMapper.update(null, new UpdateWrapper<HosPreDrugOrder>().eq("order_num", prescripNo).set("status",status).setSql((("1".equals(prescripStatus) ? "shippend_start_time" : "shippend_end_time") + " = NOW()")));
-                ylYppsxxMapper.update(null,new UpdateWrapper<TbYlYppsxx>().set("PSZT","END".equals(status) ? 1 : 0 ).set("END".equals(status) ? "PSJSSJ" : "PSKSSJ" , "NOW()" ));
+                ylYppsxxMapper.update(null,new UpdateWrapper<YlYppsxx>().set("PSZT","END".equals(status) ? 1 : 0 ).set("END".equals(status) ? "PSJSSJ" : "PSKSSJ" , "NOW()" ));
 
                 Boolean x = "1".equals(prescripStatus) ? serviceDistributionRemind(hosPrescription) : serviceTheGoodsRemind(hosPrescription);
                 

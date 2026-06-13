@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.visit.model.mapper.HosRevisitImgMapper">
+    <resultMap id="BaseResultMap" type="com.aihoo.domain.visit.model.entity.HosRevisitImg">
+        <id property="id" column="id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="hosRevisitId" column="hos_revisit_id"/>
+        <result property="img" column="img"/>
+        <result property="index" column="index"/>
+    </resultMap>
+
+    <select id="selectByRevisitId" resultMap="BaseResultMap">
+        SELECT id, create_time, update_time, hos_revisit_id, img, `index`
+        FROM t_hos_revisit_img
+        WHERE hos_revisit_id = #{id,jdbcType=VARCHAR}
+    </select>
+</mapper>

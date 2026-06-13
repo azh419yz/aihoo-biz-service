@@ -1,0 +1,97 @@
+package com.aihoo.domain.patient.service.impl;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.aihoo.domain.patient.dto.HosSickVo;
+import com.aihoo.domain.visit.model.mapper.HosSickMapper;
+import com.aihoo.domain.patient.model.mapper.PatientUserMapper;
+import com.aihoo.domain.visit.model.entity.HosSick;
+import com.aihoo.domain.patient.model.entity.PatientUser;
+import com.aihoo.domain.patient.service.PatientService;
+import com.aihoo.security.AuthUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * @description: 患者
+ * @author: Mr.Li
+ * @create: 2020-09-29 14:01
+ **/
+@Service
+public class PatientServiceImpl extends ServiceImpl<PatientUserMapper, PatientUser> implements PatientService {
+    @Autowired
+    private PatientUserMapper patientUserMapper;
+    @Autowired
+    private HosSickMapper hosSickMapper;
+
+    /**
+     * 患者列表
+     *
+     * @return
+     */
+    @Override
+    public List<Map> patientList(Map<String, String> map) {
+        String sickName = map.get("sickName");
+        if (StringUtils.isEmpty(sickName)) {
+            sickName = "%%";
+        } else {
+            sickName = "%" + sickName + "%";
+        }
+        List<Map> result = hosSickMapper.selectByDoctorId(AuthUtil.getLoginUser().getId(), sickName);
+        return result;
+    }
+
+    /**
+     * 患者详情
+     *
+     * @param map
+     * @return
+     */
+    @Override
+    public Map patientMsg(Map<String, String> map) {
+        String id = map.get("id");
+        HosSick hosSick = hosSickMapper.selectById(id);
+        if (hosSick == null) {
+            return null;
+        }
+        String name = hosSick.getName();
+        String sex = hosSick.getSex();
+        String age = hosSick.getAge();
+        Map obj = new HashMap();
+        obj.put("sex", sex.equals("0") ? "女" : "男");
+        obj.put("name", name);
+        obj.put("age", age);
+        return obj;
+    }
+
+    @Override
+    public List<HosSickVo> patientList(String sickName) {
+        String loginUserId = AuthUtil.getLoginUserId();
+        if (StringUtils.isEmpty(sickName)) {
+            sickName = "%%";
+        } else {
+            sickName = "%" + sickName + "%";
+        }
+        List<Object> list = hosSickMapper.selectVoByDoctorId(loginUserId, sickName);
+        List<HosSickVo> result = new java.util.ArrayList<>();
+        for (Object h : list) {
+            HosSickVo v = new HosSickVo();
+            org.springframework.beans.BeanUtils.copyProperties(h, v);
+            result.add(v);
+        }
+        return result;
+    }
+
+    @Override
+    public HosSickVo patientMsg(String id) {
+        HosSick hosSick = hosSickMapper.selectById(id);
+        HosSickVo hosSickVo = new HosSickVo();
+        BeanUtils.copyProperties(hosSick, hosSickVo);
+        return hosSickVo;
+    }
+}

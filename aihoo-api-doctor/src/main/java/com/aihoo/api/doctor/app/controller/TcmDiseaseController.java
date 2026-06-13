@@ -43,7 +43,7 @@ public class TcmDiseaseController extends BaseController {
             )
     )
     @GetMapping("/list")
-    public BizResult<List<TcmDiseaseVo>> list(@Parameter TcmDiseaseListReq req) {
+    public BizResult<Object> list(@Parameter TcmDiseaseListReq req) {
         return BizResult.success(tcmDiseaseService.getDiseaseList(req));
     }
 }

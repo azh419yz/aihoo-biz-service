@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.visit.model.mapper.HosVisitVoMapper">
+
+    <resultMap id="hosVisitVoMap" type="com.aihoo.domain.visit.model.vo.HosVisitSelectVo">
+        <id property="id" column="id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="patientUserId" column="patient_user_id"/>
+        <result property="hosSickId" column="hos_sick_id"/>
+        <result property="name" column="name"/>
+        <result property="idCard" column="id_card"/>
+        <result property="sex" column="sex"/>
+        <result property="age" column="age"/>
+        <result property="mobile" column="mobile"/>
+        <result property="content" column="content"/>
+        <result property="type" column="type"/>
+        <result property="totalPrice" column="total_price"/>
+        <result property="payType" column="pay_type"/>
+        <result property="payTime" column="pay_time"/>
+        <result property="status" column="status"/>
+        <result property="msg" column="msg"/>
+        <result property="orderNum" column="order_num"/>
+        <result property="fiveStar" column="five_star"/>
+        <result property="doctorUserId" column="doctor_user_id"/>
+        <result property="doctorName" column="doctor_name"/>
+        <result property="doctorHeadImg" column="head_img"/>
+        <result property="hospitalName" column="hospital_name"/>
+        <result property="officeHolderName" column="office_holder_name"/>
+        <result property="departName" column="depart_name"/>
+        <result property="sickName" column="sick_name"/>
+        <result property="orderNumber" column="order_number"/>
+        <result property="firstVisit" column="first_visit"/>
+        <result property="doctorAdvice" column="doctor_advice"/>
+        <result property="haveTime" column="have_time"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="imUserId" column="im_user_id"/>
+        <result property="imUserSig" column="im_user_sig"/>
+    </resultMap>
+
+    <select id="patientList" parameterType="map" resultMap="hosVisitVoMap">
+        SELECT
+            t1.id, t1.create_time, t1.update_time, t1.patient_user_id, t1.hos_sick_id,
+            t1.content, t1.type, t1.total_price, t1.pay_type, t1.pay_time, t1.status, t1.msg, t1.order_num,
+            t1.five_star, t1.first_visit, t1.doctor_advice, t1.have_time, t1.start_time, t1.end_time,
+            t1.doctor_user_id, t2.name AS doctor_name, t2.head_img, t2.hospital_name,
+            t2.office_holder_name, t2.depart_name,
+            t3.name AS sick_name, t3.id_card, t3.sex, t3.age, t3.mobile,
+            t3.im_user_id, t3.im_user_sig
+        FROM t_hos_visit t1
+            LEFT JOIN t_doctor_user t2 ON t2.id = t1.doctor_user_id
+            LEFT JOIN t_hos_sick t3 ON t3.id = t1.hos_sick_id
+        WHERE 1=1
+        <if test="map.doctorUserId != null and map.doctorUserId != ''">
+            AND t1.doctor_user_id = #{map.doctorUserId}
+        </if>
+        <if test="map.status != null and map.status != ''">
+            AND t1.status = #{map.status}
+        </if>
+        ORDER BY t1.create_time DESC
+    </select>
+</mapper>

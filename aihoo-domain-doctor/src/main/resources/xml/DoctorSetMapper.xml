@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aihoo.domain.doctor.model.mapper.DoctorSetMapper">
+    <select id="selectDoctorUserId" resultType="com.aihoo.domain.doctor.model.entity.DoctorSet">
+        SELECT id, create_time, update_time, doctor_user_id, is_img, is_voice, is_video, is_revisit, img_price, voice_price, video_price, is_mdt, is_combination
+        FROM t_doctor_set WHERE doctor_user_id = #{doctorUserId,jdbcType=VARCHAR}
+    </select>
+</mapper>

@@ -1,20 +1,8 @@
 package com.aihoo.api.doctor.app.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.aihoo.domain.payment.model.entity.Proposal;
-
-
 /**
- * <p>
- * 反馈意见表 服务类
- * </p>
- *
- * @author zys
- * @since 2020-09-30
+ * 兼容垫片：所有方法都委托到 im 域的 com.aihoo.domain.im.service.ProposalService。
+ * 任务 #56 阶段将删除此垫片，所有调用方应改用 com.aihoo.domain.im.service.ProposalService。
  */
-public interface ProposalService extends IService<Proposal> {
-
-    boolean createProposal(String doctorUserId, String content, String type);
-
-    Long countByDoctorUserId(String doctorUserId);
+public interface ProposalService extends com.aihoo.domain.im.service.ProposalService {
 }
