@@ -117,7 +117,7 @@
     </select>
 
     <resultMap id="HosPreDrugOrderMap" type="com.aihoo.domain.prescription.model.entity.HosPreDrugOrder" extends="BaseMap">
-        <association property="hosPrescription" javaType="com.aihoo.domain.prescription.model.entity.HosPrescription">
+        <association property="hosPrescription" javaType="com.aihoo.domain.consultation.model.entity.HosPrescription">
             <id column="prescriptionId" jdbcType="BIGINT" property="id" />
             <result column="total_price" jdbcType="DECIMAL" property="totalPrice" />
             <result column="hoSickName" jdbcType="VARCHAR" property="name" />
@@ -166,7 +166,7 @@
         <result column="mobile" jdbcType="VARCHAR" property="mobile" />
         <result column="order_num" jdbcType="VARCHAR" property="orderNum" />
         <result column="status" jdbcType="VARCHAR" property="status" />
-        <association property="hosPrescription" javaType="com.aihoo.domain.prescription.model.entity.HosPrescription">
+        <association property="hosPrescription" javaType="com.aihoo.domain.consultation.model.entity.HosPrescription">
             <id column="prescriptionId" jdbcType="BIGINT" property="id" />
             <result column="type" jdbcType="VARCHAR" property="type" />
             <result column="visit_mdt_num" jdbcType="VARCHAR" property="visitMdtNum" />

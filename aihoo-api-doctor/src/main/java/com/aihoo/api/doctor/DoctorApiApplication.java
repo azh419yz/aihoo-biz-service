@@ -28,7 +28,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
         "com.aihoo.config",
         "com.aihoo.properties",
         "com.aihoo.security",
-        "com.aihoo.constant"
+        "com.aihoo.constant", "com.aihoo.oss"
 })
 @SecurityScheme(name = "accessToken", type = SecuritySchemeType.APIKEY, in = SecuritySchemeIn.HEADER)
 @OpenAPIDefinition(

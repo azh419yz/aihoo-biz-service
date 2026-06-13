@@ -2,9 +2,8 @@ package com.aihoo.domain.payment.model.mapper;
 
 import com.aihoo.domain.payment.model.entity.OfflineClinicCard;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
-/**
- * 医院就诊卡列表
- **/
+@Mapper
 public interface OfflineClinicCardMapper extends BaseMapper<OfflineClinicCard> {
 }

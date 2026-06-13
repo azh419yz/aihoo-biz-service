@@ -22,7 +22,7 @@ import com.aihoo.domain.visit.model.mapper.HosVisitImgMapper;
 import com.aihoo.domain.payment.model.mapper.OrderBackPayMapper;
 import com.aihoo.domain.payment.model.mapper.OrderMapper;
 
-import com.aihoo.domain.visit.model.dto.HosVisitBaseInfoDTO;
+import com.aihoo.domain.visit.dto.HosVisitBaseInfoDTO;
 import com.aihoo.api.doctor.app.service.HosSickHealthRecordsService;
 import com.aihoo.api.doctor.app.service.HosVisitService;
 import com.aihoo.api.doctor.app.service.IMService;
@@ -54,6 +54,7 @@ import com.aihoo.domain.sys.model.entity.TBase;
 import com.aihoo.domain.payment.model.entity.Order;
 import com.aihoo.domain.payment.model.entity.OrderBackPay;
 import com.aihoo.api.doctor.app.controller.vo.HosOrder;
+import com.aihoo.api.doctor.app.controller.vo.OrderResult;
 import com.aihoo.api.doctor.app.controller.vo.HosVisitHealthInfoVo;
 import com.aihoo.api.doctor.app.controller.vo.HosVisitBaseInfoVo;
 

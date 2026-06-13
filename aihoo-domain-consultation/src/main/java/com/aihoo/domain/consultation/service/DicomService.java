@@ -1,24 +1,11 @@
 package com.aihoo.domain.consultation.service;
 
+import com.aihoo.domain.consultation.model.entity.Dicom;
+import com.baomidou.mybatisplus.extension.service.IService;
 
-import com.aihoo.common.JsonResult;
-
-import java.util.Map;
-
-public interface DicomService {
-
-    void uploadMeiQing(String studyId, String bodypart, String examName, String studyModality, String checkTime);
-
-    void unzip(String studyId);
-
-    JsonResult mdtDicomList(Map<String, String> param);
-
-    JsonResult updateZip(Map<String, String> param);
-
-    JsonResult cancel(Map<String, String> param);
-
-    JsonResult modality(Map<String, String> param);
-
-    JsonResult saveDicom(Map<String, String> param);
-
+/**
+ * Stub service for consultation/Dicom.
+ * TODO: Real migration will populate this interface.
+ */
+public interface DicomService extends IService<Dicom> {
 }

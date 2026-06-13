@@ -58,7 +58,7 @@ public class ImMsgVo implements Serializable {
 
     @Schema(description = "消息类型 1:普通消息 2:系统消息")
     @TableField("msg_type")
-    private Integer msgType;
+    private String msgType;
 
     private List<ImMsgContentVo> msgContents;//消息内容
 }

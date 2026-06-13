@@ -1,14 +1,9 @@
 package com.aihoo.domain.visit.model.mapper;
 
-import com.aihoo.domain.visit.model.entity.HosRevisit;
+import com.aihoo.domain.visit.model.entity.Visit;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
-/**
- * @Classname RevisitOrderMapper
- * @Description hf
- * @Date 2020/9/22 20:55
- * @Created by ad
- */
-public interface RevisitOrderMapper extends BaseMapper<HosRevisit> {
-    HosRevisit getVisitDetails(String id);
+@Mapper
+public interface RevisitOrderMapper extends BaseMapper<Visit> {
 }

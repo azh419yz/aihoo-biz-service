@@ -1,8 +1,8 @@
 package com.aihoo.api.doctor.app.controller.vo;
 
-import com.aihoo.domain.prescription.model.dto.PrescriptionConsultationFeeDTO;
-import com.aihoo.domain.prescription.model.dto.PrescriptionDrugDTO;
-import com.aihoo.domain.prescription.model.dto.PrescriptionInstructionDTO;
+import com.aihoo.domain.prescription.dto.PrescriptionConsultationFeeDTO;
+import com.aihoo.domain.prescription.dto.PrescriptionDrugDTO;
+import com.aihoo.domain.prescription.dto.PrescriptionInstructionDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

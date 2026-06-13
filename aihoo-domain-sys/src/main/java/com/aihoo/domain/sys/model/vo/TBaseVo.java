@@ -1,21 +1,15 @@
 package com.aihoo.domain.sys.model.vo;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
+import java.io.Serializable;
 
 @Data
-public class TBaseVo {
-
+public class TBaseVo implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String id;
-
-    /**
-     * 内容
-     */
+    private String name;
+    private String key;
+    private String title;
     private String content;
-
-    /**
-     * 排序字段
-     */
-    @TableField("`index`")
     private String index;
 }

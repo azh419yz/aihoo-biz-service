@@ -33,6 +33,7 @@ public class SysUser implements Serializable {
      * Im通讯密码
      */
     private String userSig;
+    private String password;
 
     /**
      * 账号
@@ -42,7 +43,6 @@ public class SysUser implements Serializable {
     /**
      * 密码
      */
-    private String password;
 
     /**
      * 昵称

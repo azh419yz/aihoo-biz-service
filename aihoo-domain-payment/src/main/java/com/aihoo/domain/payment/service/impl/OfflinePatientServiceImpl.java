@@ -8,5 +8,4 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class OfflinePatientServiceImpl extends ServiceImpl<OfflinePatientMapper, OfflinePatient> implements OfflinePatientService {
-
 }

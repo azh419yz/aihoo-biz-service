@@ -31,22 +31,12 @@
         </dependency>
         <dependency>
             <groupId>com.aihoo</groupId>
-            <artifactId>aihoo-domain-sys</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.aihoo</groupId>
             <artifactId>aihoo-domain-doctor</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.aihoo</groupId>
             <artifactId>aihoo-domain-patient</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.aihoo</groupId>
-            <artifactId>aihoo-domain-consultation</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -57,7 +47,11 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.5.5</version>
         </dependency>
     </dependencies>
 

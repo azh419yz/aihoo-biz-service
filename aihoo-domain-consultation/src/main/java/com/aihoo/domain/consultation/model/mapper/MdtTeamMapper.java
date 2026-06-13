@@ -2,22 +2,16 @@ package com.aihoo.domain.consultation.model.mapper;
 
 import com.aihoo.domain.consultation.model.entity.MdtTeam;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
-/**
- * @Classname MdtTeamMapper
- * @Description hf
- * @Date 2020/12/24 17:38
- * @Created by ad
- */
+@Mapper
 public interface MdtTeamMapper extends BaseMapper<MdtTeam> {
-
-    MdtTeam selectMdtTeamList(String mdtTeamId);
-
-    List<MdtTeam> teamListByKeyword(String keyword, IPage<Map> teamPage);
-
-    List<MdtTeam> teamList(String mdtId, String tagId, IPage<Map> teamPage);
+    List<MdtTeam> teamListByKeyword(@Param("keyword") String keyword, IPage<Map> teamPage);
+    List<MdtTeam> teamList(@Param("mdtId") String mdtId, @Param("tagId") String tagId, IPage<Map> teamPage);
 }

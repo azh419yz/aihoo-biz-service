@@ -183,9 +183,9 @@ public class IMServiceImpl implements IMService {
                 imMsg.setToAccount(req.getToAccount());
                 imMsg.setErrorInfo(resp.getErrorInfo());
                 imMsg.setSendMsgResult("0");
-                imMsg.setLoadParam(req.getLoadParam());
+                imMsg.setLoadParam(req.getLoadParam() != null ? req.getLoadParam().toString() : null);
                 imMsg.setMsgSeq(resp.getMsgSeq().toString());
-                imMsg.setMsgType(req.getMsgType());
+                imMsg.setMsgType(String.valueOf(req.getMsgType()));
                 imMsg.setMsgTime(resp.getMsgTime().toString());
                 imMsg.setCreateTimeStr(LocalDateTime.now().toEpochSecond(ZoneOffset.of("+8")) + "");
                 boolean msg = imMsgService.save(imMsg);

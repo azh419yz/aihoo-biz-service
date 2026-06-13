@@ -1,11 +1,11 @@
 package com.aihoo.domain.payment.model.entity;
 
-import com.aihoo.excel.ExcelColumn;
+import lombok.Data;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
 
 import java.io.Serializable;
 
@@ -38,12 +38,10 @@ public class OfflineOder implements Serializable, Comparable<OfflineOder> {
     /**
      * 制单时间
      */
-    @ExcelColumn(value = "制单时间", col = 1)
     private String preparationTime;
     /**
      * 制单人
      */
-    @ExcelColumn(value = "制单人", col = 17)
     private String preparationName;
     /**
      * 企业id
@@ -52,37 +50,30 @@ public class OfflineOder implements Serializable, Comparable<OfflineOder> {
     /**
      * 企业名称
      */
-    @ExcelColumn(value = "所属企业", col = 2)
     private String companyName;
     /**
      * 客户id
      */
-    @ExcelColumn(value = "客户ID", col = 3)
     private String customerId;
     /**
      * 客户经理
      */
-    @ExcelColumn(value = "客户经理", col = 4)
     private String manager;
     /**
      * 客户经理手机号
      */
-    @ExcelColumn(value = "客户经理手机号", col = 5)
     private String managerPhone;
     /**
      * 客户姓名
      */
-    @ExcelColumn(value = "客户姓名", col = 6)
     private String managerName;
     /**
      * 就诊人
      */
-    @ExcelColumn(value = "就诊人", col = 7)
     private String name;
     /**
      * 就诊人手机号
      */
-    @ExcelColumn(value = "就诊人手机号", col = 9)
     private String phone;
     /**
      * 备用手机号
@@ -111,7 +102,6 @@ public class OfflineOder implements Serializable, Comparable<OfflineOder> {
     /**
      * 就诊日期
      */
-    @ExcelColumn(value = "就诊日期", col = 10)
     private String visitTime;
     /**
      * 就诊id
@@ -120,7 +110,6 @@ public class OfflineOder implements Serializable, Comparable<OfflineOder> {
     /**
      * 就诊项目名单
      */
-    @ExcelColumn(value = "就诊项目", col = 11)
     private String treatmentName;
     /**
      * 症状描述
@@ -129,22 +118,18 @@ public class OfflineOder implements Serializable, Comparable<OfflineOder> {
     /**
      * 就诊医院
      */
-    @ExcelColumn(value = "就诊医院", col = 12)
     private String hospitalName;
     /**
      * 就诊专科
      */
-    @ExcelColumn(value = "就诊科室", col = 13)
     private String doctorSpecialty;
     /**
      * 就诊医生
      */
-    @ExcelColumn(value = "就诊医生", col = 14)
     private String doctorName;
     /**
      * 费用
      */
-    @ExcelColumn(value = "费用结算", col = 15)
     private String price;
     /**
      * 手术项目
@@ -165,7 +150,6 @@ public class OfflineOder implements Serializable, Comparable<OfflineOder> {
     /**
      * 结算方式
      */
-    @ExcelColumn(value = "结算方式", col = 16)
     private String mode;
     /**
      * 手术时间
@@ -174,7 +158,6 @@ public class OfflineOder implements Serializable, Comparable<OfflineOder> {
     /**
      * 状态
      */
-    @ExcelColumn(value = "处理状态", col = 8)
     private String status;
     /**
      * 手术方案

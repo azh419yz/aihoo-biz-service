@@ -31,9 +31,9 @@ import com.aihoo.domain.sys.model.mapper.DictMapper;
 import com.aihoo.domain.sys.model.mapper.DiseaseMapper;
 import com.aihoo.domain.prescription.model.mapper.HosPrescriptionErrorMapper;
 
-import com.aihoo.domain.prescription.model.dto.PrescriptionConsultationFeeDTO;
-import com.aihoo.domain.prescription.model.dto.PrescriptionDrugDTO;
-import com.aihoo.domain.prescription.model.dto.PrescriptionInstructionDTO;
+import com.aihoo.domain.prescription.dto.PrescriptionConsultationFeeDTO;
+import com.aihoo.domain.prescription.dto.PrescriptionDrugDTO;
+import com.aihoo.domain.prescription.dto.PrescriptionInstructionDTO;
 
 import com.aihoo.constant.DictTypeEnum;
 import com.aihoo.util.StatusEnumUtil;

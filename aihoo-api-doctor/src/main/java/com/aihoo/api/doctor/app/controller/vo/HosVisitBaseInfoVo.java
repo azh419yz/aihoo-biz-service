@@ -1,6 +1,6 @@
 package com.aihoo.api.doctor.app.controller.vo;
 
-import com.aihoo.domain.visit.model.dto.HosVisitBaseInfoDTO;
+import com.aihoo.domain.visit.dto.HosVisitBaseInfoDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

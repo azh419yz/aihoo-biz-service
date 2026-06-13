@@ -20,7 +20,7 @@ import com.aihoo.domain.visit.model.mapper.HosVisitMapper;
 import com.aihoo.domain.prescription.model.mapper.HosPrescriptionMapper;
 import com.aihoo.domain.prescription.model.mapper.HosPrescriptionLogMapper;
 import com.aihoo.domain.payment.model.mapper.OrderMapper;
-import com.aihoo.domain.payment.model.mapper.TbYlYppsxxMapper;
+import com.aihoo.domain.payment.model.mapper.YlYppsxxMapper;
 
 import com.aihoo.api.doctor.app.service.ApiService;
 import com.aihoo.api.doctor.app.service.IMService;
@@ -79,11 +79,11 @@ public class ApiServiceImpl implements ApiService {
     @Resource
     private HosPreDrugOrderMapper hosPreDrugOrderMapper;
     @Resource
-    private PushMessageServiceImpl pushMessageServiceImpl;
+    private com.aihoo.domain.im.service.impl.PushMessageServiceImpl pushMessageServiceImpl;
     @Resource
     private HosPrescriptionLogMapper hosPrescriptionLogMapper;
     @Resource
-    private TbYlYppsxxMapper ylYppsxxMapper;
+    private YlYppsxxMapper ylYppsxxMapper;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -165,7 +165,7 @@ public class ApiServiceImpl implements ApiService {
     private boolean serviceDistributionRemind(HosPrescription hosPrescription) {
         try {
             pushMessageServiceImpl.insertPatient("药品配送", hosPrescription.getPatientUserId(), "快递正在配送中，感谢您的耐心等待，查看订单和物流信息",
-                    PushMessageType.messageType_DRUG, hosPrescription.getId(), "快递正在配送中，感谢您的耐心等待，查看订单和物流信息", "0");
+                    PushMessageType.messageType_DRUG, hosPrescription.getId(), "快递正在配送中，感谢您的耐心等待，查看订单和物流信息", "0", null);
         } catch (Exception e) {
             e.printStackTrace();
             return true;
@@ -182,7 +182,7 @@ public class ApiServiceImpl implements ApiService {
     private boolean serviceTheGoodsRemind(HosPrescription hosPrescription) {
         try {
             pushMessageServiceImpl.insertPatient("药品配送", hosPrescription.getPatientUserId(), "您购买的药品已签收。",
-                    PushMessageType.messageType_DRUG, hosPrescription.getId(), "您购买的药品已签收。", "0");
+                    PushMessageType.messageType_DRUG, hosPrescription.getId(), "您购买的药品已签收。", "0", null);
         } catch (Exception e) {
             e.printStackTrace();
             return true;
@@ -341,7 +341,7 @@ public class ApiServiceImpl implements ApiService {
             String otherId = hosPrescription.getId();
             String content = "该处方已审核通过，请在3日内购买，以免过期失效";
             String isPush = "0";
-            pushMessageServiceImpl.insertPatient(title, patientId, intro, messageType, otherId, content, isPush);
+            pushMessageServiceImpl.insertPatient(title, patientId, intro, messageType, otherId, content, isPush, null);
             log.info(SmsUtils.offlineSend("{$var}医生开具的处方已审核通过，请尽快完成支付。", hosPrescription.getMobile(), doctorUser.getName()));
         } catch (Exception e) {
             e.printStackTrace();
@@ -389,7 +389,7 @@ public class ApiServiceImpl implements ApiService {
             }
             String name = doctorUser.getName();
             pushMessageServiceImpl.insertPatient("处方审核：", hosPrescription.getPatientUserId(),"温馨提醒：" +  name + "医生开具的处方已审核通过，请尽快完成支付。药品物流费用根据物流公司标准结算，送药上门时您自行支付",
-                    PushMessageType.messageType_DRUG, hosPrescription.getId(), "该处方已审核通过，请在3日内购买，以免过期失效", "0");
+                    PushMessageType.messageType_DRUG, hosPrescription.getId(), "该处方已审核通过，请在3日内购买，以免过期失效", "0", null);
         } catch (Exception e) {
             e.printStackTrace();
         }

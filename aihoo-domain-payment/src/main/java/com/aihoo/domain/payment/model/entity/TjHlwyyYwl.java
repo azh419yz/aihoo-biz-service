@@ -1,105 +1,15 @@
 package com.aihoo.domain.payment.model.entity;
 
-import com.aihoo.excel.ExcelColumn;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-
 import java.io.Serializable;
-/**
- * <p>
- * 互联网医院业务量统计表
- * </p>
- *
- * @author lx
- * @since 2020-10-26
- */
+
 @Data
-@TableName("TB_TJ_HLWYY_YWL")
+@TableName("t_tjhlwyyywl")
 public class TjHlwyyYwl implements Serializable {
-
     private static final long serialVersionUID = 1L;
-
-    /**
-     * 医疗机构代码   复合主键，医保的医院11位代码。
-     */
-    @ExcelColumn(value = "医疗机构代码",col = 1)
-    private String yljgdm;
-
-    /**
-     * 科室编码    复合主键，该科室代码对应“医疗卫生机构业务科室分类与代码”（卫统）标准的代码
-     */
-    @ExcelColumn(value = "科室编码",col = 2)
-    private String ksbm;
-
-    /**
-     * 业务时间    复合主键，是指业务发生的日期，格式为YYYYMMDD
-     */
-    @ExcelColumn(value = "业务时间",col = 3)
-    private String ywsj;
-
-    /**
-     * 卫生机构（组织）代码
-     */
-    @ExcelColumn(value = "卫生机构（组织）代码",col = 4)
-    private String wsjgdm;
-
-    /**
-     * 健康档案调阅次数  患者复诊时，医生调阅患者健康档案次数。无该业务数据，填报“0”
-     */
-    @ExcelColumn(value = "健康档案调阅次数",col = 5)
-    private Integer jkdadycs;
-
-    /**
-     * 在线咨询人次   无该业务数据，填报“0”
-     */
-    @ExcelColumn(value = "在线咨询人次",col = 6)
-    private Integer zxzrc;
-
-    /**
-     * 在线预约人次   无该业务数据，填报“0”
-     */
-    @ExcelColumn(value = "在线预约人次",col = 7)
-    private Integer zxyyrc;
-
-    /**
-     * 在线挂号人次   无该业务数据，填报“0”
-     */
-    @ExcelColumn(value = "在线挂号人次",col = 8)
-    private Integer zxghrc;
-
-    /**
-     * 复诊诊疗人次  无该业务数据，填报“0
-     */
-    @ExcelColumn(value = "复诊诊疗人次",col = 9)
-    private Integer fzzlrc;
-
-    /**
-     * 电子处方张数   无该业务数据，填报“0”
-     */
-    @ExcelColumn(value = "电子处方张数",col = 10)
-    private Integer dzcfzs;
-
-    /**
-     * 检验申请单数    开展此项服务后必填。无该业务数据，填报“0”
-     */
-    @ExcelColumn(value = "检验申请单数",col = 11)
-    private Integer jysqds;
-
-    /**
-     * 检查申请单数   开展此项服务后必填。无该业务数据，填报“0”
-     */
-    @ExcelColumn(value = "检查申请单数",col = 12)
-    private Integer jcsqds;
-
-    /**
-     * 护理服务人次  开展此项服务后必填。无该业务数据，填报“0”
-     */
-    @ExcelColumn(value = "护理服务人次",col = 13)
-    private Integer hlfwrc;
-
-    /**
-     * 修改标志  1、正常；2.撤销
-     */
-    @ExcelColumn(value = "修改标志",col = 14)
-    private String xgbz;
+    @TableId(value = "id", type = IdType.AUTO)
+    private String id;
 }

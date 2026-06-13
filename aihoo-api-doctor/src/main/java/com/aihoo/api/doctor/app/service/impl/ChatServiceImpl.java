@@ -31,6 +31,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.aihoo.domain.doctor.model.mapper.CommonLanguageMapper;
+import com.aihoo.domain.doctor.model.entity.CommonLanguage;
 import com.aihoo.domain.im.model.mapper.PushMessageMapper;
 import com.aihoo.domain.sys.model.mapper.TBaseMapper;
 import com.aihoo.domain.doctor.model.entity.DoctorUser;
@@ -100,7 +101,7 @@ public class ChatServiceImpl implements ChatService {
     @Resource
     private IMService imService;
     @Resource
-    private PushMessageServiceImpl pushMessageServiceImpl;
+    private com.aihoo.domain.im.service.impl.PushMessageServiceImpl pushMessageServiceImpl;
     @Resource
     private DoctorUserMapper doctorUserMapper;
     @Resource
@@ -211,9 +212,9 @@ public class ChatServiceImpl implements ChatService {
             }
             String name = doctorUser.getName();
             pushMessageServiceImpl.insertPatient("在线复诊订单 ：", hosVisit.getPatientUserId(), name + "医生已经接受您的在线复诊邀请，请尽快前往查看与医生交流病情。",
-                    PushMessageType.messageType_IMAGE, hosVisit.getId(), name + "医生已经接受您的在线复诊邀请，请尽快前往查看与医生交流病情。", "0");
+                    PushMessageType.messageType_IMAGE, hosVisit.getId(), name + "医生已经接受您的在线复诊邀请，请尽快前往查看与医生交流病情。", "0", null);
 //            pushMessageServiceImpl.insertPatient("专家咨询订单 ：", hosVisit.getPatientUserId(), name + "医生已经接受您的专家咨询邀请，请尽快前往查看与医生交流病情。",
-//                    PushMessageType.messageType_IMAGE, hosVisit.getId(), name + "医生已经接受您的专家咨询邀请，请尽快前往查看与医生交流病情。", "0");
+//                    PushMessageType.messageType_IMAGE, hosVisit.getId(), name + "医生已经接受您的专家咨询邀请，请尽快前往查看与医生交流病情。", "0", null);
         } catch (Exception e) {
             e.printStackTrace();
             return true;
@@ -229,7 +230,7 @@ public class ChatServiceImpl implements ChatService {
         }
         String name = doctorUser.getName();
         pushMessageServiceImpl.insertPatient("在线复诊订单 ：", hosVisit.getPatientUserId(), name + "医生已经接受您的在线复诊邀请，请尽快前往查看与医生交流病情。",
-                PushMessageType.messageType_IMAGE, hosVisit.getId(), name + "医生已经接受您的在线复诊邀请，请尽快前往查看与医生交流病情。", "0");
+                PushMessageType.messageType_IMAGE, hosVisit.getId(), name + "医生已经接受您的在线复诊邀请，请尽快前往查看与医生交流病情。", "0", null);
     }
 
     /**
@@ -391,7 +392,7 @@ public class ChatServiceImpl implements ChatService {
 //                pushMessageServiceImpl.insertOne("问诊订单","您有订单"+hosVisit.getOrderNum()+"已完成",
 //                        PushMessageType.messageType_TEXT,hosVisit.getId(),null,"","0");
 //                pushMessageServiceImpl.insertPatient("问诊订单",hosVisit.getPatientUserId(),"您有订单"+hosVisit.getOrderNum()+"已完成",
-//                        PushMessageType.messageType_TEXT,hosVisit.getId(),null,"","0");
+//                        PushMessageType.messageType_TEXT,hosVisit.getId(),"", "0", null);
 //            }
             resultMap.put("msg", "在线复诊结束成功");
 //            resultMap.put("msg", "专家咨询结束成功");
@@ -438,7 +439,7 @@ public class ChatServiceImpl implements ChatService {
 //                pushMessageServiceImpl.insertOne("复诊订单已完成","您有订单"+hosRevisit.getOrderNum()+"已完成",
 //                        PushMessageType.messageType_TEXT,hosRevisit.getId(),null,"","0");
 //                pushMessageServiceImpl.insertPatient("复诊订单已完成",hosRevisit.getPatientUserId(),"您有订单"+hosRevisit.getOrderNum()+"已完成",
-//                        PushMessageType.messageType_TEXT,hosRevisit.getId(),null,"","0");
+//                        PushMessageType.messageType_TEXT,hosRevisit.getId(),"", "0", null);
 //            }
             resultMap.put("msg", "复诊结束成功");
             resultMap.put("is_succ", "success");

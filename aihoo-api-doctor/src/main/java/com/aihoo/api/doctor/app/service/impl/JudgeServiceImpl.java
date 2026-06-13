@@ -19,6 +19,7 @@ import com.aihoo.domain.consultation.model.mapper.MdtOrderMapper;
 import com.aihoo.domain.doctor.model.mapper.DoctorUserMapper;
 import com.aihoo.domain.prescription.model.mapper.HosPrescriptionDrugMapper;
 import com.aihoo.domain.prescription.model.mapper.HosPreDrugOrderMapper;
+import com.aihoo.domain.prescription.model.entity.HosPreDrugOrder;
 import com.aihoo.domain.prescription.model.mapper.HosPrescriptionDiseaseMapper;
 import com.aihoo.domain.visit.model.mapper.HosVisitMapper;
 import com.aihoo.domain.visit.model.mapper.HosRevisitMapper;
@@ -88,7 +89,7 @@ public class JudgeServiceImpl implements JudgeService {
     @Resource
     private HosPrescriptionMapper hosPrescriptionMapper;
     @Resource
-    private PushMessageServiceImpl pushMessageServiceImpl;
+    private com.aihoo.domain.im.service.impl.PushMessageServiceImpl pushMessageServiceImpl;
     @Resource
     private HosPrescriptionDrugMapper hosPrescriptionDrugMapper;
     @Resource

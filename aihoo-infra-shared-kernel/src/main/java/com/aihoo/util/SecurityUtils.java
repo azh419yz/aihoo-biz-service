@@ -63,4 +63,27 @@ public class SecurityUtils {
     public static String encryptPassword(String password) {
         return new Md5PasswordEncoder().encode(password);
     }
+
+    /**
+     * 获取当前登录用户对象（通过反射从 principal 提取，类型由调用方 cast）。
+     * 原 admin 的 SecurityUtils.getLoginUser() 返回 SysUser，本版本返回 Object。
+     * <p>阶段 4 整改：将各域 service 改为通过领域 service 获取登录用户，移除此方法。</p>
+     */
+    public static Object getLoginUser() {
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication == null || authentication.getPrincipal() == null) {
+                return null;
+            }
+            Object principal = authentication.getPrincipal();
+            // LoginUser 模式：principal.getSysUser() 返回 domain-sys 的 SysUser
+            try {
+                return principal.getClass().getMethod("getSysUser").invoke(principal);
+            } catch (NoSuchMethodException ignore) {
+                return principal;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

@@ -1,21 +1,11 @@
 package com.aihoo.domain.consultation.service;
 
-import com.aihoo.domain.consultation.model.entity.MdtBanner;
+import com.aihoo.domain.consultation.model.entity.MdtBannerMdt;
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import java.util.Map;
-
 /**
- * <p>
- * MDT 服务类
- * </p>
- *
- * @author mcp
- * @since 2020-09-21
+ * Stub service for consultation/MdtBannerMdt.
+ * TODO: Real migration will populate this interface.
  */
-public interface MdtBannerMdtService extends IService<MdtBanner> {
-
-    void deleteByMdtId(String id);
-
-    void saveMdtBanner(Map<String, Object> map);
+public interface MdtBannerMdtService extends IService<MdtBannerMdt> {
 }

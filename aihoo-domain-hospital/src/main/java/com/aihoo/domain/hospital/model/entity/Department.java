@@ -8,34 +8,21 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-/**
- * @Classname Department
- * @Description hf
- * @Date 2020/9/17 13:55
- * @Created by ad
- */
 @Data
 @TableName("t_department")
 public class Department implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id",type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private String id;
 
     private String createTime;
-
     private String updateTime;
-
     private String level;
-
     private String iconImg;
-
     private String code;
-
     private String name;
-
     private String parentCode;
-
     private String isShow;
 
     @TableField("`index`")

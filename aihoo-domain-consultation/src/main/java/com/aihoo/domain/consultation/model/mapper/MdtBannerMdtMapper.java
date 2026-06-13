@@ -1,14 +1,6 @@
 package com.aihoo.domain.consultation.model.mapper;
-
-import com.aihoo.domain.consultation.model.entity.MdtBanner;
+import com.aihoo.domain.consultation.model.entity.MdtBannerMdt;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-
-/**
- * @Classname DepartmentMapper
- * @Description hf
- * @Date 2020/9/17 13:58
- * @Created by ad
- */
-public interface MdtBannerMdtMapper extends BaseMapper<MdtBanner> {
-    void deleteByMdtId(String id);
-}
+import org.apache.ibatis.annotations.Mapper;
+@Mapper
+public interface MdtBannerMdtMapper extends BaseMapper<MdtBannerMdt> {}

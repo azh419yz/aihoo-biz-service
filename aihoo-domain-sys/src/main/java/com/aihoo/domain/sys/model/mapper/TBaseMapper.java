@@ -4,8 +4,10 @@ import com.aihoo.domain.sys.model.entity.TBase;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
- * 倒计时
+ * @Classname TBaseMapper
+ * @Description hf
+ * @Date 2020/9/29 17:11
+ * @Created by ad
  */
 public interface TBaseMapper extends BaseMapper<TBase> {
-    TBase selectByKey(String key);
 }

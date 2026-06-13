@@ -1,11 +1,11 @@
 package com.aihoo.domain.payment.model.entity;
 
-import com.aihoo.excel.ExcelColumn;
+import lombok.Data;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
 
 /**
  * 预约后的订单表
@@ -20,8 +20,6 @@ public class OfflineOderYue {
      * id
      */
     @TableId(value = "id", type = IdType.AUTO)
-    @ExcelColumn(value = "订单编号", col = 1)
-
     private String id;
     /**
      * 预约id
@@ -34,7 +32,6 @@ public class OfflineOderYue {
     /**
      * 就诊人
      */
-    @ExcelColumn(value = "就诊人", col = 2)
     private String name;
     /**
      * 证件类型id
@@ -43,12 +40,10 @@ public class OfflineOderYue {
     /**
      * 身份证号
      */
-    @ExcelColumn(value = "身份证号", col = 3)
     private String certificates;
     /**
      * 手机号
      */
-    @ExcelColumn(value = "手机号", col = 4)
     private String phone;
     /**
      * 医院id
@@ -57,7 +52,6 @@ public class OfflineOderYue {
     /**
      * 医院
      */
-    @ExcelColumn(value = "就诊医院", col = 5)
     private String districtName;
     /**
      * 挂号类型id
@@ -66,7 +60,6 @@ public class OfflineOderYue {
     /**
      * 挂号类型
      */
-    @ExcelColumn(value = "挂号类型", col = 6)
     private String groupName;
     /**
      * 科室id
@@ -75,7 +68,6 @@ public class OfflineOderYue {
     /**
      * 科室
      */
-    @ExcelColumn(value = "科室", col = 7)
     private String codeName;
     /**
      * 医生工号
@@ -84,12 +76,10 @@ public class OfflineOderYue {
     /**
      * 医生
      */
-    @ExcelColumn(value = "医生", col = 8)
     private String staffName;
     /**
      * 状态
      */
-    @ExcelColumn(value = "订单状态", col = 9)
     private String isStatus;
     /**
      * 状态标识
@@ -106,12 +96,10 @@ public class OfflineOderYue {
     /**
      * 费用参考
      */
-    @ExcelColumn(value = "费用参考", col = 11)
     private String money;
     /**
      * 就诊类型 1自费 2医保卡
      */
-    @ExcelColumn(value = "就诊类型", col = 12)
     private String treatmentType;
     /**
      *  就诊卡号
@@ -124,7 +112,6 @@ public class OfflineOderYue {
     /**
      * 下单时间
      */
-    @ExcelColumn(value = "下单时间", col = 13)
     private String decisionTime;
     /**
      * 预约时间段
@@ -158,8 +145,6 @@ public class OfflineOderYue {
      * 是否删除 0未删除 1已删除
      */
     private String isDelete;
-
-    @ExcelColumn(value = "就诊时间", col = 10)
     @TableField(exist = false)
     private String date;
 

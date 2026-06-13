@@ -1,5 +1,6 @@
 package com.aihoo.domain.prescription.model.entity;
 
+import com.aihoo.domain.consultation.model.entity.HosPrescription;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -31,12 +32,12 @@ public class HosPreDrugOrder implements Serializable {
      * 更新时间
      */
     private String updateTime;
-
+    
     /**
      * 配送开始时间
      */
     private String shippendStartTime;
-
+    
     /**
      * 配送结束时间
      */
