@@ -40,6 +40,8 @@ import com.aihoo.util.StatusEnumUtil;
 import com.aihoo.security.AuthUtil;
 import com.aihoo.util.OrderNoUtil;
 import com.aihoo.util.TencentImGroupUtil;
+import com.aihoo.domain.im.dto.ImSendGroupMsgRequest;
+import com.aihoo.domain.im.dto.ImSendGroupMsgRespVo;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -25,7 +25,7 @@ import com.aihoo.domain.doctor.model.mapper.DoctorUserMapper;
 
 
 import com.aihoo.security.AuthUtil;
-import com.aihoo.util.ReturnValues;
+import com.aihoo.util.ValueFormatUtils;
 import com.aihoo.util.UserAgentGetter;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
@@ -223,16 +223,16 @@ public class DoctorUserServiceImpl extends ServiceImpl<DoctorUserMapper, DoctorU
                 oldToken = doctorUser.getToken();
 
                 //转JSON格式
-                jsonObject.put("id", ReturnValues.toString(doctorUser.getId()));
-                jsonObject.put("createTime", ReturnValues.toString(doctorUser.getCreateTime()));
-                jsonObject.put("updateTime", ReturnValues.toString(doctorUser.getUpdateTime()));
-                jsonObject.put("mobile", ReturnValues.toString(CodeUtils.stringSixMask(doctorUser.getMobile())));
-                jsonObject.put("headImg", ReturnValues.toString(doctorUser.getHeadImg()));
-                jsonObject.put("name", ReturnValues.toString(doctorUser.getName()));
-                jsonObject.put("tag", ReturnValues.toString(doctorUser.getTag()));
-                jsonObject.put("hospitalName", ReturnValues.toString(doctorUser.getHospitalName()));
-                jsonObject.put("beGoodAtText", ReturnValues.toString(doctorUser.getBeGoodAtText()));
-                jsonObject.put("introductionText", ReturnValues.toString(doctorUser.getIntroductionText()));
+                jsonObject.put("id", ValueFormatUtils.toString(doctorUser.getId()));
+                jsonObject.put("createTime", ValueFormatUtils.toString(doctorUser.getCreateTime()));
+                jsonObject.put("updateTime", ValueFormatUtils.toString(doctorUser.getUpdateTime()));
+                jsonObject.put("mobile", ValueFormatUtils.toString(CodeUtils.stringSixMask(doctorUser.getMobile())));
+                jsonObject.put("headImg", ValueFormatUtils.toString(doctorUser.getHeadImg()));
+                jsonObject.put("name", ValueFormatUtils.toString(doctorUser.getName()));
+                jsonObject.put("tag", ValueFormatUtils.toString(doctorUser.getTag()));
+                jsonObject.put("hospitalName", ValueFormatUtils.toString(doctorUser.getHospitalName()));
+                jsonObject.put("beGoodAtText", ValueFormatUtils.toString(doctorUser.getBeGoodAtText()));
+                jsonObject.put("introductionText", ValueFormatUtils.toString(doctorUser.getIntroductionText()));
                 jsonObject.put("token", accessToken);
                 jsonObject.put("idCard", CodeUtils.idCardMask(doctorUser.getPapersNumbers()));
                 QueryWrapper<DoctorSet> doctorSetQueryWrapper = new QueryWrapper<>();
