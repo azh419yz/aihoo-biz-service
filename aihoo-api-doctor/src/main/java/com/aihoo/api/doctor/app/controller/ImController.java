@@ -9,8 +9,6 @@ import com.aihoo.domain.im.dto.ImSendGroupMsgRequest;
 import com.aihoo.domain.im.dto.ImWithdrawMsgRequest;
 import com.aihoo.api.doctor.app.controller.vo.ImMsgContentVo;
 import com.aihoo.api.doctor.app.controller.vo.ImMsgVo;
-import com.aihoo.api.doctor.app.controller.vo.im.ImRespVo;
-import com.aihoo.api.doctor.app.controller.vo.im.ImSendGroupMsgRespVo;
 import com.aihoo.domain.prescription.model.entity.HosPrescription;
 import com.aihoo.domain.im.model.entity.ImMsg;
 import com.aihoo.domain.im.model.entity.ImMsgContent;
