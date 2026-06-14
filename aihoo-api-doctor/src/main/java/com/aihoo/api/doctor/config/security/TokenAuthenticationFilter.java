@@ -1,4 +1,4 @@
-package com.aihoo.api.doctor.common.config.security;
+package com.aihoo.api.doctor.config.security;
 
 import com.aihoo.util.JSONUtil;
 import com.aihoo.util.StringUtil;
@@ -28,7 +28,7 @@ import java.util.Collections;
 import java.util.Objects;
 import com.aihoo.redis.RedisService;
 
-import static com.aihoo.api.doctor.common.config.security.PublicEndpoints.PUBLIC_URLS;
+import static com.aihoo.api.doctor.config.security.PublicEndpoints.PUBLIC_URLS;
 
 /**
  * Token based authentication filter.

@@ -1,4 +1,4 @@
-package com.aihoo.api.doctor.common.config.security;
+package com.aihoo.api.doctor.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +9,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static com.aihoo.api.doctor.common.config.security.PublicEndpoints.PUBLIC_URLS;
+import static com.aihoo.api.doctor.config.security.PublicEndpoints.PUBLIC_URLS;
 
 @Configuration
 @EnableWebSecurity

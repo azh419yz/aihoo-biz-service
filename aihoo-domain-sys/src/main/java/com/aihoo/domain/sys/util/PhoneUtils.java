@@ -1,4 +1,4 @@
-package com.aihoo.api.doctor.common.utils;
+package com.aihoo.domain.sys.util;
 
 import cn.hutool.http.HttpRequest;
 import com.aihoo.util.PropertyReader;

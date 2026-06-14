@@ -1,4 +1,4 @@
-package com.aihoo.api.doctor.common;
+package com.aihoo.api.doctor.controller;
 
 import com.aihoo.upload.UploadUtils;
 import org.springframework.web.bind.annotation.PostMapping;

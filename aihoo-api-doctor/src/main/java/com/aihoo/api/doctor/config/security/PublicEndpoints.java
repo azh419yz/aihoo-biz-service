@@ -1,4 +1,4 @@
-package com.aihoo.api.doctor.common.config.security;
+package com.aihoo.api.doctor.config.security;
 
 public class PublicEndpoints {
     public static final String[] PUBLIC_URLS = {

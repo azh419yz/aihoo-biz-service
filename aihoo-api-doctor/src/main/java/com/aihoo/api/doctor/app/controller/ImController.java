@@ -18,7 +18,7 @@ import com.aihoo.domain.prescription.service.HosPrescriptionService;
 import com.aihoo.domain.im.service.IMService;
 import com.aihoo.domain.im.service.ImMsgContentService;
 import com.aihoo.domain.im.service.ImMsgService;
-import com.aihoo.api.doctor.common.utils.AuthUtil;
+import com.aihoo.security.AuthUtil;
 import com.google.common.collect.Lists;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

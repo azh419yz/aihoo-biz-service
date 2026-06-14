@@ -12,7 +12,7 @@ import com.aihoo.api.doctor.app.controller.request.WxaCodeRequest;
 import com.aihoo.api.doctor.app.controller.vo.WxaCodeVo;
 import com.aihoo.domain.doctor.model.entity.DoctorUser;
 import com.aihoo.wechat.WeChatApiService;
-import com.aihoo.api.doctor.common.utils.AuthUtil;
+import com.aihoo.security.AuthUtil;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -37,10 +37,10 @@ public class WxaCodeController {
 	 */
 	@PostMapping("/generate")
 	public BizResult<WxaCodeVo> generateWxaCode() {
-		DoctorUser doctorUser = AuthUtil.getLoginUser();
+		String doctorId = AuthUtil.getLoginUserId();
 		WxaCodeRequest request = new WxaCodeRequest();
 		request.setPage("pages/index/index");
-		request.setScene("id="+doctorUser.getId());
+		request.setScene("id="+doctorId);
 		request.setAutoColor(true);
 		request.setIsHyaline(false);
 		request.setWidth(430);

@@ -4,7 +4,7 @@ package com.aihoo.api.doctor.app.controller;
 import com.aihoo.common.JsonResult;
 import com.aihoo.domain.doctor.model.entity.DoctorUser;
 import com.aihoo.domain.im.service.ProposalService;
-import com.aihoo.api.doctor.common.utils.AuthUtil;
+import com.aihoo.security.AuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,11 +45,11 @@ public class ProposalController {
             if (null == map.get("content") || "".equals(map.get("content"))) {
                 return JsonResult.error("请先填写反馈内容!");
             }
-            DoctorUser doctorUser = AuthUtil.getLoginUser();
-            if (null == doctorUser) {
+            String doctorUserId = AuthUtil.getLoginUserId();
+            if (null == doctorUserId) {
                 return JsonResult.error("请您登陆后操作!");
             }
-            proposalService.createProposal(doctorUser.getId(), (String) map.get("content"), "DOCKER");
+            proposalService.createProposal(doctorUserId, (String) map.get("content"), "DOCKER");
             return JsonResult.ok("感谢您的反馈!");
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,4 +1,4 @@
-package com.aihoo.api.doctor.common.alicloud;
+package com.aihoo.domain.doctor.component;
 
 import com.aihoo.properties.AliCloudProperties;
 import com.alibaba.fastjson2.JSON;
@@ -33,10 +33,6 @@ public class AliCloudComponent {
 
     /**
      * 要素核验
-     *
-     * @param name   姓名
-     * @param idCard 身份证号
-     * @return 是否一致
      */
     public boolean verifyIdentity(String name, String idCard) {
         Config config = getConfig();
@@ -67,10 +63,6 @@ public class AliCloudComponent {
 
     /**
      * 发送短信
-     *
-     * @param phoneNumber   手机号
-     * @param templateParam 模板参数
-     * @return 是否发送成功
      */
     public boolean sendSms(String phoneNumber, String templateParam) {
         Config config = getConfig();

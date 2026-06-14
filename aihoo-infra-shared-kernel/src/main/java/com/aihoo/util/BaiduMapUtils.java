@@ -1,9 +1,10 @@
-package com.aihoo.api.doctor.common.utils;
+package com.aihoo.util;
 
-
-
+import com.aihoo.properties.BaiduProperties;
 import com.alibaba.fastjson2.JSONObject;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.net.URL;
@@ -12,26 +13,23 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 百度地图地理编码/逆编码工具
+ * 凭据从 {@link BaiduProperties} 注入，禁止硬编码。
+ */
+@Component
+@RequiredArgsConstructor
+public class BaiduMapUtils {
 
-public class MapBaiduUtils {
+    private final BaiduProperties baiduProperties;
 
-    private static final String BAIDU_APP_KEY = "tDVAfuCUqVcL8Xf44vpFLLdXZBpIK2hT";
-
-    /**
-     * 返回输入地址的经纬度坐标 key lng(经度),lat(纬度)
-     */
-    public static Map<String, String> getLatitude(String address) {
+    public Map<String, String> getLatitude(String address) {
         try {
-            // 将地址转换成utf-8的16进制
             address = URLEncoder.encode(address, "UTF-8");
-            // 如果有代理，要设置代理，没代理可注释
-            // System.setProperty("http.proxyHost","192.168.172.23");
-            // System.setProperty("http.proxyPort","3209");
 
             URL resjson = new URL("http://api.map.baidu.com/geocoder?address="
-                    + address + "&output=json&key=" + BAIDU_APP_KEY);
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    resjson.openStream()));
+                    + address + "&output=json&key=" + baiduProperties.getAppKey());
+            BufferedReader in = new BufferedReader(new InputStreamReader(resjson.openStream()));
             String res;
             StringBuilder sb = new StringBuilder("");
             while ((res = in.readLine()) != null) {
@@ -39,8 +37,7 @@ public class MapBaiduUtils {
             }
             in.close();
             String str = sb.toString();
-            System.out.println("return json:" + str);
-            if(str!=null&&!str.equals("")){
+            if (str != null && !str.equals("")) {
                 Map<String, String> map = null;
                 int lngStart = str.indexOf("lng\":");
                 int lngEnd = str.indexOf(",\"lat");
@@ -60,32 +57,15 @@ public class MapBaiduUtils {
         return null;
     }
 
-
-
-    /***
-     * 获取地理位置
-     *
-     * @param lat
-     * 纬度
-     * @param lng
-     * 经度
-     * @return JSON 地理位置
-     * @throws IOException
-     */
-    public static JSONObject getLocation(String lat, String lng) throws Exception {
-        String location = lat+","+lng;
-        URL url = new URL("http://api.map.baidu.com/geocoder?ak=" + BAIDU_APP_KEY
-                + "&callback=renderReverse&location="+location+"&output=json");
+    public JSONObject getLocation(String lat, String lng) throws Exception {
+        String location = lat + "," + lng;
+        URL url = new URL("http://api.map.baidu.com/geocoder?ak=" + baiduProperties.getAppKey()
+                + "&callback=renderReverse&location=" + location + "&output=json");
         URLConnection connection = url.openConnection();
-        /*
-         * 然后把连接设为输出模式。URLConnection通常作为输入来使用，比如下载一个Web页。
-         * 通过把URLConnection设为输出，你可以把数据向你个Web页传送。下面是如何做：
-         */
         connection.setDoOutput(true);
         OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream(), "utf-8");
         out.flush();
         out.close();
-        // 一旦发送成功，用以下方法就可以得到服务器的回应：
         String res;
         InputStream l_urlStream;
         l_urlStream = connection.getInputStream();
@@ -110,7 +90,7 @@ public class MapBaiduUtils {
                 String address = str.substring(addressStart + 20, addressEnd);
                 String province = str.substring(provinceStart + 11, provinceEnd);
                 String city = str.substring(cityStart + 7, cityEnd);
-                String district = str.substring(districtStart +11, districtEnd);
+                String district = str.substring(districtStart + 11, districtEnd);
                 jsonObject.put("address", address);
                 jsonObject.put("province", province);
                 jsonObject.put("city", city);
@@ -119,17 +99,5 @@ public class MapBaiduUtils {
             }
         }
         return jsonObject;
-    }
-
-
-    public static void main(String args[]) throws Exception{
-
-//        Map<String, String> map = MapBaidu.getLatitude("安徽池州市贵池区金碧秋浦34号");
-//        if (null != map) {
-//            System.out.println(map.get("lng"));
-//            System.out.println(map.get("lat"));
-//        }
-//        JSONObject jsonObject = MapBaidu.getLocation(30.667136+"",117.473191+"");
-//        System.out.println(jsonObject);
     }
 }

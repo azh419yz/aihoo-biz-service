@@ -1,9 +1,9 @@
-package com.aihoo.api.doctor.common.utils;
+package com.aihoo.util;
 
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -13,17 +13,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 通用 XML 解析工具
+ */
+public class XmlUtils {
 
-public class XMLUtils {
-
-    /**
-     * 解析xml,返回第一级元素键值对。如果第一级元素有子节点，则此节点的值是子节点的xml数据。
-     *
-     * @param strxml
-     * @return
-     * @throws JDOMException
-     * @throws IOException
-     */
     public static Map doXMLParse(String strxml) throws JDOMException, IOException {
         strxml = strxml.replaceFirst("encoding=\".*\"", "encoding=\"UTF-8\"");
 
@@ -47,24 +41,17 @@ public class XMLUtils {
             if (children.isEmpty()) {
                 v = e.getTextNormalize();
             } else {
-                v = XMLUtils.getChildrenText(children);
+                v = XmlUtils.getChildrenText(children);
             }
 
             m.put(k, v);
         }
 
-        //关闭流
         in.close();
 
         return m;
     }
 
-    /**
-     * 获取子结点的xml
-     *
-     * @param children
-     * @return String
-     */
     public static String getChildrenText(List children) {
         StringBuffer sb = new StringBuffer();
         if (!children.isEmpty()) {
@@ -76,7 +63,7 @@ public class XMLUtils {
                 List list = e.getChildren();
                 sb.append("<" + name + ">");
                 if (!list.isEmpty()) {
-                    sb.append(XMLUtils.getChildrenText(list));
+                    sb.append(XmlUtils.getChildrenText(list));
                 }
                 sb.append(value);
                 sb.append("</" + name + ">");
@@ -85,6 +72,4 @@ public class XMLUtils {
 
         return sb.toString();
     }
-
-
 }

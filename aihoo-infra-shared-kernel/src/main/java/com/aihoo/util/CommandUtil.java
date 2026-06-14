@@ -1,4 +1,4 @@
-package com.aihoo.api.doctor.common.utils;
+package com.aihoo.util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,18 +6,6 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class CommandUtil {
-    public static void main(String[] args) {
-        try {
-            String path = run("find / -iname PatientApprove.sh");
-            String res = run("sh " + path.split("\n"));
-            System.out.println(path);
-            System.out.println(res);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
     public static String run(String command) throws IOException {
         Scanner input = null;
         String result = "";
@@ -25,7 +13,6 @@ public class CommandUtil {
         try {
             process = Runtime.getRuntime().exec(command);
             try {
-                //等待命令执行完成
                 process.waitFor(10, TimeUnit.SECONDS);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -35,7 +22,6 @@ public class CommandUtil {
             while (input.hasNextLine()) {
                 result += input.nextLine() + "\n";
             }
-            // result = command + "\n" + result; //加上命令本身，打印出来
         } finally {
             if (input != null) {
                 input.close();
@@ -54,7 +40,6 @@ public class CommandUtil {
         try {
             process = Runtime.getRuntime().exec(command);
             try {
-                //等待命令执行完成
                 process.waitFor(10, TimeUnit.SECONDS);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -64,7 +49,7 @@ public class CommandUtil {
             while (input.hasNextLine()) {
                 result += input.nextLine() + "\n";
             }
-            result = command + "\n" + result; //加上命令本身，打印出来
+            result = command + "\n" + result;
         } finally {
             if (input != null) {
                 input.close();

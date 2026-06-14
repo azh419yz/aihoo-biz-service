@@ -19,7 +19,7 @@ import com.aihoo.domain.visit.model.mapper.HosVisitMapper;
 import com.aihoo.domain.visit.model.entity.HosVisit;
 import com.aihoo.domain.visit.service.HosVisitService;
 import com.aihoo.domain.im.service.IMService;
-import com.aihoo.api.doctor.common.utils.JacksonHelper;
+import com.aihoo.util.JSONUtil;
 
 import io.swagger.v3.oas.annotations.Hidden;
 
@@ -209,7 +209,7 @@ public class HosVisitController {
             HosVisit hosVisit = hosVisitMapper.selectById("49");
             String toJSONString = JSON.toJSONString(hosVisit);
             System.out.println(toJSONString);
-            Map<String, Object> stringObjectMap = JacksonHelper.jsonToMap("{\"Desc\":\"\",\"Data\":\"{\"businessID\":\"notify\",\"title\":\"通知消息名称\",\"linkTitle\":\"详情\",\"version\":4}\",\"Ext\":\"\",\"Sound\":\"\"}");
+            Map<String, Object> stringObjectMap = JSONUtil.parseObject("{\"Desc\":\"\",\"Data\":\"{\"businessID\":\"notify\",\"title\":\"通知消息名称\",\"linkTitle\":\"详情\",\"version\":4}\",\"Ext\":\"\",\"Sound\":\"\"}", Map.class);
             System.out.println(stringObjectMap);
             String data = stringObjectMap.get("Data").toString();
 

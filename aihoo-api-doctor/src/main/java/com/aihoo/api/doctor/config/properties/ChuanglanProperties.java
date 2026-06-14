@@ -1,4 +1,4 @@
-package com.aihoo.api.doctor.common.config.properties;
+package com.aihoo.api.doctor.config.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

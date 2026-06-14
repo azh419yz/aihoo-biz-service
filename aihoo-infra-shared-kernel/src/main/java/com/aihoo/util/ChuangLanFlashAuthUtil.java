@@ -1,4 +1,4 @@
-package com.aihoo.api.doctor.common.utils.chuanglan;
+package com.aihoo.util;
 
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -17,13 +17,6 @@ import org.slf4j.LoggerFactory;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-
-/**
- * 创蓝云智闪验服务端接口工具类
- *
- * @author wyz
- * @since 2026/3/4 10:47
- */
 public class ChuangLanFlashAuthUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(ChuangLanFlashAuthUtil.class);
@@ -38,15 +31,6 @@ public class ChuangLanFlashAuthUtil {
     public static final String ENCRYPT_TYPE_AES = "0";
     public static final String ENCRYPT_TYPE_RSA = "1";
 
-
-    /**
-     * App端  置换手机号
-     *
-     * @param token       运营商token
-     * @param clientIp    客户端IP (可选，反欺诈用)
-     * @param encryptType 加密类型 "0"(AES) 或 "1"(RSA)
-     * @return 解密后的手机号或原始响应
-     */
     public static Map<String, Object> queryMobileApp(String token, String clientIp, String encryptType
             , String appId, String appKey) {
         Map<String, String> params = Maps.newHashMap();
@@ -55,20 +39,12 @@ public class ChuangLanFlashAuthUtil {
         if (StringUtils.isNotEmpty(clientIp)) params.put("clientIp", clientIp);
         if (StringUtils.isNotEmpty(encryptType)) params.put("encryptType", encryptType);
 
-        // 生成签名并加入参数
-        params.put("sign", SignUtils.getSign(params, appKey));
+        params.put("sign", ChuangLanSignUtils.getSign(params, appKey));
 
         String responseJson = sendPostRequest(URL_APP_MOBILE_QUERY, params);
         return processResponse(responseJson, encryptType, appKey);
     }
 
-    /**
-     * 2. Web端 置换手机号
-     *
-     * @param token       运营商token
-     * @param clientIp    客户端IP (可选)
-     * @param encryptType 加密类型 "0"(AES) 或 "1"(RSA)
-     */
     public static Map<String, Object> queryMobileWeb(String token, String clientIp, String encryptType
             , String appId, String appKey) {
         Map<String, String> params = Maps.newHashMap();
@@ -77,25 +53,19 @@ public class ChuangLanFlashAuthUtil {
         if (clientIp != null && !clientIp.isEmpty()) params.put("clientIp", clientIp);
         if (encryptType != null) params.put("encryptType", encryptType);
 
-        params.put("sign", SignUtils.getSign(params, appKey));
+        params.put("sign", ChuangLanSignUtils.getSign(params, appKey));
 
         String responseJson = sendPostRequest(URL_WEB_MOBILE_QUERY, params);
         return processResponse(responseJson, encryptType, appKey);
     }
 
-    /**
-     * 3. App端 本机号码校验
-     *
-     * @param token  运营商token
-     * @param mobile 待校验的手机号
-     */
     public static Map<String, Object> validateMobileApp(String token, String mobile, String appId, String appKey) {
         Map<String, String> params = Maps.newHashMap();
         params.put("appId", appId);
         params.put("token", token);
         params.put("mobile", mobile);
 
-        params.put("sign", SignUtils.getSign(params, appKey));
+        params.put("sign", ChuangLanSignUtils.getSign(params, appKey));
 
         String responseJson = sendPostRequest(URL_APP_MOBILE_VALIDATE, params);
         JSONObject json = JSONUtil.parseObj(responseJson);
@@ -105,25 +75,19 @@ public class ChuangLanFlashAuthUtil {
         result.put("message", json.getStr("message"));
         if ("200000".equals(json.getStr("code"))) {
             JSONObject data = json.getJSONObject("data");
-            result.put("isVerify", data.getStr("isVerify")); // "1"是本机，"0"非本机
+            result.put("isVerify", data.getStr("isVerify"));
             result.put("tradeNo", data.getStr("tradeNo"));
         }
         return result;
     }
 
-    /**
-     * 4. Web端 本机号码校验
-     *
-     * @param token  运营商token
-     * @param mobile 待校验的手机号
-     */
     public static Map<String, Object> validateMobileWeb(String token, String mobile, String appId, String appKey) {
         Map<String, String> params = Maps.newHashMap();
         params.put("appId", appId);
         params.put("token", token);
         params.put("mobile", mobile);
 
-        params.put("sign", SignUtils.getSign(params, appKey));
+        params.put("sign", ChuangLanSignUtils.getSign(params, appKey));
 
         String responseJson = sendPostRequest(URL_WEB_MOBILE_VALIDATE, params);
         JSONObject json = JSONUtil.parseObj(responseJson);
@@ -139,10 +103,6 @@ public class ChuangLanFlashAuthUtil {
         return result;
     }
 
-
-    /**
-     * 处理置换手机号的响应，包含解密逻辑
-     */
     private static Map<String, Object> processResponse(String responseJson, String encryptType, String appKey) {
         Map<String, Object> result = new HashMap<>();
         if (responseJson == null) {
@@ -208,19 +168,14 @@ public class ChuangLanFlashAuthUtil {
         }
     }
 
-    /**
-     * 解密手机号
-     */
     private static String decryptMobile(String hexCipherText, String encryptType, String appKey) throws Exception {
         logger.info("开始解析:{},{},{}", hexCipherText, encryptType, appKey);
         if (StringUtils.isEmpty(encryptType) || "0".equals(encryptType)) {
-            String key = MD5.getMD5Code(appKey);
-            return AESUtils.decrypt(hexCipherText, key.substring(0, 16), key.substring(16));
+            String key = ChuangLanMd5.getMD5Code(appKey);
+            return ChuangLanAesUtils.decrypt(hexCipherText, key.substring(0, 16), key.substring(16));
         } else if ("1".equals(encryptType)) {
-            return RSAUtils.decryptByPrivateKeyForLongStr(hexCipherText, privateKey);
+            return ChuangLanRsaUtils.decryptByPrivateKeyForLongStr(hexCipherText, privateKey);
         }
         return "";
     }
 }
-
-
