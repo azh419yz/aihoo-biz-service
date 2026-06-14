@@ -19,7 +19,7 @@ spring:
       stat-view-servlet:
         url-pattern: /druid/*
         reset-enable: true
-      aop-patterns: com.aihoo.api.doctor.app.service.impl.*
+      aop-patterns: com.aihoo.domain.*.service.impl.*
   jackson:
     time-zone: Asia/Shanghai
     date-format: yyyy-MM-dd HH:mm:ss
@@ -37,7 +37,7 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath:xml/*Mapper.xml
-  typeAliasesPackage: com.aihoo.api.doctor.app.model.*
+  typeAliasesPackage: com.aihoo.domain.*.model.entity
   global-config:
     id-type: auto
     field-strategy: 1
