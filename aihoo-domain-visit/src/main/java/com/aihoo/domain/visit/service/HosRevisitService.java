@@ -1,6 +1,7 @@
 package com.aihoo.domain.visit.service;
 
 import com.aihoo.domain.visit.model.entity.HosRevisit;
+import com.aihoo.domain.hospital.model.entity.Drug;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public interface HosRevisitService extends IService<HosRevisit> {
     String writeRevisitResult(Map<String, String> map);
     Map revisitResult(Map<String, String> map);
     boolean commitPrescription(String id);
-    Object getOneDrug(Map<String, String> map);
+    Drug getOneDrug(Map<String, String> map);
     Map<String, Object> getPrescription(Map<String, String> map);
     Object getPrescriptionList(Map<String, String> map);
     Object getArchives(String id);

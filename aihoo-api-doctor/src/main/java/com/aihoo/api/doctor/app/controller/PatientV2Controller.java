@@ -1,8 +1,8 @@
 package com.aihoo.api.doctor.app.controller;
 
 import com.aihoo.common.BizResult;
-import com.aihoo.api.doctor.app.controller.vo.HosSickVo;
-import com.aihoo.api.doctor.app.service.PatientService;
+import com.aihoo.domain.patient.dto.HosSickVo;
+import com.aihoo.domain.patient.service.PatientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

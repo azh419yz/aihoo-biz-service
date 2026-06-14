@@ -13,7 +13,7 @@ import com.aihoo.properties.TencentProperties;
 import com.aihoo.util.ImUtils;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONException;
-import com.aihoo.api.doctor.app.controller.request.ImSendGroupMsgRequest;
+import com.aihoo.domain.im.dto.ImSendGroupMsgRequest;
 import com.aihoo.api.doctor.app.controller.vo.im.*;
 import com.aihoo.api.doctor.common.constant.ImRequestUrlConstant;
 import lombok.RequiredArgsConstructor;

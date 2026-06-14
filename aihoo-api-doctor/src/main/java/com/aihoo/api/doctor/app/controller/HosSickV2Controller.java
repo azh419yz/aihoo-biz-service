@@ -1,8 +1,8 @@
 package com.aihoo.api.doctor.app.controller;
 
 import com.aihoo.common.BizResult;
-import com.aihoo.api.doctor.app.controller.vo.HosSickVo;
-import com.aihoo.api.doctor.app.service.HosSickService;
+import com.aihoo.domain.patient.dto.HosSickVo;
+import com.aihoo.domain.visit.service.HosSickService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

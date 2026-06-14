@@ -3,8 +3,8 @@ package com.aihoo.api.doctor.app.controller;
 
 import com.aihoo.common.JsonResult;
 import com.alibaba.fastjson2.JSONObject;
-import com.aihoo.api.doctor.app.controller.vo.ChangeBalance;
-import com.aihoo.api.doctor.app.service.WorkService;
+import com.aihoo.domain.doctor.dto.ChangeBalance;
+import com.aihoo.domain.doctor.service.WorkService;
 import com.ibm.icu.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;

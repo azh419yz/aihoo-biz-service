@@ -2,9 +2,9 @@ package com.aihoo.api.doctor.app.controller;
 
 import com.aihoo.common.BizResult;
 import com.aihoo.api.doctor.app.controller.request.SaveDoctorDirectoryRequest;
-import com.aihoo.api.doctor.app.controller.vo.DoctorDirectoryVo;
+import com.aihoo.domain.doctor.dto.DoctorDirectoryVo;
 import com.aihoo.domain.doctor.model.entity.DoctorDirectory;
-import com.aihoo.api.doctor.app.service.DoctorDirectoryService;
+import com.aihoo.domain.doctor.service.DoctorDirectoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

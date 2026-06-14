@@ -1,6 +1,6 @@
-package com.aihoo.api.doctor.common.utils;
+package com.aihoo.domain.visit.util;
 
-import com.aihoo.api.doctor.app.controller.vo.VisitStatusVo;
+import com.aihoo.domain.visit.dto.VisitStatusVo;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 

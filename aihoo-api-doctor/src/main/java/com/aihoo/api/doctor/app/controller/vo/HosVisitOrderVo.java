@@ -1,6 +1,7 @@
 package com.aihoo.api.doctor.app.controller.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.aihoo.domain.visit.dto.VisitStatusVo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

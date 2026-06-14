@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.aihoo.common.JsonResult;
 import com.aihoo.domain.sys.model.entity.Disease;
 import com.aihoo.domain.hospital.model.entity.Drug;
-import com.aihoo.api.doctor.app.service.PrescriptionService;
+import com.aihoo.domain.prescription.service.PrescriptionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

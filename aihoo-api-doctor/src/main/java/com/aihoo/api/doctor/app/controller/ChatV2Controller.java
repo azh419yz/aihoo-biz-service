@@ -2,8 +2,8 @@ package com.aihoo.api.doctor.app.controller;
 
 import com.aihoo.common.BizResult;
 import com.aihoo.api.doctor.app.controller.request.VisitChatRequest;
-import com.aihoo.api.doctor.app.controller.vo.VisitChatVo;
-import com.aihoo.api.doctor.app.service.ChatService;
+import com.aihoo.domain.im.dto.VisitChatVo;
+import com.aihoo.domain.im.service.ChatService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

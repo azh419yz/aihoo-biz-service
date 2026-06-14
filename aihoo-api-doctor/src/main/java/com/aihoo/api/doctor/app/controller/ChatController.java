@@ -1,7 +1,7 @@
 package com.aihoo.api.doctor.app.controller;
 
 import com.aihoo.common.JsonResult;
-import com.aihoo.api.doctor.app.service.ChatService;
+import com.aihoo.domain.im.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

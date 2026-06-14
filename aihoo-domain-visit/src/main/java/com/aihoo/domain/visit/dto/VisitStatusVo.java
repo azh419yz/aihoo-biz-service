@@ -1,4 +1,4 @@
-package com.aihoo.api.doctor.app.controller.vo;
+package com.aihoo.domain.visit.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

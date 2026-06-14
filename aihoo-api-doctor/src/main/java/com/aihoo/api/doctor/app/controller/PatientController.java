@@ -1,7 +1,7 @@
 package com.aihoo.api.doctor.app.controller;
 
 import com.aihoo.common.JsonResult;
-import com.aihoo.api.doctor.app.service.PatientService;
+import com.aihoo.domain.patient.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

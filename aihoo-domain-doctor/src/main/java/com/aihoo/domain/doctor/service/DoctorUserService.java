@@ -26,7 +26,7 @@ public interface DoctorUserService extends IService<DoctorUser> {
     DoctorUserVo phoneLogin(String mobile, String code, HttpServletRequest request);
     DoctorVisitSet setVisit(DoctorVisitSetRequest request);
     DoctorVisitSet getVisitSet();
-    Object detail(String id);
+    DoctorUserVo detail(String id);
     DoctorWelcomeMessageSet getWelcomeMessage();
     DoctorWelcomeMessageSet setWelcomeMessage(DoctorWelcomeMessageRequest request);
     DoctorUserVo loginUser(String mobile, HttpServletRequest request);
