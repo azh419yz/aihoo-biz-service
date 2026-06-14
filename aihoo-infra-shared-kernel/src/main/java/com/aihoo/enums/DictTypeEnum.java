@@ -1,4 +1,4 @@
-package com.aihoo.constant;
+package com.aihoo.enums;
 
 public enum DictTypeEnum {
     BANNER("BRAND类型", "BRAND_TYPE"),

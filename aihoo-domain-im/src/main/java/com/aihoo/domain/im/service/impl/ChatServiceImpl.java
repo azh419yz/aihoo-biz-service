@@ -6,7 +6,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
-import com.aihoo.enums.PushMessageType;
+import com.aihoo.constant.PushMessageType;
 import com.aihoo.util.WeekUtil;
 import com.aihoo.common.BizResultCode;
 import com.aihoo.exception.BizException;

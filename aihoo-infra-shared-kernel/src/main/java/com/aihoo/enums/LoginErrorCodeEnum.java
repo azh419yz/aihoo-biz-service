@@ -1,4 +1,4 @@
-package com.aihoo.constant;
+package com.aihoo.enums;
 
 /**
  * @Classname LoginErrorCodeEnum

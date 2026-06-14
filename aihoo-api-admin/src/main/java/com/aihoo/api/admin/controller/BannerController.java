@@ -5,7 +5,7 @@ package com.aihoo.api.admin.controller;
  */
 
 import cn.hutool.core.collection.CollUtil;
-import com.aihoo.constant.BrandTypeEnum;
+import com.aihoo.enums.BrandTypeEnum;
 import com.aihoo.domain.sys.model.entity.Banner;
 import com.aihoo.domain.sys.service.BannerService;
 import com.aihoo.common.BaseController;

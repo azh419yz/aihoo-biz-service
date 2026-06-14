@@ -1,4 +1,4 @@
-package com.aihoo.enums;
+package com.aihoo.constant;
 
 public class PushMessageType {
     public static final String messageType_TEXT = "TEXT";

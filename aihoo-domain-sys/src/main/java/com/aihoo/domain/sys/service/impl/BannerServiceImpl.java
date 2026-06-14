@@ -1,7 +1,7 @@
 package com.aihoo.domain.sys.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.aihoo.constant.BrandTypeEnum;
+import com.aihoo.enums.BrandTypeEnum;
 import com.aihoo.util.SecurityUtils;
 import com.aihoo.domain.doctor.model.vo.SearchTeamDoctorVo;
 import com.aihoo.domain.sys.model.mapper.BannerMapper;

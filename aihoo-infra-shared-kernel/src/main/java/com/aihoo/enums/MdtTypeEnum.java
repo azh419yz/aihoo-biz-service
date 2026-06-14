@@ -1,4 +1,4 @@
-package com.aihoo.constant;
+package com.aihoo.enums;
 
 public enum MdtTypeEnum {
     DICTCODE("字典表码值", "MDT_TYPE"),

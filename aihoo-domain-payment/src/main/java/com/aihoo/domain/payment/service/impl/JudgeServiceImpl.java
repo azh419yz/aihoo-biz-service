@@ -6,7 +6,7 @@ import cn.hutool.core.util.IdcardUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
-import com.aihoo.enums.PushMessageType;
+import com.aihoo.constant.PushMessageType;
 import com.aihoo.util.OssFileUtils;
 import com.aihoo.util.SmsUtils;
 import com.aihoo.util.StringUtil;

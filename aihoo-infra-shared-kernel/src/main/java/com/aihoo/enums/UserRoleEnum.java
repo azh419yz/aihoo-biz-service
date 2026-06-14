@@ -1,4 +1,4 @@
-package com.aihoo.constant;
+package com.aihoo.enums;
 
 public enum UserRoleEnum {
     YLGJ("医疗管家", "17"),

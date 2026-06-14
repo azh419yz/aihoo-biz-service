@@ -2,7 +2,7 @@ package com.aihoo.domain.doctor.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
 import com.aihoo.domain.doctor.component.AliCloudComponent;
-import com.aihoo.enums.ImUserPrefix;
+import com.aihoo.constant.ImUserPrefix;
 import com.aihoo.properties.TencentProperties;
 import com.aihoo.properties.TestProperties;
 import com.aihoo.util.*;

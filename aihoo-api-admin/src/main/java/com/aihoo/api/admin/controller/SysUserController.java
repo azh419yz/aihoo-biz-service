@@ -1,6 +1,6 @@
 package com.aihoo.api.admin.controller;
 
-import com.aihoo.constant.UserRoleEnum;
+import com.aihoo.enums.UserRoleEnum;
 import com.aihoo.util.SecurityUtils;
 import com.aihoo.domain.sys.model.dto.SaveUpdateUserRequest;
 import com.aihoo.domain.sys.model.dto.SearchUserRequest;

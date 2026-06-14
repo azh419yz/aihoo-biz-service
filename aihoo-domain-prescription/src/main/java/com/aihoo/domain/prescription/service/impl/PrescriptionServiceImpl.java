@@ -35,7 +35,7 @@ import com.aihoo.domain.prescription.dto.PrescriptionConsultationFeeDTO;
 import com.aihoo.domain.prescription.dto.PrescriptionDrugDTO;
 import com.aihoo.domain.prescription.dto.PrescriptionInstructionDTO;
 
-import com.aihoo.constant.DictTypeEnum;
+import com.aihoo.enums.DictTypeEnum;
 import com.aihoo.util.StatusEnumUtil;
 import com.aihoo.security.AuthUtil;
 import com.aihoo.util.OrderNoUtil;

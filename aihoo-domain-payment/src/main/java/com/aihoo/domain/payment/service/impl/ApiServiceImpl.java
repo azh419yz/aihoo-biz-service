@@ -2,7 +2,7 @@ package com.aihoo.domain.payment.service.impl;
 
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
-import com.aihoo.enums.PushMessageType;
+import com.aihoo.constant.PushMessageType;
 import com.aihoo.util.OssFileUtils;
 import com.aihoo.util.SmsUtils;
 import com.alibaba.fastjson2.JSON;

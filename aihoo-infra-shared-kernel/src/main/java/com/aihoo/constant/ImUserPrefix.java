@@ -1,4 +1,4 @@
-package com.aihoo.enums;
+package com.aihoo.constant;
 
 public class ImUserPrefix {
     public static final String HOS_SICK_USER_ID_FORMAT = "%s_%s_%s";

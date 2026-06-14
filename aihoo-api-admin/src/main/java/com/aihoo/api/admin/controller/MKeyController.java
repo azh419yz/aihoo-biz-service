@@ -1,6 +1,6 @@
 package com.aihoo.api.admin.controller;
 
-import com.aihoo.constant.LoginErrorCodeEnum;
+import com.aihoo.enums.LoginErrorCodeEnum;
 import com.aihoo.domain.sys.service.MKeyService;
 import com.aihoo.common.JsonResult;
 import com.alibaba.fastjson2.JSONObject;

@@ -1,6 +1,6 @@
 package com.aihoo.domain.sys.service.impl;
 
-import com.aihoo.constant.MdtTypeEnum;
+import com.aihoo.enums.MdtTypeEnum;
 import com.aihoo.domain.sys.model.mapper.DiceMapper;
 import com.aihoo.domain.sys.model.entity.Dict;
 import com.aihoo.domain.sys.service.DiceService;

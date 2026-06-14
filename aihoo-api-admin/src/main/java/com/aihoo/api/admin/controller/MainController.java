@@ -1,6 +1,6 @@
 package com.aihoo.api.admin.controller;
 
-import com.aihoo.constant.LoginErrorCodeEnum;
+import com.aihoo.enums.LoginErrorCodeEnum;
 import com.aihoo.util.SecurityUtils;
 import com.aihoo.domain.sys.model.entity.SysUser;
 import com.aihoo.domain.sys.service.LoginRecordService;

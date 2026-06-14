@@ -9,7 +9,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
-import com.aihoo.enums.PushMessageType;
+import com.aihoo.constant.PushMessageType;
 import com.aihoo.util.CastUtil;
 import com.aihoo.util.OssFileUtils;
 import com.aihoo.util.SecurityUtil;
@@ -36,7 +36,7 @@ import com.aihoo.domain.visit.model.mapper.HosRevisitImgMapper;
 
 
 import com.aihoo.properties.CaProperties;
-import com.aihoo.constant.DictTypeEnum;
+import com.aihoo.enums.DictTypeEnum;
 import com.aihoo.util.StatusEnumUtil;
 import com.aihoo.security.AuthUtil;
 import com.aihoo.domain.im.enums.IMMsgType;
